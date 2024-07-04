@@ -24,15 +24,19 @@ struct LoginView: View {
                 
                 VStack(alignment: .leading, spacing: 1) {
                     Text("Let's")
-                        .font(.system(size: 48, weight: .bold))
+                        .font(.system(size: 52, weight: .bold))
                         .foregroundColor(Color(red: 81/255, green: 58/255, blue: 16/255))
                     
                     Text("log you in")
-                        .font(.system(size: 48, weight: .bold))
+                        .font(.system(size: 52, weight: .bold))
                         .foregroundColor(Color(red: 81/255, green: 58/255, blue: 16/255))
                     
-                    Text("Welcome back!")
-                        .font(.system(size: 48, weight: .bold))
+                    Text("Welcome")
+                        .font(.system(size: 52, weight: .bold))
+                        .foregroundColor(Color(red: 81/255, green: 58/255, blue: 16/255))
+                    
+                    Text("back!")
+                        .font(.system(size: 52, weight: .bold))
                         .foregroundColor(Color(red: 81/255, green: 58/255, blue: 16/255))
                     
                 }

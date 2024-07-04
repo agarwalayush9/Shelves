@@ -23,16 +23,20 @@ struct SignupView: View {
                 Spacer()
                 
                 VStack(alignment: .leading, spacing: 1) {
-                    Text("Let's")
-                        .font(.system(size: 48, weight: .bold))
+                    Text("Let's sign")
+                        .font(.system(size: 52, weight: .bold))
                         .foregroundColor(Color(red: 81/255, green: 58/255, blue: 16/255))
                     
-                    Text("Register you")
-                        .font(.system(size: 48, weight: .bold))
+                    Text("up and")
+                        .font(.system(size: 52, weight: .bold))
                         .foregroundColor(Color(red: 81/255, green: 58/255, blue: 16/255))
                     
-                    Text("Welcome!")
-                        .font(.system(size: 48, weight: .bold))
+                    Text("borrow")
+                        .font(.system(size: 52, weight: .bold))
+                        .foregroundColor(Color(red: 81/255, green: 58/255, blue: 16/255))
+                    
+                    Text("books")
+                        .font(.system(size: 52, weight: .bold))
                         .foregroundColor(Color(red: 81/255, green: 58/255, blue: 16/255))
                     
                 }
@@ -43,7 +47,7 @@ struct SignupView: View {
                 
                 VStack(spacing: 10) {
                     Button(action: {
-                        // Action for sign in with Apple button
+                        // Action for sign in with Google button
                     }) {
                         HStack {
                             Image(systemName: "applelogo")
