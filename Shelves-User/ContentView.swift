@@ -1,13 +1,18 @@
-//
-//  ContentView.swift
-//  User UI
-//
-//  Created by Anay Dubey on 03/07/24.
-//
-
 import SwiftUI
 
 struct ContentView: View {
+    @State private var showOnboarding = true
+    
+    var body: some View {
+        if showOnboarding {
+            OnboardingView(showOnboarding: $showOnboarding)
+        } else {
+            MainContentView()
+        }
+    }
+}
+
+struct MainContentView: View {
     var body: some View {
         NavigationView {
             ZStack {
@@ -16,8 +21,7 @@ struct ContentView: View {
                     gradient: Gradient(colors: [Color(red: 1.0, green: 0.9, blue: 0.7), Color(red: 1.0, green: 0.8, blue: 0.5)]),
                     startPoint: .top,
                     endPoint: .bottom
-                )
-                .edgesIgnoringSafeArea(.all)
+                )                .edgesIgnoringSafeArea(.all)
                 
                 VStack {
                     Spacer()
@@ -83,4 +87,3 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
-
