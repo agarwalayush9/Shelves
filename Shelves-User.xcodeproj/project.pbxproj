@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		94C9B15A2C35D725001784C3 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C9B1592C35D725001784C3 /* SignupView.swift */; };
 		94C9B15C2C35E0A7001784C3 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C9B15B2C35E0A7001784C3 /* LoginView.swift */; };
+		D0EDBE752C366B4500EC06AB /* BookSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EDBE742C366B4500EC06AB /* BookSearch.swift */; };
 		FD4A05F22C3581A000529DDA /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = FD4A05F12C3581A000529DDA /* .gitignore */; };
 		FD938B0E2C3566C700FFFC1E /* Shelves_UserApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD938B0D2C3566C700FFFC1E /* Shelves_UserApp.swift */; };
 		FD938B102C3566C700FFFC1E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD938B0F2C3566C700FFFC1E /* ContentView.swift */; };
@@ -19,6 +20,7 @@
 /* Begin PBXFileReference section */
 		94C9B1592C35D725001784C3 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		94C9B15B2C35E0A7001784C3 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		D0EDBE742C366B4500EC06AB /* BookSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSearch.swift; sourceTree = "<group>"; };
 		FD4A05F12C3581A000529DDA /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		FD938B0A2C3566C700FFFC1E /* Shelves-User.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shelves-User.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD938B0D2C3566C700FFFC1E /* Shelves_UserApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shelves_UserApp.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 				FD938B0F2C3566C700FFFC1E /* ContentView.swift */,
 				94C9B1592C35D725001784C3 /* SignupView.swift */,
 				94C9B15B2C35E0A7001784C3 /* LoginView.swift */,
+				D0EDBE742C366B4500EC06AB /* BookSearch.swift */,
 				FD938B112C3566C900FFFC1E /* Assets.xcassets */,
 				FD938B132C3566C900FFFC1E /* Preview Content */,
 			);
@@ -148,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD938B102C3566C700FFFC1E /* ContentView.swift in Sources */,
+				D0EDBE752C366B4500EC06AB /* BookSearch.swift in Sources */,
 				FD938B0E2C3566C700FFFC1E /* Shelves_UserApp.swift in Sources */,
 				94C9B15C2C35E0A7001784C3 /* LoginView.swift in Sources */,
 				94C9B15A2C35D725001784C3 /* SignupView.swift in Sources */,
