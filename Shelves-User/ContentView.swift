@@ -1,13 +1,18 @@
-//
-//  ContentView.swift
-//  User UI
-//
-//  Created by Anay Dubey on 03/07/24.
-//
-
 import SwiftUI
 
 struct ContentView: View {
+    @State private var showOnboarding = true
+    
+    var body: some View {
+        if showOnboarding {
+            OnboardingView(showOnboarding: $showOnboarding)
+        } else {
+            MainContentView()
+        }
+    }
+}
+
+struct MainContentView: View {
     var body: some View {
         NavigationView {
             ZStack {
@@ -83,4 +88,3 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
-

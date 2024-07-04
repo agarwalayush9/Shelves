@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		441E4BD82C365E3300FD59DD /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441E4BD72C365E3300FD59DD /* OnboardingView.swift */; };
+		441E4BDA2C365E7500FD59DD /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441E4BD92C365E7500FD59DD /* PageControl.swift */; };
 		94C9B15A2C35D725001784C3 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C9B1592C35D725001784C3 /* SignupView.swift */; };
 		94C9B15C2C35E0A7001784C3 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C9B15B2C35E0A7001784C3 /* LoginView.swift */; };
 		FD4A05F22C3581A000529DDA /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = FD4A05F12C3581A000529DDA /* .gitignore */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		441E4BD72C365E3300FD59DD /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		441E4BD92C365E7500FD59DD /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
 		94C9B1592C35D725001784C3 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		94C9B15B2C35E0A7001784C3 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		FD4A05F12C3581A000529DDA /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -41,6 +45,8 @@
 		FD938B012C3566C700FFFC1E = {
 			isa = PBXGroup;
 			children = (
+				441E4BD72C365E3300FD59DD /* OnboardingView.swift */,
+				441E4BD92C365E7500FD59DD /* PageControl.swift */,
 				FD4A05F12C3581A000529DDA /* .gitignore */,
 				FD938B0C2C3566C700FFFC1E /* Shelves-User */,
 				FD938B0B2C3566C700FFFC1E /* Products */,
@@ -149,7 +155,9 @@
 			files = (
 				FD938B102C3566C700FFFC1E /* ContentView.swift in Sources */,
 				FD938B0E2C3566C700FFFC1E /* Shelves_UserApp.swift in Sources */,
+				441E4BDA2C365E7500FD59DD /* PageControl.swift in Sources */,
 				94C9B15C2C35E0A7001784C3 /* LoginView.swift in Sources */,
+				441E4BD82C365E3300FD59DD /* OnboardingView.swift in Sources */,
 				94C9B15A2C35D725001784C3 /* SignupView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
