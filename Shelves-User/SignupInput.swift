@@ -12,6 +12,7 @@ struct SignupInput: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var acceptTerms: Bool = false
+    @State private var showDialog: Bool = false
 
     var body: some View {
         NavigationView {
@@ -24,9 +25,9 @@ struct SignupInput: View {
                     endRadius: 400
                 )
                 .edgesIgnoringSafeArea(.all)
+                .blur(radius: showDialog ? 10: 0)
                 
                 VStack {
-                    
                     HStack {
                         Text("Sign Up")
                             .font(.system(size: 60, weight: .bold))
@@ -34,7 +35,7 @@ struct SignupInput: View {
                             .padding(.leading, 20)
                         Spacer()
                     }
-                    .padding(.top, 20)
+                    .padding(.top, 40)
                     
                     Spacer()
                     
@@ -96,7 +97,7 @@ struct SignupInput: View {
                     Spacer()
                     
                     Button(action: {
-                        // Action for sign up button
+                        showDialog = true
                     }) {
                         Text("Sign Up")
                             .fontWeight(.bold)
@@ -122,6 +123,36 @@ struct SignupInput: View {
                     }
                     .padding(.bottom, 30)
                 }
+                
+                if showDialog {
+                    Color.black.opacity(0.4)
+                        .edgesIgnoringSafeArea(.all)
+                    
+                    VStack(spacing: 20) {
+                        Text("Sign Up Successful")
+                            .font(.title)
+                            .fontWeight(.semibold)
+                        
+                        Button(action: {
+                            showDialog = false
+                        }) {
+                            Text("Close")
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(Color(red: 81/255, green: 58/255, blue: 16/255))
+                                .cornerRadius(10)
+                        }
+                    }
+                    .padding()
+                    .frame(height: 200)
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .shadow(radius: 20)
+                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray.opacity(0.2), lineWidth: 1))
+                    .padding(.horizontal, 40)
+                }
             }
         }
     }
@@ -132,4 +163,3 @@ struct SignupInput_Previews: PreviewProvider {
         SignupInput()
     }
 }
-
