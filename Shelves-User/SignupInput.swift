@@ -1,10 +1,3 @@
-//
-//  SignupInput.swift
-//  Shelves-User
-//
-//  Created by Anay Dubey on 05/07/24.
-//
-
 import SwiftUI
 
 struct SignupInput: View {
@@ -13,6 +6,7 @@ struct SignupInput: View {
     @State private var password: String = ""
     @State private var acceptTerms: Bool = false
     @State private var showDialog: Bool = false
+    @State private var navigateToGenreSelection: Bool = false // State to control navigation
 
     var body: some View {
         NavigationView {
@@ -25,8 +19,8 @@ struct SignupInput: View {
                     endRadius: 400
                 )
                 .edgesIgnoringSafeArea(.all)
-                .blur(radius: showDialog ? 10: 0)
-                
+                .blur(radius: showDialog ? 10 : 0)
+
                 VStack {
                     HStack {
                         Text("Sign Up")
@@ -36,14 +30,14 @@ struct SignupInput: View {
                         Spacer()
                     }
                     .padding(.top, 40)
-                    
+
                     Spacer()
-                    
+
                     VStack(alignment: .leading, spacing: 15) {
                         Text("Username")
                             .font(.system(size: 16, weight: .medium))
                             .foregroundColor(Color(red: 81/255, green: 58/255, blue: 16/255))
-                        
+
                         TextField("Enter Your username", text: $username)
                             .padding()
                             .background(Color.white)
@@ -52,11 +46,11 @@ struct SignupInput: View {
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color.gray, lineWidth: 1)
                             )
-                        
+
                         Text("Email ID")
                             .font(.system(size: 16, weight: .medium))
                             .foregroundColor(Color(red: 81/255, green: 58/255, blue: 16/255))
-                        
+
                         TextField("Enter your Email", text: $email)
                             .padding()
                             .background(Color.white)
@@ -65,11 +59,11 @@ struct SignupInput: View {
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color.gray, lineWidth: 1)
                             )
-                        
+
                         Text("Password")
                             .font(.system(size: 16, weight: .medium))
                             .foregroundColor(Color(red: 81/255, green: 58/255, blue: 16/255))
-                        
+
                         SecureField("Create your password", text: $password)
                             .padding()
                             .background(Color.white)
@@ -78,7 +72,7 @@ struct SignupInput: View {
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color.gray, lineWidth: 1)
                             )
-                        
+
                         HStack {
                             Button(action: {
                                 acceptTerms.toggle()
@@ -86,16 +80,16 @@ struct SignupInput: View {
                                 Image(systemName: acceptTerms ? "checkmark.square.fill" : "square")
                                     .foregroundColor(acceptTerms ? .black : .gray)
                             }
-                            
+
                             Text("I accept the terms and privacy policy")
                                 .foregroundColor(Color(red: 81/255, green: 58/255, blue: 16/255))
                                 .font(.system(size: 16))
                         }
                     }
                     .padding(.horizontal, 25)
-                    
+
                     Spacer()
-                    
+
                     Button(action: {
                         showDialog = true
                     }) {
@@ -109,12 +103,12 @@ struct SignupInput: View {
                             .padding(.horizontal, 15)
                     }
                     .padding(.bottom, 60)
-                    
+
                     Text("by continuing, you agree with")
                         .font(.system(size: 12))
                         .foregroundColor(Color(red: 81/255, green: 58/255, blue: 16/255))
                         .padding(.bottom, 2)
-                    
+
                     HStack {
                         Text("Terms & Conditions and Privacy Policy")
                             .font(.system(size: 12))
@@ -123,18 +117,19 @@ struct SignupInput: View {
                     }
                     .padding(.bottom, 30)
                 }
-                
+
                 if showDialog {
                     Color.black.opacity(0.4)
                         .edgesIgnoringSafeArea(.all)
-                    
+
                     VStack(spacing: 20) {
                         Text("Sign Up Successful")
                             .font(.title)
                             .fontWeight(.semibold)
-                        
+
                         Button(action: {
                             showDialog = false
+                            navigateToGenreSelection = true // Navigate to GenreSelectionView
                         }) {
                             Text("Close")
                                 .fontWeight(.bold)
@@ -153,6 +148,9 @@ struct SignupInput: View {
                     .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray.opacity(0.2), lineWidth: 1))
                     .padding(.horizontal, 40)
                 }
+            }
+            .fullScreenCover(isPresented: $navigateToGenreSelection) {
+                GenreSelectionView()
             }
         }
     }

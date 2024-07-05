@@ -12,7 +12,7 @@ struct Shelves_UserApp: App {
     var body: some Scene {
         WindowGroup {
             
-//            ContentView()
+            ContentView()
         }
     }
 }
