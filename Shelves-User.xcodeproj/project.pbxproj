@@ -11,7 +11,7 @@
 		441E4BDA2C365E7500FD59DD /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441E4BD92C365E7500FD59DD /* PageControl.swift */; };
 		94C9B15A2C35D725001784C3 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C9B1592C35D725001784C3 /* SignupView.swift */; };
 		94C9B15C2C35E0A7001784C3 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C9B15B2C35E0A7001784C3 /* LoginView.swift */; };
-		C4447C732C36C7FE00E1D065 /* UserScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4447C722C36C7FE00E1D065 /* UserScreen.swift */; };
+		C4447C732C36C7FE00E1D065 /* UserScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4447C722C36C7FE00E1D065 /* UserScreenView.swift */; };
 		FD4A05F22C3581A000529DDA /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = FD4A05F12C3581A000529DDA /* .gitignore */; };
 		FD938B0E2C3566C700FFFC1E /* Shelves_UserApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD938B0D2C3566C700FFFC1E /* Shelves_UserApp.swift */; };
 		FD938B102C3566C700FFFC1E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD938B0F2C3566C700FFFC1E /* ContentView.swift */; };
@@ -24,7 +24,7 @@
 		441E4BD92C365E7500FD59DD /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
 		94C9B1592C35D725001784C3 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		94C9B15B2C35E0A7001784C3 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		C4447C722C36C7FE00E1D065 /* UserScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserScreen.swift; sourceTree = "<group>"; };
+		C4447C722C36C7FE00E1D065 /* UserScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserScreenView.swift; sourceTree = "<group>"; };
 		FD4A05F12C3581A000529DDA /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		FD938B0A2C3566C700FFFC1E /* Shelves-User.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shelves-User.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD938B0D2C3566C700FFFC1E /* Shelves_UserApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shelves_UserApp.swift; sourceTree = "<group>"; };
@@ -47,7 +47,7 @@
 		FD938B012C3566C700FFFC1E = {
 			isa = PBXGroup;
 			children = (
-				C4447C722C36C7FE00E1D065 /* UserScreen.swift */,
+				C4447C722C36C7FE00E1D065 /* UserScreenView.swift */,
 				441E4BD72C365E3300FD59DD /* OnboardingView.swift */,
 				441E4BD92C365E7500FD59DD /* PageControl.swift */,
 				FD4A05F12C3581A000529DDA /* .gitignore */,
@@ -160,7 +160,7 @@
 				FD938B0E2C3566C700FFFC1E /* Shelves_UserApp.swift in Sources */,
 				441E4BDA2C365E7500FD59DD /* PageControl.swift in Sources */,
 				94C9B15C2C35E0A7001784C3 /* LoginView.swift in Sources */,
-				C4447C732C36C7FE00E1D065 /* UserScreen.swift in Sources */,
+				C4447C732C36C7FE00E1D065 /* UserScreenView.swift in Sources */,
 				441E4BD82C365E3300FD59DD /* OnboardingView.swift in Sources */,
 				94C9B15A2C35D725001784C3 /* SignupView.swift in Sources */,
 			);
