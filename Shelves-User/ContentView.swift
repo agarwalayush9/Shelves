@@ -19,9 +19,10 @@ struct MainContentView: View {
                 // Background Gradient
                 LinearGradient(
                     gradient: Gradient(colors: [Color(red: 1.0, green: 0.9, blue: 0.7), Color(red: 1.0, green: 0.8, blue: 0.5)]),
-                    startPoint: .top,
-                    endPoint: .bottom
-                )                .edgesIgnoringSafeArea(.all)
+                    startPoint: .bottom,
+                    endPoint: .top
+                )
+                .edgesIgnoringSafeArea(.all)
                 
                 VStack {
                     Spacer()
