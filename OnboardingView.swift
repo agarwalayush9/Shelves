@@ -1,7 +1,7 @@
 
 import SwiftUI
 
-// Extension to get color components
+
 extension Color {
     var components: (red: CGFloat, green: CGFloat, blue: CGFloat, opacity: CGFloat) {
         var red: CGFloat = 0
@@ -13,7 +13,7 @@ extension Color {
     }
 }
 
-// Custom function to interpolate between two colors
+
 func interpolateColor(from startColor: Color, to endColor: Color, at position: CGFloat) -> Color {
     let t = min(max(position, 0), 1)
     let startComponents = startColor.components
@@ -40,7 +40,7 @@ struct OnboardingView: View {
 
     var body: some View {
         ZStack {
-            // Background Gradient
+            
             LinearGradient(
                 gradient: Gradient(colors: [startColor, endColor]),
                 startPoint: .top,
@@ -51,7 +51,7 @@ struct OnboardingView: View {
             VStack {
                 TabView(selection: $currentIndex) {
                     OnboardingStepView(
-                        image: "bookshelf", // Replace with your image name
+                        image: "bookshelf", 
                         title: "Explore Unlimited Books",
                         description: "Find your next favorite read"
                     )

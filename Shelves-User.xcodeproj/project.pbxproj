@@ -9,12 +9,13 @@
 /* Begin PBXBuildFile section */
 		441E4BD82C365E3300FD59DD /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441E4BD72C365E3300FD59DD /* OnboardingView.swift */; };
 		441E4BDA2C365E7500FD59DD /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441E4BD92C365E7500FD59DD /* PageControl.swift */; };
+		441E4BFC2C380F8700FD59DD /* GenereSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441E4BFB2C380F8700FD59DD /* GenereSelectionView.swift */; };
 		94045C0E2C37BFD400DB9602 /* SignupInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94045C0D2C37BFD400DB9602 /* SignupInput.swift */; };
 		94045C102C37CD6500DB9602 /* LoginInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94045C0F2C37CD6500DB9602 /* LoginInput.swift */; };
 		94C9B15A2C35D725001784C3 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C9B1592C35D725001784C3 /* SignupView.swift */; };
 		94C9B15C2C35E0A7001784C3 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C9B15B2C35E0A7001784C3 /* LoginView.swift */; };
-		D0EDBE842C36C8A700EC06AB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D0EDBE832C36C8A700EC06AB /* GoogleService-Info.plist */; };
 		C4447C732C36C7FE00E1D065 /* UserScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4447C722C36C7FE00E1D065 /* UserScreenView.swift */; };
+		D0EDBE842C36C8A700EC06AB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D0EDBE832C36C8A700EC06AB /* GoogleService-Info.plist */; };
 		FD4A05F22C3581A000529DDA /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = FD4A05F12C3581A000529DDA /* .gitignore */; };
 		FD938B0E2C3566C700FFFC1E /* Shelves_UserApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD938B0D2C3566C700FFFC1E /* Shelves_UserApp.swift */; };
 		FD938B102C3566C700FFFC1E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD938B0F2C3566C700FFFC1E /* ContentView.swift */; };
@@ -25,12 +26,13 @@
 /* Begin PBXFileReference section */
 		441E4BD72C365E3300FD59DD /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		441E4BD92C365E7500FD59DD /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
+		441E4BFB2C380F8700FD59DD /* GenereSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenereSelectionView.swift; sourceTree = "<group>"; };
 		94045C0D2C37BFD400DB9602 /* SignupInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupInput.swift; sourceTree = "<group>"; };
 		94045C0F2C37CD6500DB9602 /* LoginInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInput.swift; sourceTree = "<group>"; };
 		94C9B1592C35D725001784C3 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		94C9B15B2C35E0A7001784C3 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		D0EDBE832C36C8A700EC06AB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C4447C722C36C7FE00E1D065 /* UserScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserScreenView.swift; sourceTree = "<group>"; };
+		D0EDBE832C36C8A700EC06AB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FD4A05F12C3581A000529DDA /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		FD938B0A2C3566C700FFFC1E /* Shelves-User.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shelves-User.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD938B0D2C3566C700FFFC1E /* Shelves_UserApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shelves_UserApp.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				FD938B0D2C3566C700FFFC1E /* Shelves_UserApp.swift */,
+				441E4BFB2C380F8700FD59DD /* GenereSelectionView.swift */,
 				FD938B0F2C3566C700FFFC1E /* ContentView.swift */,
 				94C9B1592C35D725001784C3 /* SignupView.swift */,
 				94045C0D2C37BFD400DB9602 /* SignupInput.swift */,
@@ -167,6 +170,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD938B102C3566C700FFFC1E /* ContentView.swift in Sources */,
+				441E4BFC2C380F8700FD59DD /* GenereSelectionView.swift in Sources */,
 				FD938B0E2C3566C700FFFC1E /* Shelves_UserApp.swift in Sources */,
 				441E4BDA2C365E7500FD59DD /* PageControl.swift in Sources */,
 				94C9B15C2C35E0A7001784C3 /* LoginView.swift in Sources */,
