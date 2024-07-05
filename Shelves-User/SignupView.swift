@@ -11,10 +11,11 @@ struct SignupView: View {
     var body: some View {
         ZStack {
             // Background Gradient
-            LinearGradient(
-                gradient: Gradient(colors: [Color(red: 1.0, green: 0.9, blue: 0.7), Color(red: 1.0, green: 0.8, blue: 0.5)]),
-                startPoint: .top,
-                endPoint: .bottom
+            RadialGradient(
+                gradient: Gradient(colors: [Color.orange.opacity(0.6), Color.yellow.opacity(0.3)]),
+                center: .init(x: 0.2, y: 0.3),
+                startRadius: 10,
+                endRadius: 400
             )
             .edgesIgnoringSafeArea(.all)
             
@@ -61,12 +62,10 @@ struct SignupView: View {
                         .padding(.horizontal, 20)
                     }
                     
-                    Button(action: {
-                        // Action for sign in with mobile number button
-                    }) {
+                    NavigationLink(destination: SignupInput()) {
                         HStack {
-                            Image(systemName: "phone.fill")
-                            Text("Sign-up with Mobile Number")
+                            Image(systemName: "envelope.fill")
+                            Text("Sign-up with Email")
                         }
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(.white)
@@ -80,17 +79,17 @@ struct SignupView: View {
                         // Action for sign in with email button
                     }) {
                         HStack {
-                            Image(systemName: "envelope.fill")
-                            Text("Sign-up with Email")
+                            Image("G")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 20, height: 20)
+                            Text("Sign-up with Google")
                         }
                         .font(.system(size: 16, weight: .bold))
-                        .foregroundColor(Color(red: 81/255, green: 58/255, blue: 16/255))
+                        .foregroundColor(.white)
                         .frame(maxWidth: .infinity, minHeight: 50)
-                        .background(Color.white)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color(red: 81/255, green: 58/255, blue: 16/255), lineWidth: 2)
-                        )
+                        .background(Color.black)
+                        .cornerRadius(10)
                         .padding(.horizontal, 20)
                     }
                 }
