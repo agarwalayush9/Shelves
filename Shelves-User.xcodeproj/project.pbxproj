@@ -16,6 +16,11 @@
 		94C9B15C2C35E0A7001784C3 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C9B15B2C35E0A7001784C3 /* LoginView.swift */; };
 		C4447C732C36C7FE00E1D065 /* UserScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4447C722C36C7FE00E1D065 /* UserScreenView.swift */; };
 		D0EDBE842C36C8A700EC06AB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D0EDBE832C36C8A700EC06AB /* GoogleService-Info.plist */; };
+		D0FDF8612C39800200C111A7 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FDF8602C39800200C111A7 /* DataModel.swift */; };
+		D0FDF8632C39801B00C111A7 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FDF8622C39801B00C111A7 /* Tab.swift */; };
+		D0FDF8652C3982A100C111A7 /* CustomTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FDF8642C3982A100C111A7 /* CustomTabbar.swift */; };
+		D0FDF8672C398DE100C111A7 /* TabbarShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FDF8662C398DE100C111A7 /* TabbarShape.swift */; };
+		D0FDF8692C39A75700C111A7 /* TabPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FDF8682C39A75700C111A7 /* TabPosition.swift */; };
 		FD4A05F22C3581A000529DDA /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = FD4A05F12C3581A000529DDA /* .gitignore */; };
 		FD938B0E2C3566C700FFFC1E /* Shelves_UserApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD938B0D2C3566C700FFFC1E /* Shelves_UserApp.swift */; };
 		FD938B102C3566C700FFFC1E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD938B0F2C3566C700FFFC1E /* ContentView.swift */; };
@@ -33,6 +38,11 @@
 		94C9B15B2C35E0A7001784C3 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		C4447C722C36C7FE00E1D065 /* UserScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserScreenView.swift; sourceTree = "<group>"; };
 		D0EDBE832C36C8A700EC06AB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D0FDF8602C39800200C111A7 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		D0FDF8622C39801B00C111A7 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		D0FDF8642C3982A100C111A7 /* CustomTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabbar.swift; sourceTree = "<group>"; };
+		D0FDF8662C398DE100C111A7 /* TabbarShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarShape.swift; sourceTree = "<group>"; };
+		D0FDF8682C39A75700C111A7 /* TabPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabPosition.swift; sourceTree = "<group>"; };
 		FD4A05F12C3581A000529DDA /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		FD938B0A2C3566C700FFFC1E /* Shelves-User.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shelves-User.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD938B0D2C3566C700FFFC1E /* Shelves_UserApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shelves_UserApp.swift; sourceTree = "<group>"; };
@@ -52,9 +62,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D0FDF85F2C397FD600C111A7 /* Tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				D0FDF8622C39801B00C111A7 /* Tab.swift */,
+				D0FDF8642C3982A100C111A7 /* CustomTabbar.swift */,
+				D0FDF8662C398DE100C111A7 /* TabbarShape.swift */,
+				D0FDF8682C39A75700C111A7 /* TabPosition.swift */,
+			);
+			path = Tabbar;
+			sourceTree = "<group>";
+		};
 		FD938B012C3566C700FFFC1E = {
 			isa = PBXGroup;
 			children = (
+				D0FDF8602C39800200C111A7 /* DataModel.swift */,
+				D0FDF85F2C397FD600C111A7 /* Tabbar */,
 				D0EDBE832C36C8A700EC06AB /* GoogleService-Info.plist */,
 				C4447C722C36C7FE00E1D065 /* UserScreenView.swift */,
 				441E4BD72C365E3300FD59DD /* OnboardingView.swift */,
@@ -170,15 +193,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD938B102C3566C700FFFC1E /* ContentView.swift in Sources */,
+				D0FDF8672C398DE100C111A7 /* TabbarShape.swift in Sources */,
 				441E4BFC2C380F8700FD59DD /* GenereSelectionView.swift in Sources */,
+				D0FDF8612C39800200C111A7 /* DataModel.swift in Sources */,
+				D0FDF8632C39801B00C111A7 /* Tab.swift in Sources */,
 				FD938B0E2C3566C700FFFC1E /* Shelves_UserApp.swift in Sources */,
 				441E4BDA2C365E7500FD59DD /* PageControl.swift in Sources */,
 				94C9B15C2C35E0A7001784C3 /* LoginView.swift in Sources */,
 				94045C102C37CD6500DB9602 /* LoginInput.swift in Sources */,
 				C4447C732C36C7FE00E1D065 /* UserScreenView.swift in Sources */,
 				441E4BD82C365E3300FD59DD /* OnboardingView.swift in Sources */,
+				D0FDF8652C3982A100C111A7 /* CustomTabbar.swift in Sources */,
 				94045C0E2C37BFD400DB9602 /* SignupInput.swift in Sources */,
 				94C9B15A2C35D725001784C3 /* SignupView.swift in Sources */,
+				D0FDF8692C39A75700C111A7 /* TabPosition.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
