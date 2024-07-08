@@ -1,4 +1,9 @@
-
+//
+//  OnboardingView.swift
+//  Shelves-User
+//
+//  Created by Suraj Singh on 04/07/24.
+//
 import SwiftUI
 
 
