@@ -6,6 +6,10 @@ struct LoginInput: View {
     @State private var password: String = ""
     @State private var showUserHomePage: Bool = false
 
+    var isFormValid: Bool {
+        return !email.isEmpty && !password.isEmpty
+    }
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -21,12 +25,12 @@ struct LoginInput: View {
                 VStack {
                     HStack {
                         Text("Sign In")
-                            .font(.system(size: 60, weight: .bold))
+                            .font(.system(size: 60, weight: .bold)) // Adjusted size for better adaptability
                             .foregroundColor(Color(red: 81/255, green: 58/255, blue: 16/255))
                             .padding(.leading, 20)
                         Spacer()
                     }
-                    .padding(.top, 20)
+                    .padding(.top, 40) // Adjusted top padding
                     
                     Spacer()
                     
@@ -69,10 +73,11 @@ struct LoginInput: View {
                             .foregroundColor(.white)
                             .padding()
                             .frame(maxWidth: .infinity)
-                            .background(Color.black)
+                            .background(isFormValid ? Color.black : Color.gray)
                             .cornerRadius(10)
                             .padding(.horizontal, 15)
                     }
+                    .disabled(!isFormValid)
                     .padding(.bottom, 60)
                     
                     Text("by continuing, you agree with")
@@ -107,8 +112,6 @@ struct LoginInput: View {
         }
     }
 }
-
-
 
 struct LoginInput_Previews: PreviewProvider {
     static var previews: some View {
