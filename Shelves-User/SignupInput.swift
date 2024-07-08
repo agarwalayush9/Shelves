@@ -23,7 +23,7 @@ struct SignupInput: View {
     }
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 RadialGradient(
                     gradient: Gradient(colors: [Color.orange.opacity(0.6), Color.yellow.opacity(0.3)]),
@@ -137,7 +137,9 @@ struct SignupInput: View {
                     .padding(.horizontal, 25)
 
                     Spacer()
-
+                    
+                    NavigationLink("", destination: GenreSelectionView(), isActive: $navigateToGenreSelection)
+                    
                     Button(action: {
                         guard validateAndRegister() else {
                             showAlert = true
@@ -152,7 +154,8 @@ struct SignupInput: View {
                                 showAlert = true
                             } else {
                                 register()
-                                //showDialog = true
+                                
+                                
                             }
                         }
                     }) {
@@ -182,39 +185,11 @@ struct SignupInput: View {
                     .padding(.bottom, 30)
                 }
 
-                if showDialog {
-                    Color.black.opacity(0.4)
-                        .edgesIgnoringSafeArea(.all)
-
-                    VStack(spacing: 20) {
-                        Text("Sign Up Successful")
-                            .font(.title)
-                            .fontWeight(.semibold)
-
-                        Button(action: {
-                            showDialog = false
-                            navigateToGenreSelection = true // Navigate to GenreSelectionView
-                        }) {
-                            Text("Close")
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                                .padding()
-                                .frame(maxWidth: .infinity)
-                                .background(Color(red: 81/255, green: 58/255, blue: 16/255))
-                                .cornerRadius(10)
-                        }
-                    }
-                    .padding()
-                    .frame(height: 200)
-                    .background(Color.white)
-                    .cornerRadius(10)
-                    .shadow(radius: 20)
-                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray.opacity(0.2), lineWidth: 1))
-                    .padding(.horizontal, 40)
-                }
+             
             }
             .fullScreenCover(isPresented: $navigateToGenreSelection) {
-                GenreSelectionView()
+                
+            
             }
         }
         .alert(isPresented: $showAlert) {
@@ -266,6 +241,11 @@ struct SignupInput: View {
                 }
             } else {
                 print("User signed up successfully")
+//                alertMessage = "Sign Up Successfull"
+//                    ()
+//                showAlert = true
+                navigateToGenreSelection = true
+                    
             }
         }
     }
