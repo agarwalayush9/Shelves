@@ -1,4 +1,5 @@
 import SwiftUI
+import FirebaseAuth
 
 struct SignupInput: View {
     @State private var username: String = ""
@@ -92,6 +93,7 @@ struct SignupInput: View {
 
                     Button(action: {
                         showDialog = true
+                        register()
                     }) {
                         Text("Sign Up")
                             .fontWeight(.bold)
@@ -151,6 +153,17 @@ struct SignupInput: View {
             }
             .fullScreenCover(isPresented: $navigateToGenreSelection) {
                 GenreSelectionView()
+            }
+        }
+    }
+    func register()
+    {
+        Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
+            if let error = error {
+                print("Error signing up: \(error.localizedDescription)")
+            }
+            else {
+                print("User signed up successfully")
             }
         }
     }

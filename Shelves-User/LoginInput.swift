@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct LoginInput: View {
     @State private var username: String = ""
@@ -39,11 +40,11 @@ struct LoginInput: View {
                     Spacer()
                     
                     VStack(alignment: .leading, spacing: 15) {
-                        Text("Username")
+                        Text("Email")
                             .font(.system(size: 16, weight: .medium))
                             .foregroundColor(Color(red: 81/255, green: 58/255, blue: 16/255))
                         
-                        TextField("Enter Your username", text: $username)
+                        TextField("Enter Your email", text: $email)
                             .padding()
                             .background(Color.white)
                             .cornerRadius(10)
@@ -71,6 +72,7 @@ struct LoginInput: View {
                     
                     Button(action: {
                         // Action for sign up button
+                        login()
                     }) {
                         Text("Sign In")
                             .fontWeight(.bold)
@@ -96,6 +98,18 @@ struct LoginInput: View {
                     }
                     .padding(.bottom, 30)
                 }
+                
+            }
+            
+        }
+    }
+    func login() {
+        Auth.auth().signIn(withEmail: email, password: password) { firebaseResult, error in
+            if error != nil {
+                print("Invalid Password")
+            } else {
+                // Handle successful login
+                print("Login sucess")
             }
         }
     }
@@ -103,6 +117,6 @@ struct LoginInput: View {
 
 struct LoginInput_Previews: PreviewProvider {
     static var previews: some View {
-        SignupInput()
+        LoginInput()
     }
 }
