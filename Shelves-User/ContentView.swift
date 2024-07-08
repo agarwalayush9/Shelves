@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ContentView: View {
+struct USERPAGE: View {
     @State private var showOnboarding = true
     
     var body: some View {

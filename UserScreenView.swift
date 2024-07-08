@@ -28,32 +28,47 @@ struct UserHomePage: View {
                 .padding()
 
                 // Overdue Book and View My Rentals Section
-                HStack(spacing: 20) {
+                HStack(spacing: 10) {
                     // Book Overdue Section
                     HStack {
                         Image("bookCover") // Replace with your book cover image
                             .resizable()
                             .frame(width: 70, height: 100)
                         VStack(alignment: .leading) {
-                            Text("The Good Guy")
-                                .font(.title3)
                             Text("#4235532")
                                 .font(.caption)
-                                .foregroundColor(.red)
-                                .padding(.top, -5)
-                            Text("Book Overdue")
-                                .font(.subheadline)
+                                .foregroundColor(.black)
+                                .padding(.top, 2)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Color.black, lineWidth: 1)
+                                        .frame(width: 70)
+                                )
+                            Text("The Good Guy")
+                                .font(.title3)
+                                .fixedSize()
+                                .fontWeight(.bold)
+                            HStack(spacing: 0){
+                                Image(systemName: "clock")
+                                Text("Book Overdue")
+                                    .font(.system(size: 13))
+                                    .frame(width: 100)
+                                    .fontWeight(.medium)
+                                    
+                            }
+                            
                             Text("Return before 29 May, Fines applied!")
-                                .font(.caption)
-                                .foregroundColor(.red)
-                                .frame(width:100,height: 35)
+                                .font(.footnote)
+                                .foregroundColor(.black)
+                                .frame(width:120,height: 35)
                         }
+                        .frame(width: 140)
                     }
                     .padding()
                     .background(Color("background"))
                     .overlay(
                         RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.red, lineWidth: 1)
+                            .stroke(Color.black, lineWidth: 1)
                     )
 
                     // View My Rentals Section
@@ -65,24 +80,27 @@ struct UserHomePage: View {
                             VStack {
                                 Image(systemName: "list.bullet")
                                     .imageScale(.large)
-//                                    .resizable()
-                                    .frame(width: 50, height: 85)
+                                    .frame(width: 80, height: 85)
                                 Text("View My Rentals")
-                                    .font(.subheadline)
-                                    .foregroundColor(.blue)
-                                    .frame(width: 100,height: 30)
+                                    .font(.system(size: 13))
+                                    .foregroundColor(.black)
+                                    
+                                    .frame(width: 100,height: 20)
                             }
+                            .frame(width: 85)
                             .padding(10)
                             .background(Color("background"))
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.red, lineWidth: 1)
+                                    .stroke(Color.black, lineWidth: 1)
                             )
+                            
                         }
+                        
                     }.padding(.bottom, 9)
                     .frame(width: 100)
                 }
-                .frame(height: 100) // Adjust the height if necessary
+                .frame(height: 100)// Adjust the height if necessary
                 .padding([.leading, .trailing,.top,.bottom])
 
                 // Shelf of the Day Section
@@ -99,7 +117,7 @@ struct UserHomePage: View {
                     Text("Selected by our curators")
                         .font(.subheadline)
                         .foregroundColor(.gray)
-                    Image("shelfBookCover")
+                    Image("homepageImage")
                         .resizable()
                         .frame(height:200)
                         .cornerRadius(10)
