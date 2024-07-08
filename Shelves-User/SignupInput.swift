@@ -2,17 +2,17 @@ import SwiftUI
 import FirebaseAuth
 
 struct SignupInput: View {
-    @State private var username: String = ""
     @State private var firstname: String = ""
     @State private var lastname: String = ""
     @State private var email: String = ""
     @State private var password: String = ""
+    @State private var confirmPassword: String = ""
     @State private var acceptTerms: Bool = false
     @State private var showDialog: Bool = false
     @State private var navigateToGenreSelection: Bool = false // State to control navigation
 
     var isFormValid: Bool {
-        return !username.isEmpty && !email.isEmpty && !password.isEmpty && acceptTerms
+        return !email.isEmpty && !password.isEmpty && !confirmPassword.isEmpty && password == confirmPassword && acceptTerms
     }
 
     var body: some View {
@@ -74,19 +74,6 @@ struct SignupInput: View {
                                     .frame(width: 165)
                             }
                         }
-                        
-                        Text("Username")
-                            .font(.system(size: 16, weight: .medium))
-                            .foregroundColor(Color(red: 81/255, green: 58/255, blue: 16/255))
-
-                        TextField("Enter Your username", text: $username)
-                            .padding()
-                            .background(Color.white)
-                            .cornerRadius(10)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.gray, lineWidth: 1)
-                            )
 
                         Text("Email ID")
                             .font(.system(size: 16, weight: .medium))
@@ -113,7 +100,20 @@ struct SignupInput: View {
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color.gray, lineWidth: 1)
                             )
+                        
+                        Text("Confirm Password")
+                            .font(.system(size: 16, weight: .medium))
+                            .foregroundColor(Color(red: 81/255, green: 58/255, blue: 16/255))
 
+                        SecureField("Confirm your password", text: $confirmPassword)
+                            .padding()
+                            .background(Color.white)
+                            .cornerRadius(10)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.gray, lineWidth: 1)
+                            )
+                        
                         HStack {
                             Button(action: {
                                 acceptTerms.toggle()
