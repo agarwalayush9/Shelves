@@ -85,7 +85,7 @@ struct SubscriptionView: View {
             if selectedPlan == "Monthly" {
                 SubscriptionTierView(tierName: "Bronze", price: "Free", description: "Rent 5 Books a Month", isSelected: selectedTier == "Bronze", details: [
                     "Access to limited collection",
-                    "1 free audiobook per month",
+                    "Acess to few events",
                     "Standard support"
                 ]) {
                     selectedTier = selectedTier == "Bronze" ? nil : "Bronze"
@@ -93,7 +93,7 @@ struct SubscriptionView: View {
 
                 SubscriptionTierView(tierName: "Silver", price: "₹399/-", description: "Rent 10 Books a Month", isSelected: selectedTier == "Silver", details: [
                     "Access to extended collection",
-                    "2 free audiobooks per month",
+                    "Normal passes for all events",
                     "Priority support"
                 ]) {
                     selectedTier = selectedTier == "Silver" ? nil : "Silver"
@@ -101,7 +101,7 @@ struct SubscriptionView: View {
 
                 SubscriptionTierView(tierName: "Gold", price: "₹599/-", description: "Rent 25 Books a Month", isSelected: selectedTier == "Gold", details: [
                     "Access to full collection",
-                    "5 free audiobooks per month",
+                    "Normal passes for all events",
                     "Premium support"
                 ]) {
                     selectedTier = selectedTier == "Gold" ? nil : "Gold"
@@ -109,7 +109,7 @@ struct SubscriptionView: View {
             } else if selectedPlan == "Yearly" {
                 SubscriptionTierView(tierName: "Bronze", price: "₹2999/-", description: "Rent 60 Books a Year", isSelected: selectedTier == "Bronze", details: [
                     "Access to limited collection",
-                    "12 free audiobooks per year",
+                    "Acess to few events",
                     "Standard support"
                 ]) {
                     selectedTier = selectedTier == "Bronze" ? nil : "Bronze"
@@ -117,7 +117,7 @@ struct SubscriptionView: View {
 
                 SubscriptionTierView(tierName: "Silver", price: "₹3999/-", description: "Rent 120 Books a Year", isSelected: selectedTier == "Silver", details: [
                     "Access to extended collection",
-                    "24 free audiobooks per year",
+                    "Normal passes for all events",
                     "Priority support"
                 ]) {
                     selectedTier = selectedTier == "Silver" ? nil : "Silver"
@@ -125,7 +125,7 @@ struct SubscriptionView: View {
 
                 SubscriptionTierView(tierName: "Gold", price: "₹5999/-", description: "Rent 300 Books a Year", isSelected: selectedTier == "Gold", details: [
                     "Access to full collection",
-                    "60 free audiobooks per year",
+                    "VIP passes for all events",
                     "Premium support"
                 ]) {
                     selectedTier = selectedTier == "Gold" ? nil : "Gold"
