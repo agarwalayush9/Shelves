@@ -1,21 +1,13 @@
-//
-//  LoginInput.swift
-//  Shelves-User
-//
-//  Created by Anay Dubey on 05/07/24.
-//
-
 import SwiftUI
 import FirebaseAuth
 
 struct LoginInput: View {
-    @State private var username: String = ""
     @State private var email: String = ""
     @State private var password: String = ""
-    @State private var acceptTerms: Bool = false
+    @State private var showUserHomePage: Bool = false
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 // Background Gradient
                 RadialGradient(
@@ -27,7 +19,6 @@ struct LoginInput: View {
                 .edgesIgnoringSafeArea(.all)
                 
                 VStack {
-                    
                     HStack {
                         Text("Sign In")
                             .font(.system(size: 60, weight: .bold))
@@ -71,7 +62,6 @@ struct LoginInput: View {
                     Spacer()
                     
                     Button(action: {
-                        // Action for sign up button
                         login()
                     }) {
                         Text("Sign In")
@@ -98,22 +88,27 @@ struct LoginInput: View {
                     }
                     .padding(.bottom, 30)
                 }
-                
             }
-            
+            .fullScreenCover(isPresented: $showUserHomePage) {
+                UserHomePage()
+            }
         }
     }
+
     func login() {
         Auth.auth().signIn(withEmail: email, password: password) { firebaseResult, error in
             if error != nil {
                 print("Invalid Password")
             } else {
                 // Handle successful login
-                print("Login sucess")
+                self.showUserHomePage = true
+                print("Login success")
             }
         }
     }
 }
+
+
 
 struct LoginInput_Previews: PreviewProvider {
     static var previews: some View {

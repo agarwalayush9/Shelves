@@ -9,6 +9,10 @@ struct SignupInput: View {
     @State private var showDialog: Bool = false
     @State private var navigateToGenreSelection: Bool = false // State to control navigation
 
+    var isFormValid: Bool {
+        return !username.isEmpty && !email.isEmpty && !password.isEmpty && acceptTerms
+    }
+
     var body: some View {
         NavigationView {
             ZStack {
@@ -100,10 +104,11 @@ struct SignupInput: View {
                             .foregroundColor(.white)
                             .padding()
                             .frame(maxWidth: .infinity)
-                            .background(Color.black)
+                            .background(isFormValid ? Color.black : Color.gray)
                             .cornerRadius(10)
                             .padding(.horizontal, 15)
                     }
+                    .disabled(!isFormValid)
                     .padding(.bottom, 60)
 
                     Text("by continuing, you agree with")
@@ -156,13 +161,12 @@ struct SignupInput: View {
             }
         }
     }
-    func register()
-    {
+    
+    func register() {
         Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
             if let error = error {
                 print("Error signing up: \(error.localizedDescription)")
-            }
-            else {
+            } else {
                 print("User signed up successfully")
             }
         }
