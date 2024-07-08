@@ -186,6 +186,15 @@ struct SignupInput: View {
                                 .foregroundColor(.red)
                         }
 
+                        SecureField("Confirm your password", text: $confirmPassword)
+                            .padding()
+                            .background(Color.white)
+                            .cornerRadius(10)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.gray, lineWidth: 1)
+                            )
+                        
                         HStack {
                             Button(action: {
                                 acceptTerms.toggle()
