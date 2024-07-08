@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SignupInput: View {
     @State private var username: String = ""
+    @State private var firstname: String = ""
+    @State private var lastname: String = ""
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var acceptTerms: Bool = false
@@ -17,7 +19,6 @@ struct SignupInput: View {
     var body: some View {
         NavigationView {
             ZStack {
-                // Background Gradient
                 RadialGradient(
                     gradient: Gradient(colors: [Color.orange.opacity(0.6), Color.yellow.opacity(0.3)]),
                     center: .init(x: 0.2, y: 0.3),
@@ -40,6 +41,41 @@ struct SignupInput: View {
                     Spacer()
                     
                     VStack(alignment: .leading, spacing: 15) {
+                        
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text("First Name")
+                                    .font(.system(size: 16, weight: .medium))
+                                    .foregroundStyle(Color(red: 81/255, green: 58/255, blue: 16/255))
+                                
+                                TextField("Your First Name", text: $firstname)
+                                    .padding()
+                                    .background(Color.white)
+                                    .cornerRadius(10)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .stroke(Color.gray, lineWidth: 1)
+                                    )
+                                    .frame(width: 165)
+                            }
+                            
+                            VStack(alignment: .leading) {
+                                Text("Last Name")
+                                    .font(.system(size: 16, weight: .medium))
+                                    .foregroundStyle(Color(red: 81/255, green: 58/255, blue: 16/255))
+                                
+                                TextField("Your Last Name", text: $lastname)
+                                    .padding()
+                                    .background(Color.white)
+                                    .cornerRadius(10)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .stroke(Color.gray, lineWidth: 1)
+                                    )
+                                    .frame(width: 165)
+                            }
+                        }
+                        
                         Text("Username")
                             .font(.system(size: 16, weight: .medium))
                             .foregroundColor(Color(red: 81/255, green: 58/255, blue: 16/255))
