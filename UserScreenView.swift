@@ -117,6 +117,7 @@ struct UserHomePage: View {
 
                 // Include the BottomNavigationBar
                 CustomTabbar()
+//                    .ignoresSafeArea()
             }
         }
     }
