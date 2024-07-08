@@ -9,10 +9,17 @@ struct SignupInput: View {
     @State private var confirmPassword: String = ""
     @State private var acceptTerms: Bool = false
     @State private var showDialog: Bool = false
-    @State private var navigateToGenreSelection: Bool = false // State to control navigation
+    @State private var navigateToGenreSelection: Bool = false
+    @State private var showAlert = false
+    @State private var alertMessage = ""
 
     var isFormValid: Bool {
-        return !email.isEmpty && !password.isEmpty && !confirmPassword.isEmpty && password == confirmPassword && acceptTerms
+        return !firstname.isEmpty &&
+               !lastname.isEmpty &&
+               !email.isEmpty &&
+               !password.isEmpty &&
+               !confirmPassword.isEmpty &&
+               acceptTerms
     }
 
     var body: some View {
@@ -40,13 +47,13 @@ struct SignupInput: View {
                     Spacer()
 
                     VStack(alignment: .leading, spacing: 15) {
-                        
+
                         HStack {
                             VStack(alignment: .leading) {
                                 Text("First Name")
                                     .font(.system(size: 16, weight: .medium))
                                     .foregroundStyle(Color(red: 81/255, green: 58/255, blue: 16/255))
-                                
+
                                 TextField("Your First Name", text: $firstname)
                                     .padding()
                                     .background(Color.white)
@@ -57,12 +64,12 @@ struct SignupInput: View {
                                     )
                                     .frame(width: 165)
                             }
-                            
+
                             VStack(alignment: .leading) {
                                 Text("Last Name")
                                     .font(.system(size: 16, weight: .medium))
                                     .foregroundStyle(Color(red: 81/255, green: 58/255, blue: 16/255))
-                                
+
                                 TextField("Your Last Name", text: $lastname)
                                     .padding()
                                     .background(Color.white)
@@ -100,7 +107,7 @@ struct SignupInput: View {
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color.gray, lineWidth: 1)
                             )
-                        
+
                         Text("Confirm Password")
                             .font(.system(size: 16, weight: .medium))
                             .foregroundColor(Color(red: 81/255, green: 58/255, blue: 16/255))
@@ -113,7 +120,7 @@ struct SignupInput: View {
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color.gray, lineWidth: 1)
                             )
-                        
+
                         HStack {
                             Button(action: {
                                 acceptTerms.toggle()
@@ -132,8 +139,22 @@ struct SignupInput: View {
                     Spacer()
 
                     Button(action: {
-                        showDialog = true
-                        register()
+                        guard validateAndRegister() else {
+                            showAlert = true
+                            return
+                        }
+                        
+                        // Check if email is already in use
+                        DataController.shared.isEmailAlreadyInUse(email: email) { exists in
+                            if exists {
+                                // Email is already in use, show appropriate alert
+                                alertMessage = "Email is already in use by another user"
+                                showAlert = true
+                            } else {
+                                register()
+                                //showDialog = true
+                            }
+                        }
                     }) {
                         Text("Sign Up")
                             .fontWeight(.bold)
@@ -196,16 +217,81 @@ struct SignupInput: View {
                 GenreSelectionView()
             }
         }
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("Registration"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+        }
     }
-    
+
+    func validateAndRegister() -> Bool {
+        guard isFormValid else {
+            alertMessage = "Please fill in all fields."
+            return false
+        }
+
+        if !isValidFirstName(firstname) {
+            alertMessage = "First name should contain only letters."
+            return false
+        }
+
+        if !isValidLastName(lastname) {
+            alertMessage = "Last name should contain only letters."
+            return false
+        }
+
+        if !isValidEmail(email) {
+            alertMessage = "Please enter a valid email address."
+            return false
+        }
+
+        if !isValidPassword(password) {
+            alertMessage = "Password must be at least 8 characters long and contain both digits and special characters."
+            return false
+        }
+
+        if password != confirmPassword {
+            alertMessage = "Passwords do not match."
+            return false
+        }
+
+        return true
+    }
+
     func register() {
         Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
             if let error = error {
                 print("Error signing up: \(error.localizedDescription)")
+                DispatchQueue.main.async {
+                    showAlert = true
+                    alertMessage = "Failed to register user. \(error.localizedDescription)"
+                }
             } else {
                 print("User signed up successfully")
             }
         }
+    }
+
+    // Validation functions
+    func isValidFirstName(_ name: String) -> Bool {
+        let nameRegex = "^[A-Za-z]+$"
+        return NSPredicate(format: "SELF MATCHES %@", nameRegex).evaluate(with: name)
+    }
+
+    func isValidLastName(_ name: String) -> Bool {
+        let nameRegex = "^[A-Za-z]+$"
+        return NSPredicate(format: "SELF MATCHES %@", nameRegex).evaluate(with: name)
+    }
+
+    func isValidEmail(_ email: String) -> Bool {
+        
+        let trimmedEmail = email.trimmingCharacters(in: .whitespacesAndNewlines)
+        let emailRegex = "^(?=.{1,64}@.{4,64}$)(?=.{6,100}$)[A-Za-z0-9](?:[A-Za-z0-9._%+-]*[A-Za-z0-9])?@[A-Za-z0-9](?:[A-Za-z0-9.-]*[A-Za-z0-9])?\\.[A-Za-z]{2,64}$"
+        let emailPred = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        return emailPred.evaluate(with: trimmedEmail)
+    }
+
+    func isValidPassword(_ password: String) -> Bool {
+        let passwordRegex = "^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$"
+        return NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: password)
     }
 }
 

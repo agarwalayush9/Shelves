@@ -27,6 +27,7 @@
 		D063707B2C3BDE5500697510 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D063707A2C3BDE5500697510 /* GoogleService-Info.plist */; };
 		D063707F2C3BE00600697510 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D063707E2C3BE00600697510 /* FirebaseAuth */; };
 		D06370812C3BE00600697510 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = D06370802C3BE00600697510 /* FirebaseDatabase */; };
+		D06370852C3C135600697510 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06370842C3C135600697510 /* DataController.swift */; };
 		FD4A05F22C3581A000529DDA /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = FD4A05F12C3581A000529DDA /* .gitignore */; };
 		FD938B0E2C3566C700FFFC1E /* Shelves_UserApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD938B0D2C3566C700FFFC1E /* Shelves_UserApp.swift */; };
 		FD938B102C3566C700FFFC1E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD938B0F2C3566C700FFFC1E /* ContentView.swift */; };
@@ -51,6 +52,7 @@
 		C26271712C3C055C009C6830 /* AuthManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManage.swift; sourceTree = "<group>"; };
 		C4447C722C36C7FE00E1D065 /* UserScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserScreenView.swift; sourceTree = "<group>"; };
 		D063707A2C3BDE5500697510 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D06370842C3C135600697510 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		FD4A05F12C3581A000529DDA /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		FD938B0A2C3566C700FFFC1E /* Shelves-User.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shelves-User.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD938B0D2C3566C700FFFC1E /* Shelves_UserApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shelves_UserApp.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 		FD938B012C3566C700FFFC1E = {
 			isa = PBXGroup;
 			children = (
+				D06370842C3C135600697510 /* DataController.swift */,
 				D063707A2C3BDE5500697510 /* GoogleService-Info.plist */,
 				C4447C722C36C7FE00E1D065 /* UserScreenView.swift */,
 				441E4BD72C365E3300FD59DD /* OnboardingView.swift */,
@@ -236,6 +239,7 @@
 				943013EB2C381210000C068C /* ExploreTab.swift in Sources */,
 				C4447C732C36C7FE00E1D065 /* UserScreenView.swift in Sources */,
 				441E4BD82C365E3300FD59DD /* OnboardingView.swift in Sources */,
+				D06370852C3C135600697510 /* DataController.swift in Sources */,
 				441E4C202C3BB6A200FD59DD /* CustomTabbar.swift in Sources */,
 				94045C0E2C37BFD400DB9602 /* SignupInput.swift in Sources */,
 				94C9B15A2C35D725001784C3 /* SignupView.swift in Sources */,
