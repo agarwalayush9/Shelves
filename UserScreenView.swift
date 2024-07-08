@@ -1,11 +1,9 @@
+// UserScreen.swift
+// Shelves-User
 //
-//  UserScreen.swift
-//  Shelves-User
-//
-//  Created by Jhanvi Jindal on 04/07/24.
+// Created by Jhanvi Jindal on 04/07/24.
 //
 
-import Foundation
 import SwiftUI
 
 struct UserHomePage: View {
@@ -46,7 +44,7 @@ struct UserHomePage: View {
                             Text("Return before 29 May, Fines applied!")
                                 .font(.caption)
                                 .foregroundColor(.red)
-                                .frame(width:100,height: 35)
+                                .frame(width: 100, height: 35)
                         }
                     }
                     .padding()
@@ -65,12 +63,11 @@ struct UserHomePage: View {
                             VStack {
                                 Image(systemName: "list.bullet")
                                     .imageScale(.large)
-//                                    .resizable()
                                     .frame(width: 50, height: 85)
                                 Text("View My Rentals")
                                     .font(.subheadline)
                                     .foregroundColor(.blue)
-                                    .frame(width: 100,height: 30)
+                                    .frame(width: 100, height: 30)
                             }
                             .padding(10)
                             .background(Color("background"))
@@ -79,35 +76,36 @@ struct UserHomePage: View {
                                     .stroke(Color.red, lineWidth: 1)
                             )
                         }
-                    }.padding(.bottom, 9)
+                    }
+                    .padding(.bottom, 9)
                     .frame(width: 100)
                 }
                 .frame(height: 100) // Adjust the height if necessary
-                .padding([.leading, .trailing,.top,.bottom])
+                .padding([.leading, .trailing, .top, .bottom])
 
                 // Shelf of the Day Section
                 VStack(alignment: .leading, spacing: 10) {
-                    HStack{
+                    HStack {
                         Text("Shelve of the Day")
                             .font(.headline)
                         Spacer()
                         Image(systemName: "bell") // Replace with your shelf book cover image
                             .resizable()
-                            .frame(width:20,height:20)
-                            .padding(.trailing,10)
+                            .frame(width: 20, height: 20)
+                            .padding(.trailing, 10)
                     }
                     Text("Selected by our curators")
                         .font(.subheadline)
                         .foregroundColor(.gray)
                     Image("shelfBookCover")
                         .resizable()
-                        .frame(height:200)
+                        .frame(height: 200)
                         .cornerRadius(10)
                     Text("Humanly Possible")
                         .font(.title2)
                     Text("Sarah Bakewell")
                         .font(.subheadline)
-                    Text("Seven hundered Years of Humanist Freethinking, Inquiry, and Hope")
+                    Text("Seven hundred Years of Humanist Freethinking, Inquiry, and Hope")
                         .font(.caption)
                 }
                 .padding()
@@ -117,34 +115,8 @@ struct UserHomePage: View {
 
                 Spacer()
 
-                // Bottom Navigation
-                HStack {
-                    Button(action: {
-                        // Home action
-                    }) {
-                        Image(systemName: "house")
-                            .resizable()
-                            .frame(width: 25, height: 25)
-                    }
-                    Spacer()
-                    Button(action: {
-                        // Search action
-                    }) {
-                        Image(systemName: "magnifyingglass")
-                            .resizable()
-                            .frame(width: 25, height: 25)
-                    }
-                    Spacer()
-                    Button(action: {
-                        // User profile action
-                    }) {
-                        Image(systemName: "person.crop.circle")
-                            .resizable()
-                            .frame(width: 25, height: 25)
-                    }
-                }
-                .padding()
-                .background(Color.gray.opacity(0.1))
+                // Include the BottomNavigationBar
+                CustomTabbar()
             }
         }
     }
