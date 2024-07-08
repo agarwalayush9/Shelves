@@ -5,6 +5,8 @@ struct LoginInput: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var showUserHomePage: Bool = false
+    @State private var showAlert: Bool = false
+    @State private var alertMessage: String = ""
 
     var isFormValid: Bool {
         return !email.isEmpty && !password.isEmpty
@@ -97,13 +99,18 @@ struct LoginInput: View {
             .fullScreenCover(isPresented: $showUserHomePage) {
                 UserHomePage()
             }
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text("Login Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+            }
         }
     }
 
     func login() {
         Auth.auth().signIn(withEmail: email, password: password) { firebaseResult, error in
-            if error != nil {
-                print("Invalid Password")
+            if let error = error {
+                self.alertMessage = error.localizedDescription
+                self.showAlert = true
+                print("Login error: \(error.localizedDescription)")
             } else {
                 // Handle successful login
                 self.showUserHomePage = true
