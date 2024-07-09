@@ -86,6 +86,7 @@ struct GenreSelectionView: View {
                                 .background(Color(UIColor(red: 0.66, green: 0.46, blue: 0.28, alpha: 1.0)))
                                 .cornerRadius(10)
                         }
+                        .navigationBarBackButtonHidden(true)
                         .padding(.horizontal)
                         .padding(.bottom, 5)
                     } else {

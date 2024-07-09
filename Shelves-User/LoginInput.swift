@@ -8,8 +8,12 @@ struct LoginInput: View {
     @State private var showAlert: Bool = false
     @State private var alertMessage: String = ""
 
+    // Validation state
+    @State private var isEmailValid: Bool = true
+    @State private var isPasswordValid: Bool = true
+
     var isFormValid: Bool {
-        return !email.isEmpty && !password.isEmpty
+        return isEmailValid && isPasswordValid && !email.isEmpty && !password.isEmpty
     }
 
     var body: some View {
@@ -27,12 +31,12 @@ struct LoginInput: View {
                 VStack {
                     HStack {
                         Text("Sign In")
-                            .font(.system(size: 60, weight: .bold)) // Adjusted size for better adaptability
+                            .font(.system(size: 60, weight: .bold))
                             .foregroundColor(Color(red: 81/255, green: 58/255, blue: 16/255))
                             .padding(.leading, 20)
                         Spacer()
                     }
-                    .padding(.top, 40) // Adjusted top padding
+                    .padding(.top, 40)
                     
                     Spacer()
                     
@@ -47,8 +51,17 @@ struct LoginInput: View {
                             .cornerRadius(10)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.gray, lineWidth: 1)
+                                    .stroke(isEmailValid ? Color.gray : Color.red, lineWidth: 1)
                             )
+                            .onChange(of: email) { newValue in
+                                validateEmail()
+                            }
+                        
+                        if !isEmailValid {
+                            Text("Invalid email format.")
+                                .foregroundColor(.red)
+                                .font(.caption)
+                        }
                         
                         Text("Password")
                             .font(.system(size: 16, weight: .medium))
@@ -60,8 +73,17 @@ struct LoginInput: View {
                             .cornerRadius(10)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.gray, lineWidth: 1)
+                                    .stroke(isPasswordValid ? Color.gray : Color.red, lineWidth: 1)
                             )
+                            .onChange(of: password) { newValue in
+                                validatePassword()
+                            }
+                        
+                        if !isPasswordValid {
+                            Text("Password must be at least 8 characters, with 1 uppercase, 1 lowercase, 1 number, and 1 special character.")
+                                .foregroundColor(.red)
+                                .font(.caption)
+                        }
                     }
                     .padding(.horizontal, 25)
                     
@@ -117,6 +139,34 @@ struct LoginInput: View {
                 print("Login success")
             }
         }
+    }
+
+    private func validateEmail() {
+        isEmailValid = isValidEmail(email)
+    }
+
+    private func validatePassword() {
+        let passwordRegex = [
+            ("^(?=.*[A-Z]).{1,}$", "At least 1 uppercase letter"),
+            ("^(?=.*[a-z]).{1,}$", "At least 1 lowercase letter"),
+            ("^(?=.*\\d).{1,}$", "At least 1 number"),
+            ("^(?=.*[#$^+=!*()@%&]).{1,}$", "At least 1 special character"),
+            (".{8,}", "Minimum 8 characters")
+        ]
+
+        for (regex, _) in passwordRegex {
+            let pred = NSPredicate(format: "SELF MATCHES %@", regex)
+            isPasswordValid = pred.evaluate(with: password)
+            if !isPasswordValid {
+                break
+            }
+        }
+    }
+
+    private func isValidEmail(_ email: String) -> Bool {
+        let emailRegEx = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
+        let emailPred = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: email)
     }
 }
 
