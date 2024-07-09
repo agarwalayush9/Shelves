@@ -28,7 +28,7 @@ struct GenreSelectionView: View {
                     endPoint: .bottom
                 )
                 .edgesIgnoringSafeArea(.all)
-
+                
                 Rectangle()
                     .fill(Color(red: 0.32, green: 0.23, blue: 0.06).opacity(0.2))
                     .frame(width: 400, height: 300)
@@ -36,17 +36,17 @@ struct GenreSelectionView: View {
                     .blur(radius: 10)
                     .opacity(10.0)
                     .offset(y: -30)
-
+                
                 VStack {
                     Text("Select Genres")
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .padding(.top, 60)
-
+                    
                     Text("Select the type of book you enjoy reading.")
                         .font(.subheadline)
                         .padding(.bottom)
-
+                    
                     VStack {
                         LazyVGrid(columns: [
                             GridItem(.flexible(), spacing: 10),
@@ -74,9 +74,9 @@ struct GenreSelectionView: View {
                         )
                     )
                     .padding()
-
+                    
                     Spacer(minLength: 5)
-
+                    
                     if self.selectedGenres.count >= 3 {
                         NavigationLink(destination: SubscriptionView()) {
                             Text("Continue")
@@ -86,7 +86,6 @@ struct GenreSelectionView: View {
                                 .background(Color(UIColor(red: 0.66, green: 0.46, blue: 0.28, alpha: 1.0)))
                                 .cornerRadius(10)
                         }
-                        .navigationBarBackButtonHidden(true)
                         .padding(.horizontal)
                         .padding(.bottom, 5)
                     } else {
@@ -100,13 +99,13 @@ struct GenreSelectionView: View {
                             .padding(.bottom, 5)
                             .disabled(true)
                     }
-
+                    
                     Text("Select 3 or more genres to continue")
                         .font(.subheadline)
                         .foregroundColor(Color(UIColor(red: 0.66, green: 0.46, blue: 0.28, alpha: 1.0)))
                         .padding(.bottom, 20)
                         .frame(maxWidth: .infinity)
-
+                    
                     Spacer()
                 }
                 .padding()

@@ -250,11 +250,14 @@ struct SignupInput: View {
              
             }
             
-            NavigationLink(destination: GenreSelectionView(), isActive: $showGenreSelection)
-            {
-                EmptyView()
-            }.navigationBarBackButtonHidden()
-                
+//            NavigationLink(destination: GenreSelectionView(), isActive: $showGenreSelection)
+//            {
+//                EmptyView()
+//            }.navigationBarBackButtonHidden()
+            .fullScreenCover(isPresented: $showGenreSelection) {
+                            GenreSelectionView()
+                        
+                        }
         }
         .alert(isPresented: $showAlert) {
             Alert(title: Text("Registration"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
