@@ -1,4 +1,13 @@
+//
+//  ContentView.swift
+//  Shelves-User
+//
+//  Created by Rajeev Choudhary on 08/07/24.
+//
+
 import SwiftUI
+import Firebase
+import GoogleSignIn
 
 struct ContentView: View {
     @State private var showOnboarding = true
@@ -9,6 +18,12 @@ struct ContentView: View {
         } else {
             MainContentView()
         }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
     }
 }
 
@@ -83,8 +98,3 @@ struct MainContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}

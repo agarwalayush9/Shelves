@@ -1,3 +1,10 @@
+//
+//  SignupInput.swift
+//  Shelves-User
+//
+//  Created by Rajeev Choudhary on 08/07/24.
+//
+
 import SwiftUI
 import FirebaseAuth
 
@@ -20,12 +27,9 @@ struct SignupInput: View {
     @State private var confirmPasswordError: String = ""
 
     var isFormValid: Bool {
-        return !firstname.isEmpty &&
-               !lastname.isEmpty &&
-               !email.isEmpty &&
-               !password.isEmpty &&
-               !confirmPassword.isEmpty &&
-               acceptTerms
+        return !email.isEmpty && !password.isEmpty && !confirmPassword.isEmpty && password == confirmPassword &&
+        password.count >= 8 &&
+        email.lowercased() == email && acceptTerms
     }
 
     var body: some View {
@@ -156,12 +160,7 @@ struct SignupInput: View {
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color.gray, lineWidth: 1)
                             )
-                        if !passwordError.isEmpty {
-                            Text(passwordError)
-                                .font(.system(size: 12))
-                                .foregroundColor(.red)
-                        }
-
+                        
                         Text("Confirm Password")
                             .font(.system(size: 16, weight: .medium))
                             .foregroundColor(Color(red: 81/255, green: 58/255, blue: 16/255))

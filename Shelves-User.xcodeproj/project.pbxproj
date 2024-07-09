@@ -23,6 +23,8 @@
 		C262716E2C3C0548009C6830 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = C262716D2C3C0548009C6830 /* FirebaseAnalytics */; };
 		C26271702C3C054B009C6830 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C262716F2C3C054B009C6830 /* FirebaseAnalyticsSwift */; };
 		C26271722C3C055C009C6830 /* AuthManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26271712C3C055C009C6830 /* AuthManage.swift */; };
+		C27C0EF22C3DABDE00131A5B /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = C27C0EF12C3DABDE00131A5B /* GoogleSignIn */; };
+		C27C0EF42C3DABDE00131A5B /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C27C0EF32C3DABDE00131A5B /* GoogleSignInSwift */; };
 		C4447C732C36C7FE00E1D065 /* UserScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4447C722C36C7FE00E1D065 /* UserScreenView.swift */; };
 		D063707B2C3BDE5500697510 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D063707A2C3BDE5500697510 /* GoogleService-Info.plist */; };
 		D063707F2C3BE00600697510 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D063707E2C3BE00600697510 /* FirebaseAuth */; };
@@ -50,6 +52,7 @@
 		94C9B1592C35D725001784C3 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		94C9B15B2C35E0A7001784C3 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		C26271712C3C055C009C6830 /* AuthManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManage.swift; sourceTree = "<group>"; };
+		C27C0EEF2C3DABA100131A5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C4447C722C36C7FE00E1D065 /* UserScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserScreenView.swift; sourceTree = "<group>"; };
 		D063707A2C3BDE5500697510 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D06370842C3C135600697510 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
@@ -66,8 +69,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C27C0EF22C3DABDE00131A5B /* GoogleSignIn in Frameworks */,
 				C26271702C3C054B009C6830 /* FirebaseAnalyticsSwift in Frameworks */,
 				D06370812C3BE00600697510 /* FirebaseDatabase in Frameworks */,
+				C27C0EF42C3DABDE00131A5B /* GoogleSignInSwift in Frameworks */,
 				D063707F2C3BE00600697510 /* FirebaseAuth in Frameworks */,
 				C262716E2C3C0548009C6830 /* FirebaseAnalytics in Frameworks */,
 			);
@@ -121,6 +126,7 @@
 		FD938B0C2C3566C700FFFC1E /* Shelves-User */ = {
 			isa = PBXGroup;
 			children = (
+				C27C0EEF2C3DABA100131A5B /* Info.plist */,
 				FD938B0D2C3566C700FFFC1E /* Shelves_UserApp.swift */,
 				441E4BFB2C380F8700FD59DD /* GenereSelectionView.swift */,
 				FD938B0F2C3566C700FFFC1E /* ContentView.swift */,
@@ -166,6 +172,8 @@
 				D06370802C3BE00600697510 /* FirebaseDatabase */,
 				C262716D2C3C0548009C6830 /* FirebaseAnalytics */,
 				C262716F2C3C054B009C6830 /* FirebaseAnalyticsSwift */,
+				C27C0EF12C3DABDE00131A5B /* GoogleSignIn */,
+				C27C0EF32C3DABDE00131A5B /* GoogleSignInSwift */,
 			);
 			productName = "Shelves-User";
 			productReference = FD938B0A2C3566C700FFFC1E /* Shelves-User.app */;
@@ -197,6 +205,7 @@
 			mainGroup = FD938B012C3566C700FFFC1E;
 			packageReferences = (
 				D063707C2C3BDFB200697510 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				C27C0EF02C3DABDE00131A5B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			productRefGroup = FD938B0B2C3566C700FFFC1E /* Products */;
 			projectDirPath = "";
@@ -380,6 +389,7 @@
 				DEVELOPMENT_TEAM = 299M5Z525X;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Shelves-User/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -409,6 +419,7 @@
 				DEVELOPMENT_TEAM = 299M5Z525X;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Shelves-User/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -451,6 +462,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		C27C0EF02C3DABDE00131A5B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.1.0;
+			};
+		};
 		D063707C2C3BDFB200697510 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -471,6 +490,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D063707C2C3BDFB200697510 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalyticsSwift;
+		};
+		C27C0EF12C3DABDE00131A5B /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C27C0EF02C3DABDE00131A5B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		C27C0EF32C3DABDE00131A5B /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C27C0EF02C3DABDE00131A5B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
 		};
 		D063707E2C3BE00600697510 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;

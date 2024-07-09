@@ -5,7 +5,6 @@
 //  Created by Suraj Singh on 05/07/24.
 //
 
-
 import SwiftUI
 
 struct GenreSelectionView: View {

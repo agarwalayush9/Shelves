@@ -2,10 +2,12 @@
 //  LoginView.swift
 //  Shelves-User
 //
-//  Created by Anay Dubey on 04/07/24.
+//  Created by Rajeev Choudhary on 09/07/24.
 //
 
 import SwiftUI
+import GoogleSignIn
+import Firebase
 
 struct LoginView: View {
     var body: some View {
@@ -62,7 +64,7 @@ struct LoginView: View {
                         .padding(.horizontal, 20)
                     }
                     
-                   NavigationLink(destination: LoginInput()) {
+                    NavigationLink(destination: LoginInput()) {
                         HStack {
                             Image(systemName: "envelope.fill")
                             Text("Sign in with Email")
@@ -76,14 +78,14 @@ struct LoginView: View {
                     }
                     
                     Button(action: {
-                        // Action for sign in with email button
+                        signInWithGoogle()
                     }) {
                         HStack {
                             Image("G")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 20, height: 20)
-                            Text("Sign-up with Google")
+                            Text("Sign in with Google")
                         }
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(.white)
@@ -111,10 +113,50 @@ struct LoginView: View {
             }
         }
     }
+    
+    func signInWithGoogle() {
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+        
+        let config = GIDConfiguration(clientID: clientID)
+        
+        guard let presentingViewController = UIApplication.shared.windows.first?.rootViewController else {
+            return
+        }
+        
+        GIDSignIn.sharedInstance.configuration = config
+        
+        GIDSignIn.sharedInstance.signIn(withPresenting: presentingViewController) { signResult, error in
+            if let error = error {
+                // Handle the error if any
+                print("Error signing in: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let user = signResult?.user,
+                  let idToken = user.idToken else { return }
+            
+            let accessToken = user.accessToken
+            
+            let credential = GoogleAuthProvider.credential(withIDToken: idToken.tokenString, accessToken: accessToken.tokenString)
+            
+            // Use the credential to authenticate with Firebase
+            Auth.auth().signIn(with: credential) { authResult, error in
+                if let error = error {
+                    // Handle the error if any
+                    print("Error authenticating with Firebase: \(error.localizedDescription)")
+                    return
+                }
+                
+                // User is signed in
+                print("User is signed in")
+                // Handle post-sign-in logic here
+            }
+        }
+    }
 }
 
-struct SignupView_Previews: PreviewProvider {
+struct LoginViewPreviews: PreviewProvider {
     static var previews: some View {
-        SignupView()
+        LoginView()
     }
 }
