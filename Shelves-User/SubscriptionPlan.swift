@@ -5,13 +5,6 @@
 //  Created by Suraj Singh on 08/07/24.
 //
 
-//
-//  BookRow.swift
-//  Book Management user
-//
-//  Created by Suraj Singh on 02/07/24.
-//
-
 import SwiftUI
 
 struct SubscriptionView: View {
