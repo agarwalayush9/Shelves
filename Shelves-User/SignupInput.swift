@@ -9,7 +9,7 @@ struct SignupInput: View {
     @State private var confirmPassword: String = ""
     @State private var acceptTerms: Bool = false
     @State private var showDialog: Bool = false
-    @State private var navigateToGenreSelection: Bool = false
+    @State private var showGenreSelection: Bool = false
     @State private var showAlert = false
     @State private var alertMessage = ""
 
@@ -138,7 +138,7 @@ struct SignupInput: View {
 
                     Spacer()
                     
-                    NavigationLink("", destination: GenreSelectionView(), isActive: $navigateToGenreSelection)
+//                    NavigationLink("", destination: GenreSelectionView(), isActive: $navigateToGenreSelection)
                     
                     Button(action: {
                         guard validateAndRegister() else {
@@ -187,8 +187,8 @@ struct SignupInput: View {
 
              
             }
-            .fullScreenCover(isPresented: $navigateToGenreSelection) {
-                
+            .fullScreenCover(isPresented: $showGenreSelection) {
+                GenreSelectionView()
             
             }
         }
@@ -244,7 +244,7 @@ struct SignupInput: View {
 //                alertMessage = "Sign Up Successfull"
 //                    ()
 //                showAlert = true
-                navigateToGenreSelection = true
+                showGenreSelection = true
                     
             }
         }
