@@ -234,4 +234,3 @@ struct SubscriptionView_Previews: PreviewProvider {
         SubscriptionView()
     }
 }
-
