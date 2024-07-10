@@ -31,7 +31,7 @@ struct ProfileHeader: View {
                 .padding()
             
             VStack(alignment: .leading) {
-                Text("Ankit Verma")
+                Text("Jhanvi Jindal")
                     .font(.headline)
                 Text("An Avid Reader")
                     .font(.subheadline)
