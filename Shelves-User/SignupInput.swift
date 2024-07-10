@@ -160,30 +160,6 @@ struct SignupInput: View {
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color.gray, lineWidth: 1)
                             )
-                        
-                        Text("Confirm Password")
-                            .font(.system(size: 16, weight: .medium))
-                            .foregroundColor(Color(red: 81/255, green: 58/255, blue: 16/255))
-
-                        SecureField("Confirm your password", text: $confirmPassword)
-                            .onChange(of: confirmPassword) { newValue in
-                                confirmPasswordError = ""
-                                if !newValue.isEmpty && password != newValue {
-                                    confirmPasswordError = "Passwords do not match."
-                                }
-                            }
-                            .padding()
-                            .background(Color.white)
-                            .cornerRadius(10)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.gray, lineWidth: 1)
-                            )
-                        if !confirmPasswordError.isEmpty {
-                            Text(confirmPasswordError)
-                                .font(.system(size: 12))
-                                .foregroundColor(.red)
-                        }
 
                         SecureField("Confirm your password", text: $confirmPassword)
                             .padding()
