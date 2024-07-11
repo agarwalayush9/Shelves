@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  Shelves-User
 //
-//  Created by Rajeev Choudhary on 08/07/24.
+//  Created by Anay Dubey on 04/07/24.
 //
 
 import SwiftUI
@@ -18,12 +18,6 @@ struct ContentView: View {
         } else {
             MainContentView()
         }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
     }
 }
 
@@ -98,3 +92,8 @@ struct MainContentView: View {
     }
 }
 
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
