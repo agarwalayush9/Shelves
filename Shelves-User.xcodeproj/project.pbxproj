@@ -25,6 +25,9 @@
 		C27ADB392C3E4B190058B8E0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27ADB382C3E4B190058B8E0 /* ProfileView.swift */; };
 		C27C0EF22C3DABDE00131A5B /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = C27C0EF12C3DABDE00131A5B /* GoogleSignIn */; };
 		C27C0EF42C3DABDE00131A5B /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C27C0EF32C3DABDE00131A5B /* GoogleSignInSwift */; };
+		C41746C02C3F9A8400D5D7D1 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41746BF2C3F9A8400D5D7D1 /* DataModel.swift */; };
+		C41746C42C3FA34A00D5D7D1 /* EventRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41746C32C3FA34A00D5D7D1 /* EventRowView.swift */; };
+		C41746C62C3FA42700D5D7D1 /* EventContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41746C52C3FA42700D5D7D1 /* EventContentView.swift */; };
 		C4447C732C36C7FE00E1D065 /* UserScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4447C722C36C7FE00E1D065 /* UserScreenView.swift */; };
 		D063707B2C3BDE5500697510 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D063707A2C3BDE5500697510 /* GoogleService-Info.plist */; };
 		D063707F2C3BE00600697510 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D063707E2C3BE00600697510 /* FirebaseAuth */; };
@@ -53,6 +56,9 @@
 		94C9B15B2C35E0A7001784C3 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		C27ADB382C3E4B190058B8E0 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		C27C0EEF2C3DABA100131A5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C41746BF2C3F9A8400D5D7D1 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		C41746C32C3FA34A00D5D7D1 /* EventRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRowView.swift; sourceTree = "<group>"; };
+		C41746C52C3FA42700D5D7D1 /* EventContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventContentView.swift; sourceTree = "<group>"; };
 		C4447C722C36C7FE00E1D065 /* UserScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserScreenView.swift; sourceTree = "<group>"; };
 		D063707A2C3BDE5500697510 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D06370842C3C135600697510 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
@@ -102,6 +108,9 @@
 		FD938B012C3566C700FFFC1E = {
 			isa = PBXGroup;
 			children = (
+				C41746BF2C3F9A8400D5D7D1 /* DataModel.swift */,
+				C41746C32C3FA34A00D5D7D1 /* EventRowView.swift */,
+				C41746C52C3FA42700D5D7D1 /* EventContentView.swift */,
 				D06370842C3C135600697510 /* DataController.swift */,
 				D063707A2C3BDE5500697510 /* GoogleService-Info.plist */,
 				C4447C722C36C7FE00E1D065 /* UserScreenView.swift */,
@@ -240,6 +249,7 @@
 				441E4BFC2C380F8700FD59DD /* GenereSelectionView.swift in Sources */,
 				FD938B0E2C3566C700FFFC1E /* Shelves_UserApp.swift in Sources */,
 				441E4C1E2C3BB66500FD59DD /* Tab.swift in Sources */,
+				C41746C62C3FA42700D5D7D1 /* EventContentView.swift in Sources */,
 				441E4BDA2C365E7500FD59DD /* PageControl.swift in Sources */,
 				94C9B15C2C35E0A7001784C3 /* LoginView.swift in Sources */,
 				441E4C1C2C3BA59600FD59DD /* SubscriptionPlan.swift in Sources */,
@@ -249,6 +259,8 @@
 				C4447C732C36C7FE00E1D065 /* UserScreenView.swift in Sources */,
 				441E4BD82C365E3300FD59DD /* OnboardingView.swift in Sources */,
 				D06370852C3C135600697510 /* DataController.swift in Sources */,
+				C41746C42C3FA34A00D5D7D1 /* EventRowView.swift in Sources */,
+				C41746C02C3F9A8400D5D7D1 /* DataModel.swift in Sources */,
 				441E4C202C3BB6A200FD59DD /* CustomTabbar.swift in Sources */,
 				94045C0E2C37BFD400DB9602 /* SignupInput.swift in Sources */,
 				94C9B15A2C35D725001784C3 /* SignupView.swift in Sources */,
