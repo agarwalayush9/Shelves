@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct ExploreTab: View {
-    @State private var selectedCategory: String = "Trending"
+    @StateObject private var viewModel = ExploreTabViewModel()
+    @State private var selectedCategory: String = ""
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
                     Text("Explore")
@@ -71,66 +72,14 @@ struct ExploreTab: View {
                         .padding(.horizontal)
                     }
                     
-                    VStack(alignment: .leading, spacing: 10) {
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text("Recommended for you")
-                                    .font(.headline)
-                                Text("We think you'll like these")
-                                    .font(.footnote)
-                                    .foregroundColor(.secondary)
-                            }
-                            Spacer()
-                            Button(action: {}) {
-                                Text("Show all")
-                                    .font(.subheadline)
-                                    .foregroundColor(.brown)
-                            }
-                        }
-                        .padding(.horizontal)
-                        
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 20) {
-                                BookView(title: "The Good Guy", author: "Author Name", subtitle: "Subtitle goes here")
-                                BookView(title: "Really Good, Actually", author: "Monica Heisey", subtitle: "Subtitle goes here")
-                                BookView(title: "A Brief History of Time", author: "Stephen Hawking", subtitle: "From the Big Bang to Black Holes")
-                                BookView(title: "Who We Are and How We", author: "David Reich", subtitle: "Ancient DNA and the New Science of Human")
-                            }
-                            .padding(.horizontal, 10)
-                        }
-                    }
-                    
-                    VStack(alignment: .leading, spacing: 10) {
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text("Fictional")
-                                    .font(.headline)
-                                Text("We think you'll like these")
-                                    .font(.footnote)
-                                    .foregroundColor(.secondary)
-                            }
-                            Spacer()
-                            Button(action: {}) {
-                                Text("Show all")
-                                    .font(.subheadline)
-                                    .foregroundColor(.brown)
-                            }
-                        }
-                        .padding(.horizontal)
-                        
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 20) {
-                                BookView(title: "Futurama", author: "Matt Groening", subtitle: "Fictional Universe")
-                                BookView(title: "Really Good, Actually", author: "Monica Heisey", subtitle: "A Novel")
-                                BookView(title: "A Brief History of Time", author: "Stephen Hawking", subtitle: "From the Big Bang to Black Holes")
-                                BookView(title: "Who We Are and How We", author: "David Reich", subtitle: "Ancient DNA and the New Science of Human")
-                            }
-                            .padding(.horizontal, 10)
-                        }
+                    ForEach(viewModel.contentSections) { section in
+                        BookContentView(section: section)
                     }
                     
                     Spacer()
                 }
+                .padding(.top, 20)
+                .padding(.bottom, 20)
             }
             .background(
                 LinearGradient(gradient: Gradient(colors: [Color(red: 1.0, green: 0.87, blue: 0.7), Color.white]),
@@ -196,11 +145,13 @@ struct BookView: View {
     var title: String
     var author: String
     var subtitle: String
+    var imageName: String
     
     var body: some View {
         VStack(alignment: .leading) {
-            Rectangle()
-                .fill(Color.gray)
+            Image(imageName) // Use Image with imageName
+                .resizable()
+                .aspectRatio(contentMode: .fill)
                 .frame(width: 120, height: 180)
                 .cornerRadius(8)
             

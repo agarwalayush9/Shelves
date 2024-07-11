@@ -20,6 +20,10 @@
 		943013EB2C381210000C068C /* ExploreTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943013EA2C38120F000C068C /* ExploreTab.swift */; };
 		94C9B15A2C35D725001784C3 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C9B1592C35D725001784C3 /* SignupView.swift */; };
 		94C9B15C2C35E0A7001784C3 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C9B15B2C35E0A7001784C3 /* LoginView.swift */; };
+		94CC112B2C3FF26B006B3988 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CC112A2C3FF26B006B3988 /* Book.swift */; };
+		94CC112F2C3FF2D1006B3988 /* BookContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CC112E2C3FF2D1006B3988 /* BookContentView.swift */; };
+		94CC11312C3FF317006B3988 /* ExploreTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CC11302C3FF317006B3988 /* ExploreTabViewModel.swift */; };
+		94CC11332C3FFDEA006B3988 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CC11322C3FFDEA006B3988 /* Events.swift */; };
 		C262716E2C3C0548009C6830 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = C262716D2C3C0548009C6830 /* FirebaseAnalytics */; };
 		C26271702C3C054B009C6830 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C262716F2C3C054B009C6830 /* FirebaseAnalyticsSwift */; };
 		C27ADB392C3E4B190058B8E0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27ADB382C3E4B190058B8E0 /* ProfileView.swift */; };
@@ -51,6 +55,11 @@
 		943013EA2C38120F000C068C /* ExploreTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreTab.swift; sourceTree = "<group>"; };
 		94C9B1592C35D725001784C3 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		94C9B15B2C35E0A7001784C3 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		94CC112A2C3FF26B006B3988 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		94CC112E2C3FF2D1006B3988 /* BookContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookContentView.swift; sourceTree = "<group>"; };
+		94CC11302C3FF317006B3988 /* ExploreTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreTabViewModel.swift; sourceTree = "<group>"; };
+		94CC11322C3FFDEA006B3988 /* Events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
+		C26271712C3C055C009C6830 /* AuthManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManage.swift; sourceTree = "<group>"; };
 		C27ADB382C3E4B190058B8E0 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		C27C0EEF2C3DABA100131A5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C4447C722C36C7FE00E1D065 /* UserScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserScreenView.swift; sourceTree = "<group>"; };
@@ -136,6 +145,10 @@
 				94C9B15B2C35E0A7001784C3 /* LoginView.swift */,
 				94045C0F2C37CD6500DB9602 /* LoginInput.swift */,
 				943013EA2C38120F000C068C /* ExploreTab.swift */,
+				94CC112A2C3FF26B006B3988 /* Book.swift */,
+				94CC112E2C3FF2D1006B3988 /* BookContentView.swift */,
+				94CC11302C3FF317006B3988 /* ExploreTabViewModel.swift */,
+				94CC11322C3FFDEA006B3988 /* Events.swift */,
 				FD938B112C3566C900FFFC1E /* Assets.xcassets */,
 				C27ADB382C3E4B190058B8E0 /* ProfileView.swift */,
 				FD938B132C3566C900FFFC1E /* Preview Content */,
@@ -242,9 +255,13 @@
 				441E4C1E2C3BB66500FD59DD /* Tab.swift in Sources */,
 				441E4BDA2C365E7500FD59DD /* PageControl.swift in Sources */,
 				94C9B15C2C35E0A7001784C3 /* LoginView.swift in Sources */,
+				94CC11312C3FF317006B3988 /* ExploreTabViewModel.swift in Sources */,
 				441E4C1C2C3BA59600FD59DD /* SubscriptionPlan.swift in Sources */,
+				94CC112F2C3FF2D1006B3988 /* BookContentView.swift in Sources */,
 				94045C102C37CD6500DB9602 /* LoginInput.swift in Sources */,
+				94CC11332C3FFDEA006B3988 /* Events.swift in Sources */,
 				943013EB2C381210000C068C /* ExploreTab.swift in Sources */,
+				94CC112B2C3FF26B006B3988 /* Book.swift in Sources */,
 				C27ADB392C3E4B190058B8E0 /* ProfileView.swift in Sources */,
 				C4447C732C36C7FE00E1D065 /* UserScreenView.swift in Sources */,
 				441E4BD82C365E3300FD59DD /* OnboardingView.swift in Sources */,
