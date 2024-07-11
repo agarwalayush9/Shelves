@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ExploreTab: View {
+    @State private var selectedCategory: String = "Trending"
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -19,9 +21,10 @@ struct ExploreTab: View {
                         .padding(.top, 20)
                     
                     Rectangle()
-                        .frame(width: 80, height: 2)
-                        .foregroundColor(.gray)
+                        .frame(width: 80, height: 5)
+                        .foregroundColor(.brown)
                         .padding(.horizontal)
+                        .cornerRadius(10)
                     
                     SearchBar()
                         .padding(.horizontal)
@@ -30,68 +33,110 @@ struct ExploreTab: View {
                     Text("Categories")
                         .font(.headline)
                         .padding(.horizontal)
-                        .padding(.top, 10)
+                        .padding(.top, 5)
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 15) {
-                            CategoryButton(title: "Trending", icon: "flame.fill", isSelected: true)
-                            CategoryButton(title: "5-Minutes Read", icon: "clock.fill", isSelected: false)
-                            CategoryButton(title: "Quick Listen", icon: "headphones", isSelected: false)
+                            CategoryButton(
+                                title: "Trending",
+                                icon: "flame.fill",
+                                isSelected: selectedCategory == "Trending",
+                                backgroundColor: selectedCategory == "Trending" ? Color(red: 86/255, green: 63/255, blue: 39/255) : .white,
+                                textColor: selectedCategory == "Trending" ? .white : Color(red: 86/255, green: 63/255, blue: 39/255),
+                                action: {
+                                    selectedCategory = "Trending"
+                                }
+                            )
+                            CategoryButton(
+                                title: "5-Minutes Read",
+                                icon: "book.fill",
+                                isSelected: selectedCategory == "5-Minutes Read",
+                                backgroundColor: selectedCategory == "5-Minutes Read" ? Color(red: 86/255, green: 63/255, blue: 39/255) : .white,
+                                textColor: selectedCategory == "5-Minutes Read" ? .white : Color(red: 86/255, green: 63/255, blue: 39/255),
+                                action: {
+                                    selectedCategory = "5-Minutes Read"
+                                }
+                            )
+                            CategoryButton(
+                                title: "Quick Listen",
+                                icon: "headphones",
+                                isSelected: selectedCategory == "Quick Listen",
+                                backgroundColor: selectedCategory == "Quick Listen" ? Color(red: 86/255, green: 63/255, blue: 39/255) : .white,
+                                textColor: selectedCategory == "Quick Listen" ? .white : Color(red: 86/255, green: 63/255, blue: 39/255),
+                                action: {
+                                    selectedCategory = "Quick Listen"
+                                }
+                            )
                         }
                         .padding(.horizontal)
                     }
                     
                     VStack(alignment: .leading, spacing: 10) {
                         HStack {
-                            Text("Recommended for you")
-                                .font(.headline)
+                            VStack(alignment: .leading) {
+                                Text("Recommended for you")
+                                    .font(.headline)
+                                Text("We think you'll like these")
+                                    .font(.footnote)
+                                    .foregroundColor(.secondary)
+                            }
                             Spacer()
                             Button(action: {}) {
                                 Text("Show all")
                                     .font(.subheadline)
-                                    .foregroundColor(.blue)
+                                    .foregroundColor(.brown)
                             }
                         }
                         .padding(.horizontal)
                         
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 20) {
-                                BookView(title: "A Brief History of Time", author: "Stephen Hawking", subtitle: "From the Big Bang to Black Holes")
-                                BookView(title: "Who We Are and How We", author: "David Reich", subtitle: "Ancient DNA and the New Science of Human")
                                 BookView(title: "The Good Guy", author: "Author Name", subtitle: "Subtitle goes here")
                                 BookView(title: "Really Good, Actually", author: "Monica Heisey", subtitle: "Subtitle goes here")
+                                BookView(title: "A Brief History of Time", author: "Stephen Hawking", subtitle: "From the Big Bang to Black Holes")
+                                BookView(title: "Who We Are and How We", author: "David Reich", subtitle: "Ancient DNA and the New Science of Human")
                             }
-                            .padding(.horizontal)
+                            .padding(.horizontal, 10)
                         }
                     }
-
+                    
                     VStack(alignment: .leading, spacing: 10) {
                         HStack {
-                            Text("Recommended for you")
-                                .font(.headline)
+                            VStack(alignment: .leading) {
+                                Text("Fictional")
+                                    .font(.headline)
+                                Text("We think you'll like these")
+                                    .font(.footnote)
+                                    .foregroundColor(.secondary)
+                            }
                             Spacer()
                             Button(action: {}) {
                                 Text("Show all")
                                     .font(.subheadline)
-                                    .foregroundColor(.blue)
+                                    .foregroundColor(.brown)
                             }
                         }
                         .padding(.horizontal)
                         
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 20) {
+                                BookView(title: "Futurama", author: "Matt Groening", subtitle: "Fictional Universe")
+                                BookView(title: "Really Good, Actually", author: "Monica Heisey", subtitle: "A Novel")
                                 BookView(title: "A Brief History of Time", author: "Stephen Hawking", subtitle: "From the Big Bang to Black Holes")
                                 BookView(title: "Who We Are and How We", author: "David Reich", subtitle: "Ancient DNA and the New Science of Human")
-                                BookView(title: "Do Epic Shit", author: "Author Name", subtitle: "Subtitle goes here")
-                                BookView(title: "Really Good, Actually", author: "Monica Heisey", subtitle: "Subtitle goes here")
                             }
-                            .padding(.horizontal)
+                            .padding(.horizontal, 10)
                         }
                     }
                     
                     Spacer()
                 }
             }
+            .background(
+                LinearGradient(gradient: Gradient(colors: [Color(red: 1.0, green: 0.87, blue: 0.7), Color.white]),
+                               startPoint: .top,
+                               endPoint: .bottom)
+            )
             .navigationBarHidden(true)
         }
     }
@@ -114,7 +159,7 @@ struct SearchBar: View {
         .cornerRadius(10)
         .overlay(
             RoundedRectangle(cornerRadius: 10)
-                .stroke(Color.brown, lineWidth: 1)
+                .stroke(Color.brown, lineWidth: 2)
         )
         .padding(.horizontal, 10)
     }
@@ -124,17 +169,20 @@ struct CategoryButton: View {
     var title: String
     var icon: String
     var isSelected: Bool
+    var backgroundColor: Color
+    var textColor: Color
+    var action: () -> Void
     
     var body: some View {
-        Button(action: {}) {
+        Button(action: action) {
             HStack {
                 Image(systemName: icon)
-                    .foregroundColor(isSelected ? .white : .brown)
+                    .foregroundColor(textColor)
                 Text(title)
-                    .foregroundColor(isSelected ? .white : .brown)
+                    .foregroundColor(textColor)
             }
             .padding()
-            .background(isSelected ? Color.brown : Color.white)
+            .background(backgroundColor)
             .cornerRadius(35)
             .overlay(
                 RoundedRectangle(cornerRadius: 35)
@@ -156,18 +204,21 @@ struct BookView: View {
                 .frame(width: 120, height: 180)
                 .cornerRadius(8)
             
-            Text(title)
-                .font(.headline)
-                .lineLimit(2)
-            
-            Text(author)
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-            
-            Text(subtitle)
-                .font(.caption)
-                .foregroundColor(.secondary)
-                .lineLimit(3)
+            VStack(alignment: .leading, spacing: 4) {
+                Text(title)
+                    .font(.headline)
+                    .lineLimit(2)
+                
+                Text(author)
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                    .lineLimit(1)
+                
+                Text(subtitle)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .lineLimit(2)
+            }
         }
         .frame(width: 140)
     }

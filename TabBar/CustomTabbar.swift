@@ -22,7 +22,7 @@ struct CustomTabbar: View {
                 Text("For You")
                     .tag(Tab.forYou)
                 
-                Text("Explore")
+                ExploreTab()
                     .tag(Tab.explore)
                 
                 Text("My Library")
