@@ -20,6 +20,7 @@ struct CustomTabbar: View {
         VStack(spacing: 0) {
             TabView(selection: $activeTab) {
                 Text("For You")
+                UserHomePage()
                     .tag(Tab.forYou)
                 
                 ExploreTab()

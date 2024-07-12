@@ -15,3 +15,12 @@ struct Event: Identifiable {
     let price: String
     let imageName: String
 }
+
+
+struct Author: Identifiable {
+    let id = UUID()
+    let name: String
+    let title: String
+    let description: String
+    let image: String
+}
