@@ -21,7 +21,7 @@ struct BookContentView: View {
                         .foregroundColor(.secondary)
                 }
                 Spacer()
-                Button(action: {}) {
+                NavigationLink(destination: DetailedBookListView(title: section.title, books: section.books)) {
                     Text("Show all")
                         .font(.subheadline)
                         .foregroundColor(.brown)
