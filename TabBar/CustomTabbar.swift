@@ -28,7 +28,7 @@ struct CustomTabbar: View {
                 Text("My Library")
                     .tag(Tab.myLibrary)
                 
-                Text("Profile")
+                AccountView()
                     .tag(Tab.profile)
             }
             .frame(maxHeight: .infinity) // Ensure TabView takes up all available space
