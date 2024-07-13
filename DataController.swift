@@ -21,6 +21,99 @@ class DataController
     }
     
     
+    
+    func addMember(_ member: Member, completion: @escaping (Result<Void, Error>) -> Void) {
+        let safeEmail = DataController.safeEmail(email: member.email)
+
+        // Check if the member email already exists
+        database.child("members").child(safeEmail).observeSingleEvent(of: .value) { snapshot in
+            if snapshot.exists() {
+                // Member email already exists
+                completion(.failure(NSError(domain: "", code: 1, userInfo: [NSLocalizedDescriptionKey: "Email is already in use."])))
+            } else {
+                // Add the member to the database
+                self.saveMemberToDatabase(member) { result in
+                    completion(result)
+                }
+            }
+        }
+    }
+
+    private func saveMemberToDatabase(_ member: Member, completion: @escaping (Result<Void, Error>) -> Void) {
+        let safeEmail = DataController.safeEmail(email: member.email)
+        var memberDictionary: [String: Any] = [
+            "email": member.email,
+            "firstName": member.firstName,
+            "lastName": member.lastName,
+            "phoneNumber": member.phoneNumber,
+            "subscriptionPlan": member.subscriptionPlan,
+            "genre": member.genre.map { $0.rawValue } // Convert Genre enum to raw values (String)
+        ]
+
+        // Convert events to a dictionary representation
+        var eventsArray: [[String: Any]] = []
+        for event in member.registeredEvents {
+            let eventDictionary: [String: Any] = [
+                "id": event.id.uuidString,
+                "title": event.title,
+                "date": event.date,
+                "time": event.time,
+                "location": event.location,
+                "price": event.price,
+                "imageName": event.imageName
+            ]
+            eventsArray.append(eventDictionary)
+        }
+        memberDictionary["registeredEvents"] = eventsArray
+
+        // Save member to database
+        database.child("members").child(safeEmail).setValue(memberDictionary) { error, _ in
+            if let error = error {
+                print("Failed to save member: \(error.localizedDescription)")
+                completion(.failure(error))
+            } else {
+                print("Member saved successfully.")
+                completion(.success(()))
+            }
+        }
+    }
+
+    func updateMemberGenre(email: String, selectedGenres: [Genre], completion: @escaping (Result<Void, Error>) -> Void) {
+        let safeEmail = DataController.safeEmail(email: email)
+
+        // Convert selected genres to an array of raw values (Strings)
+        let updatedProperties = ["genre": selectedGenres.map { $0.rawValue }]
+
+        // Update member properties in the database
+        database.child("members").child(safeEmail).updateChildValues(updatedProperties) { error, _ in
+            if let error = error {
+                print("Failed to update member genre properties: \(error.localizedDescription)")
+                completion(.failure(error))
+            } else {
+                print("Member genre properties updated successfully.")
+                completion(.success(()))
+            }
+        }
+    }
+
+    func updateSubscriptionPlan(email: String, newSubscriptionPlan: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        let safeEmail = DataController.safeEmail(email: email)
+
+        let updatedProperties = ["subscriptionPlan": newSubscriptionPlan]
+
+        // Update member properties in the database
+        database.child("members").child(safeEmail).updateChildValues(updatedProperties) { error, _ in
+            if let error = error {
+                print("Failed to update member subscription plan: \(error.localizedDescription)")
+                completion(.failure(error))
+            } else {
+                print("Member subscription plan updated successfully.")
+                completion(.success(()))
+            }
+        }
+    }
+
+    
     func isEmailAlreadyInUse(email: String, completion: @escaping (Bool) -> Void) {
         Auth.auth().fetchSignInMethods(forEmail: email) { methods, error in
             if let error = error {

@@ -6,16 +6,17 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct GenreSelectionView: View {
-    @State private var selectedGenres: [String] = []
+    @State private var selectedGenres: [Genre] = []
     @State private var navigateToSubscriptionView = false
+    @State private var userEmail: String?
 
-    let genres = [
-        "Horror", "Historical Fiction", "Fiction", "Non-fiction", "Novel",
-        "Children's Literature", "Sci-Fi", "Narrative", "Biography", "Mystery",
-        "Autobiography", "Poetry", "Thriller", "Crime", "History", "Romantic",
-        "Stories", "Cookbook"
+    let genres: [Genre] = [
+        .Horror, .HistoricalFiction, .Fiction, .NonFiction, .Literature,
+        .YoungAdult, .ScienceFiction, .Romance, .Psychology, .SelfHelp,
+        .Mystery
     ]
 
     var body: some View {
@@ -52,7 +53,7 @@ struct GenreSelectionView: View {
                             GridItem(.flexible(), spacing: 10)
                         ], spacing: 8) {
                             ForEach(genres, id: \.self) { genre in
-                                GenreButton(genre: genre, isSelected: self.selectedGenres.contains(genre)) {
+                                GenreButton(genre: genre.rawValue, isSelected: self.selectedGenres.contains(genre)) {
                                     if self.selectedGenres.contains(genre) {
                                         self.selectedGenres.removeAll { $0 == genre }
                                     } else {
@@ -77,7 +78,32 @@ struct GenreSelectionView: View {
                     Spacer(minLength: 5)
                     
                     if self.selectedGenres.count >= 3 {
-                        NavigationLink(destination: SubscriptionView()) {
+                        NavigationLink(destination: SubscriptionView(), isActive: $navigateToSubscriptionView) {
+                            EmptyView()
+                        }
+                        .hidden()
+                        
+                        Button(action: {
+                                                   // Get current user's email using FirebaseAuth
+                            if let userEmail = UserDefaults.standard.string(forKey: "email") {
+                                self.userEmail = userEmail
+                                                       // Call updateMemberGenre function
+                                    DataController.shared.updateMemberGenre(email: userEmail, selectedGenres: self.selectedGenres) { result in
+                                                           switch result {
+                                                           case .success:
+                                                               print("Genres updated successfully.")
+                                                               // Set navigateToSubscriptionView to true to navigate
+                                                               self.navigateToSubscriptionView = true
+                                                           case .failure(let error):
+                                                               print("Failed to update genres: \(error.localizedDescription)")
+                                                               // Handle error
+                                                           }
+                                                       }
+                                                   } else {
+                                                       print("User not authenticated or email not found.")
+                                                       // Handle scenario where user is not authenticated
+                                                   }
+                        }) {
                             Text("Continue")
                                 .foregroundColor(.white)
                                 .padding()
@@ -111,8 +137,8 @@ struct GenreSelectionView: View {
                 .background(
                     LinearGradient(
                         gradient: Gradient(colors: [Color(red: 1.0, green: 0.9, blue: 0.7), Color(red: 1.0, green: 0.8, blue: 0.5)]),
-                        startPoint: .top,
-                        endPoint: .bottom
+                            startPoint: .top,
+                            endPoint: .bottom
                     )
                 )
             }
@@ -159,7 +185,6 @@ struct GenreButton: View {
         .foregroundColor(Color(UIColor(red: 0.66, green: 0.46, blue: 0.28, alpha: 1.0)))
     }
 }
-
 
 struct GenreSelectionView_Previews: PreviewProvider {
     static var previews: some View {

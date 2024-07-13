@@ -158,27 +158,53 @@ struct SubscriptionView: View {
                 .padding(.horizontal, 50)
                 
                 Button(action: {
-                    // Handle continue and pay action
                     if let tier = selectedTier {
-                        switch tier {
-                        case "Bronze":
-                            if let bronze = bronzeSubscription {
-                                updateSubscription(tier: tier, monthly: bronze.monthly, yearly: bronze.yearly, activeUsers: bronze.activeUsers + 1)
+                            // Determine the selected plan name
+                            let selectedPlanName = selectedPlan == "Monthly" ? "\(tier) Monthly" : "\(tier) Yearly"
+                            
+                            // Retrieve user email from UserDefaults
+                            if let userEmail = UserDefaults.standard.string(forKey: "email") {
+                                DataController.shared.updateSubscriptionPlan(email: userEmail, newSubscriptionPlan: selectedPlanName) { result in
+                                    switch result {
+                                    case .success:
+                                        print("Subscription plan updated successfully.")
+                                        
+                                        // Update subscription details
+                                        switch tier {
+                                        case "Bronze":
+                                            if let bronze = bronzeSubscription {
+                                                updateSubscription(tier: tier, monthly: bronze.monthly, yearly: bronze.yearly, activeUsers: bronze.activeUsers + 1)
+                                            }
+                                        case "Silver":
+                                            if let silver = silverSubscription {
+                                                updateSubscription(tier: tier, monthly: silver.monthly, yearly: silver.yearly, activeUsers: silver.activeUser + 1)
+                                            }
+                                        case "Gold":
+                                            if let gold = goldSubscription {
+                                                updateSubscription(tier: tier, monthly: gold.monthly, yearly: gold.yearly, activeUsers: gold.activeUsers + 1)
+                                            }
+                                        default:
+                                            break
+                                        }
+                                        
+                                        // Navigate to the user home page
+                                        self.showUserHomePage = true
+                                    case .failure(let error):
+                                        print("Failed to update subscription plan: \(error.localizedDescription)")
+                                        // Handle error scenario, show alert or retry logic
+                                    }
+                                }
+                            } else {
+                                // Handle case where email is not found in UserDefaults
+                                print("User email not found.")
+                                // Optionally, show an alert or UI indication for missing email
                             }
-                        case "Silver":
-                            if let silver = silverSubscription {
-                                updateSubscription(tier: tier, monthly: silver.monthly, yearly: silver.yearly, activeUsers: silver.activeUser + 1)
-                            }
-                        case "Gold":
-                            if let gold = goldSubscription {
-                                updateSubscription(tier: tier, monthly: gold.monthly, yearly: gold.yearly, activeUsers: gold.activeUsers + 1)
-                            }
-                        default:
-                            break
+                        } else {
+                            // Handle case where no tier is selected
+                            print("Please select a subscription tier.")
+                            // Optionally, show an alert or UI indication to select a tier
                         }
-                    }
-                    self.showUserHomePage = true
-                }) {
+                    }) {
                     Text("Continue & Pay")
                         .foregroundColor(.white).bold()
                         .frame(maxWidth: .infinity)

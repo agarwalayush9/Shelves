@@ -38,10 +38,10 @@ struct Shelves_UserApp: App {
 //            if isLoggedIn {
 //                UserHomePage()
 //            } else {
-//                ContentView()
-//            }
+                ContentView()
+            //}
             
-            SubscriptionView()
+           
         }
     }
 }
