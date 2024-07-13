@@ -1,10 +1,3 @@
-//
-//  CustomTabbar.swift
-//  Shelves-User
-//
-//  Created by Sahil Raj on 06/07/24.
-//
-
 import SwiftUI
 
 struct CustomTabbar: View {
@@ -19,8 +12,7 @@ struct CustomTabbar: View {
     var body: some View {
         VStack(spacing: 0) {
             TabView(selection: $activeTab) {
-                Text("For You")
-                UserHomePage()
+                UserHomePage() // Ensure UserHomePage is tagged correctly
                     .tag(Tab.forYou)
                 
                 ExploreTab()
