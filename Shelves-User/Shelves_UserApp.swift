@@ -29,12 +29,19 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct Shelves_UserApp: App {
     
+    @State private var isLoggedIn: Bool = UserDefaults.standard.bool(forKey: "isLoggedIn")
+    
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     var body: some Scene {
         WindowGroup {
+//            if isLoggedIn {
+//                UserHomePage()
+//            } else {
+//                ContentView()
+//            }
             
-            ContentView()
+            SubscriptionView()
         }
     }
 }

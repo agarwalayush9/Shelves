@@ -261,6 +261,7 @@ struct LoginInput: View {
                 print("Login error: \(error.localizedDescription)")
             } else {
                 // Handle successful login
+                UserDefaults.standard.set(true, forKey: "isLoggedIn")
                 self.showUserHomePage = true
                 print("Login success")
             }

@@ -298,6 +298,7 @@ struct SignupInput: View {
                 }
             } else {
                 print("User signed up successfully")
+                UserDefaults.standard.set(true, forKey: "isLoggedIn")
                 showGenreSelection = true
             }
         }

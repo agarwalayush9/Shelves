@@ -24,3 +24,48 @@ struct Author: Identifiable {
     let description: String
     let image: String
 }
+
+
+struct BronzeSubscription {
+    
+    var monthly: Int
+    var yearly: Int
+    var activeUsers: Int
+    
+    func toDictionary() -> [String: Any] {
+        return [
+            "monthly": monthly,
+            "yearly": yearly,
+            "activeUsers": activeUsers
+        ]
+    }
+}
+
+struct SilverSubscription {
+    
+    var monthly: Int
+    var yearly: Int
+    var activeUser: Int
+    
+    func toDictionary() -> [String: Any] {
+        return [
+            "monthly": monthly,
+            "yearly": yearly,
+            "activeUsers": activeUser
+        ]
+    }
+}
+
+struct GoldSubscription {
+    var monthly: Int
+    var yearly: Int
+    var activeUsers: Int
+    
+    func toDictionary() -> [String: Any] {
+        return [
+            "monthly": monthly,
+            "yearly": yearly,
+            "activeUsers": activeUsers
+        ]
+    }
+}
