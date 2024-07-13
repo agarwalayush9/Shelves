@@ -15,6 +15,10 @@
 		441E4C202C3BB6A200FD59DD /* CustomTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441E4C1F2C3BB6A200FD59DD /* CustomTabbar.swift */; };
 		441E4C222C3BB6BF00FD59DD /* TabbarShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441E4C212C3BB6BF00FD59DD /* TabbarShape.swift */; };
 		441E4C242C3BB6D100FD59DD /* TabPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441E4C232C3BB6D100FD59DD /* TabPosition.swift */; };
+		44EE4A122C3FF76700B322B6 /* CustomBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EE4A112C3FF76700B322B6 /* CustomBookView.swift */; };
+		44EE4A162C3FFE8500B322B6 /* SubscriptionUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EE4A152C3FFE8400B322B6 /* SubscriptionUpdate.swift */; };
+		44EE4A182C404C8400B322B6 /* SubscriptionDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EE4A172C404C8400B322B6 /* SubscriptionDataController.swift */; };
+		44EE4A1A2C404CA700B322B6 /* SubscriptionTiersData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EE4A192C404CA700B322B6 /* SubscriptionTiersData.swift */; };
 		94045C0E2C37BFD400DB9602 /* SignupInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94045C0D2C37BFD400DB9602 /* SignupInput.swift */; };
 		94045C102C37CD6500DB9602 /* LoginInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94045C0F2C37CD6500DB9602 /* LoginInput.swift */; };
 		943013EB2C381210000C068C /* ExploreTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943013EA2C38120F000C068C /* ExploreTab.swift */; };
@@ -46,6 +50,10 @@
 		441E4C1F2C3BB6A200FD59DD /* CustomTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabbar.swift; sourceTree = "<group>"; };
 		441E4C212C3BB6BF00FD59DD /* TabbarShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarShape.swift; sourceTree = "<group>"; };
 		441E4C232C3BB6D100FD59DD /* TabPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabPosition.swift; sourceTree = "<group>"; };
+		44EE4A112C3FF76700B322B6 /* CustomBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBookView.swift; sourceTree = "<group>"; };
+		44EE4A152C3FFE8400B322B6 /* SubscriptionUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionUpdate.swift; sourceTree = "<group>"; };
+		44EE4A172C404C8400B322B6 /* SubscriptionDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionDataController.swift; sourceTree = "<group>"; };
+		44EE4A192C404CA700B322B6 /* SubscriptionTiersData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionTiersData.swift; sourceTree = "<group>"; };
 		94045C0D2C37BFD400DB9602 /* SignupInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupInput.swift; sourceTree = "<group>"; };
 		94045C0F2C37CD6500DB9602 /* LoginInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInput.swift; sourceTree = "<group>"; };
 		943013EA2C38120F000C068C /* ExploreTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreTab.swift; sourceTree = "<group>"; };
@@ -86,10 +94,22 @@
 			children = (
 				441E4C1D2C3BB66500FD59DD /* Tab.swift */,
 				441E4C1F2C3BB6A200FD59DD /* CustomTabbar.swift */,
+				44EE4A112C3FF76700B322B6 /* CustomBookView.swift */,
 				441E4C232C3BB6D100FD59DD /* TabPosition.swift */,
 				441E4C212C3BB6BF00FD59DD /* TabbarShape.swift */,
 			);
 			path = TabBar;
+			sourceTree = "<group>";
+		};
+		44EE4A1B2C404EF600B322B6 /* SubscriptionPlan */ = {
+			isa = PBXGroup;
+			children = (
+				441E4C1B2C3BA59600FD59DD /* SubscriptionPlan.swift */,
+				44EE4A152C3FFE8400B322B6 /* SubscriptionUpdate.swift */,
+				44EE4A192C404CA700B322B6 /* SubscriptionTiersData.swift */,
+				44EE4A172C404C8400B322B6 /* SubscriptionDataController.swift */,
+			);
+			path = SubscriptionPlan;
 			sourceTree = "<group>";
 		};
 		D063707D2C3BE00600697510 /* Frameworks */ = {
@@ -131,7 +151,7 @@
 				441E4BFB2C380F8700FD59DD /* GenereSelectionView.swift */,
 				FD938B0F2C3566C700FFFC1E /* ContentView.swift */,
 				94C9B1592C35D725001784C3 /* SignupView.swift */,
-				441E4C1B2C3BA59600FD59DD /* SubscriptionPlan.swift */,
+				44EE4A1B2C404EF600B322B6 /* SubscriptionPlan */,
 				94045C0D2C37BFD400DB9602 /* SignupInput.swift */,
 				94C9B15B2C35E0A7001784C3 /* LoginView.swift */,
 				94045C0F2C37CD6500DB9602 /* LoginInput.swift */,
@@ -238,9 +258,12 @@
 				FD938B102C3566C700FFFC1E /* ContentView.swift in Sources */,
 				441E4C222C3BB6BF00FD59DD /* TabbarShape.swift in Sources */,
 				441E4BFC2C380F8700FD59DD /* GenereSelectionView.swift in Sources */,
+				44EE4A182C404C8400B322B6 /* SubscriptionDataController.swift in Sources */,
 				FD938B0E2C3566C700FFFC1E /* Shelves_UserApp.swift in Sources */,
 				441E4C1E2C3BB66500FD59DD /* Tab.swift in Sources */,
+				44EE4A122C3FF76700B322B6 /* CustomBookView.swift in Sources */,
 				441E4BDA2C365E7500FD59DD /* PageControl.swift in Sources */,
+				44EE4A1A2C404CA700B322B6 /* SubscriptionTiersData.swift in Sources */,
 				94C9B15C2C35E0A7001784C3 /* LoginView.swift in Sources */,
 				441E4C1C2C3BA59600FD59DD /* SubscriptionPlan.swift in Sources */,
 				94045C102C37CD6500DB9602 /* LoginInput.swift in Sources */,
@@ -249,6 +272,7 @@
 				C4447C732C36C7FE00E1D065 /* UserScreenView.swift in Sources */,
 				441E4BD82C365E3300FD59DD /* OnboardingView.swift in Sources */,
 				D06370852C3C135600697510 /* DataController.swift in Sources */,
+				44EE4A162C3FFE8500B322B6 /* SubscriptionUpdate.swift in Sources */,
 				441E4C202C3BB6A200FD59DD /* CustomTabbar.swift in Sources */,
 				94045C0E2C37BFD400DB9602 /* SignupInput.swift in Sources */,
 				94C9B15A2C35D725001784C3 /* SignupView.swift in Sources */,
