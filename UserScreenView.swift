@@ -14,27 +14,29 @@ struct UserHomePage: View {
     ]
 
     var body: some View {
-        ScrollView {
-            ZStack {
-                Color("background").edgesIgnoringSafeArea(.all)
+           ScrollView {
+               ZStack {
+                   Color("background")
+                   VStack(alignment: .leading) {
+                       // Header
+                       VStack(alignment: .leading) {
+                           Text("Shelves.")
+                               .font(.largeTitle)
+                               .bold()
+               
+                           Rectangle()
+                               .frame(width: 80, height: 5)
+                               .foregroundColor(.brown)
+                               .cornerRadius(10)
+                           
+                       }
+                       .padding()
 
-                VStack {
-                    // Header
-                    HStack {
-                        Text("Shelves.")
-                            .font(.largeTitle)
-                            .bold()
-                        Spacer()
-                        Text("Updated one hour ago")
-                            .font(.subheadline)
-                    }
-                    .padding()
-
-                    // Overdue Book and View My Rentals Section
-                    HStack(spacing: 20) {
-                        OverdueBookView()
-                        ViewMyRentalsView()
-                    }
+                       // Overdue Book and View My Rentals Section
+                       HStack(spacing: 20) {
+                           OverdueBookView()
+                           ViewMyRentalsView()
+                       }
                     .frame(height: 100)
                     .padding()
 
@@ -92,7 +94,8 @@ struct UserHomePage: View {
                         .padding()
                 }
             }
-        }
+        }.padding(.top)
+            .ignoresSafeArea()
     }
 }
 
@@ -245,7 +248,7 @@ struct BookCardView: View {
     let title: String
     let author: String
     let description: String
-
+    
     var body: some View {
         VStack(alignment: .leading) {
             Image(imageName)
@@ -263,68 +266,60 @@ struct BookCardView: View {
                 .lineLimit(2)
         }
         .frame(width: 120)
-        .padding()
-        .background(Color.white)
-        .cornerRadius(10)
-        .shadow(radius: 5)
-    }
-}
-
-struct BookView2: View {
-    let book: Book
-
-    var body: some View {
-        VStack(alignment: .leading) {
-            Image(book.imageName)
-                .resizable()
-                .frame(width: 100, height: 150)
-                .cornerRadius(10)
-            Text(book.title)
-                .font(.headline)
-            Text(book.author)
-                .font(.subheadline)
-                .foregroundColor(.gray)
-            Text(book.subtitle)
-                .font(.caption)
-                .foregroundColor(.gray)
-                .lineLimit(2)
+        //
+    }}
+    
+    struct BookView2: View {
+        let book: Book
+        
+        var body: some View {
+            VStack(alignment: .leading) {
+                Image(book.imageName)
+                    .resizable()
+                    .frame(width: 100, height: 150)
+                    .cornerRadius(10)
+                Text(book.title)
+                    .font(.headline)
+                Text(book.author)
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                Text(book.subtitle)
+                    .font(.caption)
+                    .foregroundColor(.gray)
+                    .lineLimit(2)
+            }
+            .frame(width: 120)
+            //        .padding()
+            //        .background(Color.white)
+            //        .cornerRadius(10)
+            //        .shadow(radius: 5)
         }
-        .frame(width: 120)
-        .padding()
-        .background(Color.white)
-        .cornerRadius(10)
-        .shadow(radius: 5)
     }
-}
-
-struct AuthorView: View {
-    let author: Author
-
-    var body: some View {
-        VStack {
-            Image(author.image)
-                .resizable()
-                .frame(width: 100, height: 100)
-                .clipShape(Circle())
-            Text(author.name)
-                .font(.headline)
-            Text(author.title)
-                .font(.subheadline)
-                .foregroundColor(.gray)
-            Text(author.description)
-                .font(.caption)
-                .foregroundColor(.gray)
-                .lineLimit(2)
+    
+    struct AuthorView: View {
+        let author: Author
+        
+        var body: some View {
+            VStack {
+                Image(author.image)
+                    .resizable()
+                    .frame(width: 100, height: 100)
+                    .clipShape(Circle())
+                Text(author.name)
+                    .font(.headline)
+                Text(author.title)
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                Text(author.description)
+                    .font(.caption)
+                    .foregroundColor(.gray)
+                    .lineLimit(2)
+            }
+            .frame(width: 120)
+            
         }
-        .frame(width: 120)
-        .padding()
-        .background(Color.white)
-        .cornerRadius(10)
-        .shadow(radius: 5)
     }
-}
 
-// Category Button
 
 
 
@@ -333,7 +328,7 @@ struct AuthorView: View {
 extension Color {
     init(hex: String) {
         let scanner = Scanner(string: hex)
-        scanner.scanLocation = 0
+//        scanner.scanLocation = 0
 
         var rgbValue: UInt64 = 0
         scanner.scanHexInt64(&rgbValue)
@@ -351,3 +346,4 @@ struct UserHomePage_Previews: PreviewProvider {
         UserHomePage()
     }
 }
+
