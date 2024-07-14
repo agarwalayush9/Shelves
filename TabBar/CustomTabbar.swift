@@ -18,13 +18,14 @@ struct CustomTabbar: View {
                 ExploreTab()
                     .tag(Tab.explore)
                 
-                Text("My Library")
+                BorrowBooks()
                     .tag(Tab.myLibrary)
                 
                 Text("Profile")
                     .tag(Tab.profile)
             }
-            .frame(maxHeight: .infinity) // Ensure TabView takes up all available space
+            .frame(maxHeight: .infinity)
+            .edgesIgnoringSafeArea(.bottom)// Ensure TabView takes up all available space
             customTabBar()
         }
         .edgesIgnoringSafeArea(.bottom) // Ignore safe area to cover the entire screen

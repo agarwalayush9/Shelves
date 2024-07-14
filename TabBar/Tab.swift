@@ -11,7 +11,7 @@ enum Tab: String, CaseIterable
 {
     case forYou = "For You"
     case explore = "Explore"
-    case myLibrary = "My Library"
+    case myLibrary = "My BookShelf"
     case profile = "Profile"
     
     var systemImage: String

@@ -9,6 +9,7 @@ import SwiftUI
 import FirebaseAuth
 
 struct LoginInput: View {
+    @EnvironmentObject var authManager: AuthManager
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var showCustomTabbar: Bool = false
@@ -254,15 +255,18 @@ struct LoginInput: View {
     }
 
     func login() {
-        Auth.auth().signIn(withEmail: email, password: password) { firebaseResult, error in
-            if let error = error {
+     
+        authManager.signIn(email: email, password: password) { result in
+            
+            switch result {
+            case .success:
+                print("Login successful")
+                self.showCustomTabbar = true
+                // Do any additional UI updates or navigation here
+            case .failure(let error):
                 self.alertMessage = error.localizedDescription
                 self.showAlert = true
                 print("Login error: \(error.localizedDescription)")
-            } else {
-                // Handle successful login
-                self.showCustomTabbar = true
-                print("Login success")
             }
         }
     }

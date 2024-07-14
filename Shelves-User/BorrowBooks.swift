@@ -44,7 +44,7 @@ struct BorrowBooks: View {
                         ReservationsSection(books: reservedBooks)
                     }
                 }
-                .padding()
+                .padding([.leading, .trailing], 16)
             }
             .navigationBarHidden(true) // Hide the navigation bar to match the design
         }
@@ -65,16 +65,13 @@ struct HeaderView: View {
                     .background(Color(red: 0.32, green: 0.23, blue: 0.06))
                     .frame(alignment: .leading)
             }
-            .padding(0)
             Spacer()
             Image(systemName: "qrcode.viewfinder")
                 .resizable()
                 .frame(width: 40, height: 40)
                 .padding(.trailing)
         }
-        .padding(.top, 0)
-        .padding(.bottom)
-        .padding(.leading)
+        .padding(.vertical)
     }
 }
 
@@ -101,10 +98,8 @@ struct SubHeaderView: View {
                         .font(.title2)
                 }
             }
-            .padding(.leading, 36)
-            .padding(.trailing, 35)
-            .padding(.top, 18)
-            .padding(.bottom, 19)
+            .padding([.top, .bottom], 18)
+            .padding([.leading, .trailing], 36)
             .cornerRadius(Constants.sm)
             .overlay(
                 RoundedRectangle(cornerRadius: Constants.sm)
@@ -112,11 +107,6 @@ struct SubHeaderView: View {
                     .stroke(Color(red: 0.32, green: 0.23, blue: 0.06), lineWidth: 2)
             )
         }
-        .padding(.top, 0)
-        .padding(.bottom)
-        .padding(.leading)
-        .cornerRadius(10)
-        .padding(.trailing)
     }
 }
 
@@ -144,9 +134,7 @@ struct BorrowedBooksSection: View {
                 }
             }
         }
-        .padding(.top, 0)
-        .padding(.bottom,0)
-        .padding(.leading)
+        .padding(.vertical)
     }
 }
 
@@ -174,9 +162,7 @@ struct ReservationsSection: View {
                 }
             }
         }
-        .padding(.top, 0)
-        .padding(.bottom)
-        .padding(.leading)
+        .padding(.vertical)
     }
 }
 
@@ -212,7 +198,7 @@ struct BookView1: View {
             Text(book.details)
                 .font(.caption)
                 .foregroundColor(.secondary)
-                .lineLimit(2)
+                .lineLimit(1)
         }
         .frame(width: 161)
     }
@@ -223,7 +209,7 @@ struct BooksGridView1: View {
     let books: [Book1]
     
     var body: some View {
-        ZStack{
+        ZStack {
             LinearGradient(gradient: Gradient(colors: [Color(red: 1.0, green: 0.87, blue: 0.7), Color.white]),
                            startPoint: .top,
                            endPoint: .bottom)
@@ -238,9 +224,8 @@ struct BooksGridView1: View {
                     .padding()
                 }
             }
-            
-        }.navigationTitle(title)
-            
+        }
+        .navigationTitle(title)
     }
 }
 

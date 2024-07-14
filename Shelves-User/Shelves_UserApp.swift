@@ -31,10 +31,17 @@ struct Shelves_UserApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
+    @StateObject private var authManager = AuthManager() // Use @StateObject for SwiftUI 2.0
+    
     var body: some Scene {
         WindowGroup {
-            
-            BorrowBooks()
+            if authManager.isLoggedIn {
+                BorrowBooks()
+                    .environmentObject(authManager)
+            } else {
+                ContentView()
+                    .environmentObject(authManager)
+            }
         }
     }
 }

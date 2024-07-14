@@ -47,6 +47,7 @@
 		FD938B122C3566C900FFFC1E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD938B112C3566C900FFFC1E /* Assets.xcassets */; };
 		FD938B152C3566C900FFFC1E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD938B142C3566C900FFFC1E /* Preview Assets.xcassets */; };
 		FDE615052C431BBD00D37975 /* BorrowBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE615042C431BBD00D37975 /* BorrowBooks.swift */; };
+		FDE615072C44040E00D37975 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE615062C44040E00D37975 /* AuthManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +87,7 @@
 		FD938B112C3566C900FFFC1E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD938B142C3566C900FFFC1E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FDE615042C431BBD00D37975 /* BorrowBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowBooks.swift; sourceTree = "<group>"; };
+		FDE615062C44040E00D37975 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,7 +144,6 @@
 				C41746C52C3FA42700D5D7D1 /* EventContentView.swift */,
 				D06370842C3C135600697510 /* DataController.swift */,
 				D063707A2C3BDE5500697510 /* GoogleService-Info.plist */,
-				C4447C722C36C7FE00E1D065 /* UserScreenView.swift */,
 				441E4BD72C365E3300FD59DD /* OnboardingView.swift */,
 				441E4BD92C365E7500FD59DD /* PageControl.swift */,
 				FD4A05F12C3581A000529DDA /* .gitignore */,
@@ -165,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				C27C0EEF2C3DABA100131A5B /* Info.plist */,
+				C4447C722C36C7FE00E1D065 /* UserScreenView.swift */,
 				FD938B0D2C3566C700FFFC1E /* Shelves_UserApp.swift */,
 				441E4BFB2C380F8700FD59DD /* GenereSelectionView.swift */,
 				FD938B0F2C3566C700FFFC1E /* ContentView.swift */,
@@ -183,6 +185,7 @@
 				FD938B112C3566C900FFFC1E /* Assets.xcassets */,
 				C27ADB382C3E4B190058B8E0 /* ProfileView.swift */,
 				FD938B132C3566C900FFFC1E /* Preview Content */,
+				FDE615062C44040E00D37975 /* AuthManager.swift */,
 			);
 			path = "Shelves-User";
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 				44EE4A222C42C05B00B322B6 /* SubscriptionUpdate.swift in Sources */,
 				441E4BDA2C365E7500FD59DD /* PageControl.swift in Sources */,
 				94C9B15C2C35E0A7001784C3 /* LoginView.swift in Sources */,
+				FDE615072C44040E00D37975 /* AuthManager.swift in Sources */,
 				44EE4A202C42C01F00B322B6 /* SubscriptionTier.swift in Sources */,
 				94CC11312C3FF317006B3988 /* ExploreTabViewModel.swift in Sources */,
 				441E4C1C2C3BA59600FD59DD /* SubscriptionPlan.swift in Sources */,
