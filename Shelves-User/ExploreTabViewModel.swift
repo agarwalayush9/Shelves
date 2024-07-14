@@ -17,7 +17,7 @@ class ExploreTabViewModel: ObservableObject {
     func fetchContent() {
         // Replace with your actual API call
         let sampleBooks = [
-            Book(id: UUID(), title: "The Good Guy", author: "Author Name", subtitle: "Subtitle goes here", imageName: "book1"),
+            Book(id: UUID(), title: "The Good Guy", author: "Author Name", subtitle: "Subtitle goes here", imageName: "bookCover"),
             Book(id: UUID(), title: "Really Good, Actually", author: "Monica Heisey", subtitle: "Subtitle goes here", imageName: "book2"),
             Book(id: UUID(), title: "A Brief History of Time", author: "Stephen Hawking", subtitle: "From the Big Bang to Black Holes", imageName: "book3"),
             Book(id: UUID(), title: "Who We Are and How We", author: "David Reich", subtitle: "Ancient DNA and the New Science of Human", imageName: "book4")

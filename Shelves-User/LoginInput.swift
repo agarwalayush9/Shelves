@@ -11,7 +11,7 @@ import FirebaseAuth
 struct LoginInput: View {
     @State private var email: String = ""
     @State private var password: String = ""
-    @State private var showUserHomePage: Bool = false
+    @State private var showCustomTabbar: Bool = false
     @State private var showAlert: Bool = false
     @State private var alertMessage: String = ""
     @State private var showForgotPassword: Bool = false
@@ -138,8 +138,8 @@ struct LoginInput: View {
                     .padding(.bottom, 30)
                 }
             }
-            .fullScreenCover(isPresented: $showUserHomePage) {
-                UserHomePage()
+            .fullScreenCover(isPresented: $showCustomTabbar) {
+                CustomTabbar()
             }
             .alert(isPresented: $showAlert) {
                 Alert(title: Text("Login Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
@@ -261,7 +261,7 @@ struct LoginInput: View {
                 print("Login error: \(error.localizedDescription)")
             } else {
                 // Handle successful login
-                self.showUserHomePage = true
+                self.showCustomTabbar = true
                 print("Login success")
             }
         }
