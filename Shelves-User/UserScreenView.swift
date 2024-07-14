@@ -45,6 +45,7 @@ struct UserHomePage: View {
                     Text("Profile")
                 }
         }
+        .accentColor(Color(hex: "#513A10"))
     }
 }
 
@@ -387,8 +388,6 @@ extension Color {
     }
 }
 
-struct UserHomePage_Previews: PreviewProvider {
-    static var previews: some View {
-        UserHomePage()
-    }
+#Preview{
+    UserHomePage()
 }
