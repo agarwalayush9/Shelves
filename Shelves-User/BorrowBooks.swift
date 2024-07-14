@@ -66,10 +66,13 @@ struct HeaderView: View {
                     .frame(alignment: .leading)
             }
             Spacer()
-            Image(systemName: "qrcode.viewfinder")
-                .resizable()
-                .frame(width: 40, height: 40)
-                .padding(.trailing)
+            NavigationLink(destination: ContentWiew()) {
+                Image(systemName: "qrcode.viewfinder")
+                    .resizable()
+                    .frame(width: 40, height: 40)
+                    .padding(.trailing)
+                    .foregroundColor(.black)
+            }
         }
         .padding(.vertical)
     }
@@ -226,6 +229,12 @@ struct BooksGridView1: View {
             }
         }
         .navigationTitle(title)
+    }
+}
+
+struct CContentView: View {
+    var body: some View {
+        Text("This is the ContentView")
     }
 }
 
