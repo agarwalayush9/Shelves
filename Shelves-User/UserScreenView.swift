@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct UserHomePage: View {
+    @State private var selectedIndex = 0
     @State private var selectedCategory: String = ""
     let books: [Book] = [
         Book(id: UUID(), title: "Life 3.0", author: "Max Tegmark", subtitle: "Being Human in the Age of Artificial Intelligence", imageName: "bookCover"),
@@ -14,10 +15,52 @@ struct UserHomePage: View {
     ]
 
     var body: some View {
-        ScrollView {
-            ZStack {
-                Color("background").edgesIgnoringSafeArea(.all)
+        TabView {
+            HomeView(selectedCategory: $selectedCategory, books: books, authors: authors)
+                .tabItem {
+                    Image(systemName: "house.fill")
+                    Text("Home")
+                }
+            
+            ExploreTab()
+                .tabItem {
+                    Image(systemName: "magnifyingglass")
+                    Text("Search")
+                }
+            
+            BorrowBooks()
+                .tabItem {
+                    Image(systemName: "books.vertical.fill")
+                    Text("BookShelf")
+                }
+            Text("Events")
+                .tabItem {
+                    Image(systemName: "book.circle.fill")
+                    Text("Events")
+                }
+            
+            Text("Profile")
+                .tabItem {
+                    Image(systemName: "person.fill")
+                    Text("Profile")
+                }
+        }
+    }
+}
 
+struct HomeView: View {
+    @Binding var selectedCategory: String
+    let books: [Book]
+    let authors: [Author]
+
+    var body: some View {
+        
+            ZStack {
+                LinearGradient(gradient: Gradient(colors: [Color(red: 1.0, green: 0.87, blue: 0.7), Color.white]),
+                               startPoint: .top,
+                               endPoint: .bottom)
+                    .edgesIgnoringSafeArea(.all)
+                ScrollView {
                 VStack {
                     // Header
                     HStack {
@@ -176,9 +219,9 @@ struct RecommendedForYouView: View {
                 .bold()
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    BookCardView(imageName: "life3_0", title: "Life 3.0", author: "Max Tegmark", description: "From the Bing Bang to Black Holes")
-                    BookCardView(imageName: "history_time", title: "A Brief History of Time", author: "Stephen Hawking", description: "Ancient DNA and the New Science of the Human Past")
-                    BookCardView(imageName: "who_we_are", title: "Who We Are and How We...", author: "David Reich", description: "From the Bing Bang to Black Holes")
+                    BookCardView(imageName: "bookCover", title: "Life 3.0", author: "Max Tegmark", description: "From the Bing Bang to Black Holes")
+                    BookCardView(imageName: "bookCover", title: "A Brief History of Time", author: "Stephen Hawking", description: "Ancient DNA and the New Science of the Human Past")
+                    BookCardView(imageName: "bookCover", title: "Who We Are and How We...", author: "David Reich", description: "From the Bing Bang to Black Holes")
                 }
             }
         }
@@ -235,7 +278,6 @@ struct TopAuthorsView: View {
 }
 
 // Models
-
 
 
 // Supporting Views
@@ -325,7 +367,6 @@ struct AuthorView: View {
 }
 
 // Category Button
-
 
 
 // Hex Color Extension

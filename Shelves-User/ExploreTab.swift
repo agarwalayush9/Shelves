@@ -19,7 +19,7 @@ struct ExploreTab: View {
                         .font(.largeTitle)
                         .bold()
                         .padding(.horizontal)
-                        .padding(.top, 20)
+                        .padding(.top, 0)
                     
                     Rectangle()
                         .frame(width: 80, height: 5)

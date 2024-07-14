@@ -14,11 +14,11 @@ struct DetailedBookListView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
-                Text(title)
-                    .font(.largeTitle)
-                    .bold()
-                    .padding(.horizontal)
-                    .padding(.top, 20)
+//                Text(title)
+//                    .font(.largeTitle)
+//                    .bold()
+//                    .padding(.horizontal)
+//                    .padding(.top, 20)
                 
                 Text("Select the type of book you enjoy reading.")
                     .font(.subheadline)

@@ -111,10 +111,7 @@ struct SubscriptionView: View {
                 .padding(.horizontal, 40)
                 .padding(.bottom, 20)
                 .disabled(selectedTier == nil) // Disable the button if no tier is selected
-                .navigationDestination(isPresented: $showCustomTabbar) {
-                    CustomTabbar()
-                        .navigationBarBackButtonHidden(true)
-                }
+            
 
                 Text("You can cancel the subscription at any time from the app store at no additional cost and it will end at the end of the current period. By going further, you accept our terms of service, which lay down the details of your right of withdrawal.")
                     .font(.system(size: 12))
