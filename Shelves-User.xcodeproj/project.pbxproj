@@ -43,6 +43,7 @@
 		FD938B102C3566C700FFFC1E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD938B0F2C3566C700FFFC1E /* ContentView.swift */; };
 		FD938B122C3566C900FFFC1E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD938B112C3566C900FFFC1E /* Assets.xcassets */; };
 		FD938B152C3566C900FFFC1E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD938B142C3566C900FFFC1E /* Preview Assets.xcassets */; };
+		FDE615052C431BBD00D37975 /* BorrowBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE615042C431BBD00D37975 /* BorrowBooks.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		FD938B0F2C3566C700FFFC1E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FD938B112C3566C900FFFC1E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD938B142C3566C900FFFC1E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		FDE615042C431BBD00D37975 /* BorrowBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowBooks.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 				94C9B15B2C35E0A7001784C3 /* LoginView.swift */,
 				94045C0F2C37CD6500DB9602 /* LoginInput.swift */,
 				943013EA2C38120F000C068C /* ExploreTab.swift */,
+				FDE615042C431BBD00D37975 /* BorrowBooks.swift */,
 				9410FDB52C40FC7A00299544 /* DetailedBookListView.swift */,
 				94CC112A2C3FF26B006B3988 /* Book.swift */,
 				94CC11302C3FF317006B3988 /* ExploreTabViewModel.swift */,
@@ -280,6 +283,7 @@
 				441E4BD82C365E3300FD59DD /* OnboardingView.swift in Sources */,
 				D06370852C3C135600697510 /* DataController.swift in Sources */,
 				C41746C42C3FA34A00D5D7D1 /* EventRowView.swift in Sources */,
+				FDE615052C431BBD00D37975 /* BorrowBooks.swift in Sources */,
 				C41746C02C3F9A8400D5D7D1 /* DataModel.swift in Sources */,
 				441E4C202C3BB6A200FD59DD /* CustomTabbar.swift in Sources */,
 				94045C0E2C37BFD400DB9602 /* SignupInput.swift in Sources */,
