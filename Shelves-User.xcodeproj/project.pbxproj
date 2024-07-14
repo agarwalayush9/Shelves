@@ -18,6 +18,10 @@
 		44EE4A1E2C42BFFF00B322B6 /* SubscriptionUpdateDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EE4A1D2C42BFFF00B322B6 /* SubscriptionUpdateDataController.swift */; };
 		44EE4A202C42C01F00B322B6 /* SubscriptionTier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EE4A1F2C42C01F00B322B6 /* SubscriptionTier.swift */; };
 		44EE4A222C42C05B00B322B6 /* SubscriptionUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EE4A212C42C05B00B322B6 /* SubscriptionUpdate.swift */; };
+		44EE4A262C43F8C600B322B6 /* CustomBorrowBookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EE4A252C43F8C500B322B6 /* CustomBorrowBookDetailView.swift */; };
+		44EE4A282C43F8FA00B322B6 /* BorrowConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EE4A272C43F8FA00B322B6 /* BorrowConfirmation.swift */; };
+		44EE4A2A2C43FA3E00B322B6 /* ReserveBookInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EE4A292C43FA3E00B322B6 /* ReserveBookInterface.swift */; };
+		44EE4A2C2C43FAC200B322B6 /* ReservationConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EE4A2B2C43FAC200B322B6 /* ReservationConfirmationView.swift */; };
 		94045C0E2C37BFD400DB9602 /* SignupInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94045C0D2C37BFD400DB9602 /* SignupInput.swift */; };
 		94045C102C37CD6500DB9602 /* LoginInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94045C0F2C37CD6500DB9602 /* LoginInput.swift */; };
 		9410FDB62C40FC7A00299544 /* DetailedBookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9410FDB52C40FC7A00299544 /* DetailedBookListView.swift */; };
@@ -60,6 +64,10 @@
 		44EE4A1D2C42BFFF00B322B6 /* SubscriptionUpdateDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionUpdateDataController.swift; sourceTree = "<group>"; };
 		44EE4A1F2C42C01F00B322B6 /* SubscriptionTier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionTier.swift; sourceTree = "<group>"; };
 		44EE4A212C42C05B00B322B6 /* SubscriptionUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionUpdate.swift; sourceTree = "<group>"; };
+		44EE4A252C43F8C500B322B6 /* CustomBorrowBookDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBorrowBookDetailView.swift; sourceTree = "<group>"; };
+		44EE4A272C43F8FA00B322B6 /* BorrowConfirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowConfirmation.swift; sourceTree = "<group>"; };
+		44EE4A292C43FA3E00B322B6 /* ReserveBookInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveBookInterface.swift; sourceTree = "<group>"; };
+		44EE4A2B2C43FAC200B322B6 /* ReservationConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationConfirmationView.swift; sourceTree = "<group>"; };
 		94045C0D2C37BFD400DB9602 /* SignupInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupInput.swift; sourceTree = "<group>"; };
 		94045C0F2C37CD6500DB9602 /* LoginInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInput.swift; sourceTree = "<group>"; };
 		9410FDB52C40FC7A00299544 /* DetailedBookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedBookListView.swift; sourceTree = "<group>"; };
@@ -125,6 +133,24 @@
 			path = Subscription;
 			sourceTree = "<group>";
 		};
+		44EE4A2D2C43FB3300B322B6 /* BookDetailBorrow */ = {
+			isa = PBXGroup;
+			children = (
+				44EE4A252C43F8C500B322B6 /* CustomBorrowBookDetailView.swift */,
+				44EE4A272C43F8FA00B322B6 /* BorrowConfirmation.swift */,
+			);
+			path = BookDetailBorrow;
+			sourceTree = "<group>";
+		};
+		44EE4A2E2C43FB5600B322B6 /* ReservationBookInterface */ = {
+			isa = PBXGroup;
+			children = (
+				44EE4A292C43FA3E00B322B6 /* ReserveBookInterface.swift */,
+				44EE4A2B2C43FAC200B322B6 /* ReservationConfirmationView.swift */,
+			);
+			path = ReservationBookInterface;
+			sourceTree = "<group>";
+		};
 		D063707D2C3BE00600697510 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +202,8 @@
 				94CC112A2C3FF26B006B3988 /* Book.swift */,
 				94CC11302C3FF317006B3988 /* ExploreTabViewModel.swift */,
 				94CC112E2C3FF2D1006B3988 /* BookContentView.swift */,
+				44EE4A2D2C43FB3300B322B6 /* BookDetailBorrow */,
+				44EE4A2E2C43FB5600B322B6 /* ReservationBookInterface */,
 				94CC11322C3FFDEA006B3988 /* Events.swift */,
 				FD938B112C3566C900FFFC1E /* Assets.xcassets */,
 				C27ADB382C3E4B190058B8E0 /* ProfileView.swift */,
@@ -279,15 +307,18 @@
 				FD938B102C3566C700FFFC1E /* ContentView.swift in Sources */,
 				441E4C222C3BB6BF00FD59DD /* TabbarShape.swift in Sources */,
 				441E4BFC2C380F8700FD59DD /* GenereSelectionView.swift in Sources */,
+				44EE4A282C43F8FA00B322B6 /* BorrowConfirmation.swift in Sources */,
 				9410FDB62C40FC7A00299544 /* DetailedBookListView.swift in Sources */,
 				FD938B0E2C3566C700FFFC1E /* Shelves_UserApp.swift in Sources */,
 				441E4C1E2C3BB66500FD59DD /* Tab.swift in Sources */,
 				44EE4A1E2C42BFFF00B322B6 /* SubscriptionUpdateDataController.swift in Sources */,
 				C41746C62C3FA42700D5D7D1 /* EventContentView.swift in Sources */,
 				44EE4A222C42C05B00B322B6 /* SubscriptionUpdate.swift in Sources */,
+				44EE4A2C2C43FAC200B322B6 /* ReservationConfirmationView.swift in Sources */,
 				441E4BDA2C365E7500FD59DD /* PageControl.swift in Sources */,
 				94C9B15C2C35E0A7001784C3 /* LoginView.swift in Sources */,
 				44EE4A202C42C01F00B322B6 /* SubscriptionTier.swift in Sources */,
+				44EE4A2A2C43FA3E00B322B6 /* ReserveBookInterface.swift in Sources */,
 				94CC11312C3FF317006B3988 /* ExploreTabViewModel.swift in Sources */,
 				441E4C1C2C3BA59600FD59DD /* SubscriptionPlan.swift in Sources */,
 				94CC112F2C3FF2D1006B3988 /* BookContentView.swift in Sources */,
@@ -297,6 +328,7 @@
 				94CC112B2C3FF26B006B3988 /* Book.swift in Sources */,
 				C27ADB392C3E4B190058B8E0 /* ProfileView.swift in Sources */,
 				C4447C732C36C7FE00E1D065 /* UserScreenView.swift in Sources */,
+				44EE4A262C43F8C600B322B6 /* CustomBorrowBookDetailView.swift in Sources */,
 				441E4BD82C365E3300FD59DD /* OnboardingView.swift in Sources */,
 				D06370852C3C135600697510 /* DataController.swift in Sources */,
 				C41746C42C3FA34A00D5D7D1 /* EventRowView.swift in Sources */,
