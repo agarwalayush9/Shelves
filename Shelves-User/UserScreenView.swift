@@ -1,5 +1,11 @@
 import SwiftUI
 
+struct Constant {
+    static let meta: CGFloat = 4
+      static let Black: Color = .black
+}
+
+
 struct UserHomePage: View {
     @State private var selectedIndex = 0
     @State private var selectedCategory: String = ""
@@ -19,90 +25,97 @@ struct UserHomePage: View {
     }
 }
 struct HomeView: View {
+    
     @Binding var selectedCategory: String
     let books: [Book]
     let authors: [Author]
 
     var body: some View {
-        
+        NavigationView(){
             ZStack {
                 LinearGradient(gradient: Gradient(colors: [Color(red: 1.0, green: 0.87, blue: 0.7), Color.white]),
                                startPoint: .top,
                                endPoint: .bottom)
-                    .edgesIgnoringSafeArea(.all)
+                .edgesIgnoringSafeArea(.all)
                 ScrollView {
-                VStack {
-                    // Header
-                    HStack {
-                        Text("Shelves.")
-                            .font(.largeTitle)
-                            .bold()
-                        Spacer()
-                        Text("Updated one hour ago")
-                            .font(.subheadline)
-                    }
-                    .padding()
-
-                    // Overdue Book and View My Rentals Section
-                    HStack(spacing: 20) {
-                        OverdueBookView()
-                        ViewMyRentalsView()
-                    }
-                    .frame(height: 100)
-                    .padding()
-
-                    // Shelf of the Day Section
-                    ShelfOfTheDayView()
-                        .padding()
-
-                    // Categories Section
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 15) {
-                            CategoryButton(
-                                title: "Trending",
-                                icon: "flame.fill",
-                                isSelected: selectedCategory == "Trending",
-                                backgroundColor: selectedCategory == "Trending" ? Color(red: 86/255, green: 63/255, blue: 39/255) : .white,
-                                textColor: selectedCategory == "Trending" ? .white : Color(red: 86/255, green: 63/255, blue: 39/255),
-                                action: {
-                                    selectedCategory = "Trending"
-                                }
-                            )
-                            CategoryButton(
-                                title: "5-Minutes Read",
-                                icon: "book.fill",
-                                isSelected: selectedCategory == "5-Minutes Read",
-                                backgroundColor: selectedCategory == "5-Minutes Read" ? Color(red: 86/255, green: 63/255, blue: 39/255) : .white,
-                                textColor: selectedCategory == "5-Minutes Read" ? .white : Color(red: 86/255, green: 63/255, blue: 39/255),
-                                action: {
-                                    selectedCategory = "5-Minutes Read"
-                                }
-                            )
-                            CategoryButton(
-                                title: "Quick Listen",
-                                icon: "headphones",
-                                isSelected: selectedCategory == "Quick Listen",
-                                backgroundColor: selectedCategory == "Quick Listen" ? Color(red: 86/255, green: 63/255, blue: 39/255) : .white,
-                                textColor: selectedCategory == "Quick Listen" ? .white : Color(red: 86/255, green: 63/255, blue: 39/255),
-                                action: {
-                                    selectedCategory = "Quick Listen"
-                                }
-                            )
+                    
+                    VStack {
+                        // Header
+                        HStack(alignment: .center, spacing: 15) {
+                            VStack(alignment: .leading, spacing: 7) {
+                                Text("Shelves")
+                                    .font(.largeTitle)
+                                    .foregroundColor(.black)
+                                    .bold()
+                                Rectangle()
+                                    .foregroundColor(.clear)
+                                    .frame(width: 50, height: Constants.meta)
+                                    .background(Color(red: 0.32, green: 0.23, blue: 0.06))
+                                    .frame(alignment: .leading)
+                            }
+                            Spacer()
                         }
-                        .padding(.horizontal)
+                        .padding()
+                        
+                        // Overdue Book and View My Rentals Section
+                        //                    HStack(spacing: 20) {
+                        //                        OverdueBookView()
+                        //                        ViewMyRentalsView()
+                        //                    }
+                        //                    .frame(height: 100)
+                        //                    .padding()
+                        
+                        // Shelf of the Day Section
+                        ShelfOfTheDayView()
+                            .padding(.top,0)
+                            .padding(.leading)
+                            .padding(.bottom)
+                            .padding(.trailing)
+                        
+                        // Categories Section
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 15) {
+                                CategoryButton(
+                                    title: "Trending",
+                                    icon: "flame.fill",
+                                    isSelected: selectedCategory == "Trending",
+                                    backgroundColor: selectedCategory == "Trending" ? Color(red: 86/255, green: 63/255, blue: 39/255) : .white,
+                                    textColor: selectedCategory == "Trending" ? .white : Color(red: 86/255, green: 63/255, blue: 39/255),
+                                    action: {
+                                        selectedCategory = "Trending"
+                                    }
+                                )
+                                CategoryButton(
+                                    title: "5-Minutes Read",
+                                    icon: "book.fill",
+                                    isSelected: selectedCategory == "5-Minutes Read",
+                                    backgroundColor: selectedCategory == "5-Minutes Read" ? Color(red: 86/255, green: 63/255, blue: 39/255) : .white,
+                                    textColor: selectedCategory == "5-Minutes Read" ? .white : Color(red: 86/255, green: 63/255, blue: 39/255),
+                                    action: {
+                                        selectedCategory = "5-Minutes Read"
+                                    }
+                                )
+                                CategoryButton(
+                                    title: "Quick Listen",
+                                    icon: "headphones",
+                                    isSelected: selectedCategory == "Quick Listen",
+                                    backgroundColor: selectedCategory == "Quick Listen" ? Color(red: 86/255, green: 63/255, blue: 39/255) : .white,
+                                    textColor: selectedCategory == "Quick Listen" ? .white : Color(red: 86/255, green: 63/255, blue: 39/255),
+                                    action: {
+                                        selectedCategory = "Quick Listen"
+                                    }
+                                )
+                            }
+                            .padding(.horizontal)
+                        }
+                        
+                        // Recommended for You Section
+                        
+                        RecommendedForYouView()
+                            .padding()
+                        
+                      
                     }
-
-                    // Recommended for You Section
-                    RecommendedForYouView()
-                        .padding()
-
-                    // Look Out for Categories Section
-                    LookOutForCategoriesView(books: books)
-                        .padding()
-
-                    // Top Authors Section
-                    TopAuthorsView(authors: authors)
-                        .padding()
                 }
             }
         }
@@ -171,81 +184,98 @@ struct ShelfOfTheDayView: View {
                 .font(.subheadline)
                 .foregroundColor(.gray)
             Image("shelfBookCover").resizable().frame(height: 200).cornerRadius(10)
-            Text("Humanly Possible").font(.title2)
-            Text("Sarah Bakewell").font(.subheadline)
-            Text("Seven hundred Years of Humanist Freethinking, Inquiry, and Hope").font(.caption)
+            HStack(alignment: .center) {
+                VStack(alignment: .leading, spacing: Constant.meta) {
+                    Text("Humanly Possible")
+                      .font(
+                        Font.custom("DM Sans", size: 16)
+                          .weight(.bold)
+                      )
+                      .foregroundColor(Constant.Black)
+                    Text("Sarah Bakewell")
+                      .font(
+                        Font.custom("DM Sans", size: 14)
+                          .weight(.medium)
+                      )
+                      .foregroundColor(Constant.Black)
+                    
+                }
+                Spacer()
+                Image("fe_share")
+                  .frame(width: 24, height: 24)
+                
+            }
+            .frame(width: .infinity, alignment: .center)
+            Text("Seven hundred Years of Humanist Freethinking, Inquiry, and Hope")
+              .font(
+                Font.custom("DM Sans", size: 14)
+                  .weight(.medium)
+              )
+              .foregroundColor(Constant.Black)
+              .frame(width: .infinity, alignment: .leading)
         }
-        .padding()
-        .background(Color.gray.opacity(0.1))
         .cornerRadius(10)
     }
 }
 
 struct RecommendedForYouView: View {
+    @StateObject private var viewModel = ExploreTabViewModel()
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("Recommended for You")
-                .font(.title2)
-                .bold()
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    BookCardView(imageName: "bookCover", title: "Life 3.0", author: "Max Tegmark", description: "From the Bing Bang to Black Holes")
-                    BookCardView(imageName: "bookCover", title: "A Brief History of Time", author: "Stephen Hawking", description: "Ancient DNA and the New Science of the Human Past")
-                    BookCardView(imageName: "bookCover", title: "Who We Are and How We...", author: "David Reich", description: "From the Bing Bang to Black Holes")
-                }
-            }
+        ForEach(viewModel.contentSections) { section in
+            BookContentView(section: section)
         }
+        
     }
 }
 
-struct LookOutForCategoriesView: View {
-    let books: [Book]
+//struct LookOutForCategoriesView: View {
+//    let books: [Book]
+//
+//    var body: some View {
+//        VStack(alignment: .leading) {
+//            Text("Look Out for Categories")
+//                .font(.title2)
+//                .bold()
+//            Text("We think you’ll like these")
+//                .font(.subheadline)
+//                .foregroundColor(.gray)
+//            ScrollView(.horizontal, showsIndicators: false) {
+//                HStack(spacing: 16) {
+//                    ForEach(books) { book in
+//                        BookView2(book: book)
+//                    }
+//                }
+//                .padding(.horizontal)
+//            }
+//        }
+//    }
+//}
 
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text("Look Out for Categories")
-                .font(.title2)
-                .bold()
-            Text("We think you’ll like these")
-                .font(.subheadline)
-                .foregroundColor(.gray)
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 16) {
-                    ForEach(books) { book in
-                        BookView2(book: book)
-                    }
-                }
-                .padding(.horizontal)
-            }
-        }
-    }
-}
-
-struct TopAuthorsView: View {
-    let authors: [Author]
-
-    var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Text("Top Authors")
-                    .font(.title2)
-                    .bold()
-                Spacer()
-                Text("Show all")
-                    .foregroundColor(Color("#765511"))
-                    .underline()
-            }
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 16) {
-                    ForEach(authors) { author in
-                        AuthorView(author: author)
-                    }
-                }
-                .padding(.horizontal)
-            }
-        }
-    }
-}
+//struct TopAuthorsView: View {
+//    let authors: [Author]
+//
+//    var body: some View {
+//        VStack(alignment: .leading) {
+//            HStack {
+//                Text("Top Authors")
+//                    .font(.title2)
+//                    .bold()
+//                Spacer()
+//                Text("Show all")
+//                    .foregroundColor(Color("#765511"))
+//                    .underline()
+//            }
+//            ScrollView(.horizontal, showsIndicators: false) {
+//                HStack(spacing: 16) {
+//                    ForEach(authors) { author in
+//                        AuthorView(author: author)
+//                    }
+//                }
+//                .padding(.horizontal)
+//            }
+//        }
+//    }
+//}
 
 // Models
 

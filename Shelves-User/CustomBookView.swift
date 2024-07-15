@@ -31,7 +31,7 @@ struct CustomBookDetailView: View {
                                 .fill(Color.clear)
                                 .frame(width: geometry.size.width - 100, height: 200) // Adjust width if necessary
                                 .overlay(
-                                    Image("book")
+                                    Image("bookCover")
                                         .resizable()
                                         .scaledToFit()
                                         .frame(width: geometry.size.width - 100, height: 200)

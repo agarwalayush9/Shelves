@@ -15,21 +15,25 @@ struct ExploreTab: View {
         NavigationView {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
-                    Text("Explore")
-                        .font(.largeTitle)
-                        .bold()
-                        .padding(.horizontal)
-                        .padding(.top, 0)
-                    
-                    Rectangle()
-                        .frame(width: 80, height: 5)
-                        .foregroundColor(.brown)
-                        .padding(.horizontal)
-                        .cornerRadius(10)
-                    
+                    HStack(alignment: .center, spacing: 15) {
+                        VStack(alignment: .leading, spacing: 7) {
+                            Text("Explore")
+                                .font(.largeTitle)
+                                .foregroundColor(.black)
+                                .bold()
+                            Rectangle()
+                                .foregroundColor(.clear)
+                                .frame(width: 50, height: Constants.meta)
+                                .background(Color(red: 0.32, green: 0.23, blue: 0.06))
+                                .frame(alignment: .leading)
+                        }
+                        Spacer()
+                    }.padding(.bottom,0)
+                        .padding(.top,0)
+                        .padding(.leading)
+                        .padding(.trailing)
                     SearchBar()
                         .padding(.horizontal)
-                        .padding(.top, 10)
                     
                     Text("Categories")
                         .font(.headline)
@@ -110,7 +114,6 @@ struct SearchBar: View {
             RoundedRectangle(cornerRadius: 10)
                 .stroke(Color.brown, lineWidth: 2)
         )
-        .padding(.horizontal, 10)
     }
 }
 
@@ -149,16 +152,28 @@ struct BookView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Image(imageName) // Use Image with imageName
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 120, height: 180)
-                .cornerRadius(8)
+            ZStack {
+                Image("Ellipse 2")
+                    .frame(width: 161.58664, height: 81.00001)
+                    .offset(y: 55)
+                
+                Rectangle()
+                    .foregroundColor(.clear)
+                    .frame(width: 104, height: 156)
+                    .background(
+                        Image("bookCover")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 104, height: 156)
+                            .clipped()
+                    )
+            }
+            .padding(.bottom, 20)
             
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)
                     .font(.headline)
-                    .lineLimit(2)
+                    .lineLimit(1)
                 
                 Text(author)
                     .font(.subheadline)
@@ -168,10 +183,10 @@ struct BookView: View {
                 Text(subtitle)
                     .font(.caption)
                     .foregroundColor(.secondary)
-                    .lineLimit(2)
+                    .lineLimit(1)
             }
         }
-        .frame(width: 140)
+        .frame(width: 161)
     }
 }
 
