@@ -69,9 +69,6 @@ struct EventContentView: View {
                     HStack {
                         Text("Event Categories")
                             .font(.headline)
-                        Spacer()
-                        Text("See All")
-                            .foregroundColor(.blue)
                     }
                     
                     .padding(.horizontal)
