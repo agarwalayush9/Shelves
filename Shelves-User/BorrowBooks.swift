@@ -173,37 +173,41 @@ struct BookView1: View {
     let book: Book1
     
     var body: some View {
-        VStack(alignment: .leading) {
-            ZStack {
-                Image("Ellipse 2")
-                    .frame(width: 161.58664, height: 81.00001)
-                    .offset(y: 55)
+        NavigationLink(destination: CustomBookDetailView(title: book.title, author: book.author, subtitle: book.details)){
+            VStack(alignment: .leading) {
+                ZStack {
+                    Image("Ellipse 2")
+                        .frame(width: 161.58664, height: 81.00001)
+                        .offset(y: 55)
+                    
+                    Rectangle()
+                        .foregroundColor(.clear)
+                        .frame(width: 104, height: 156)
+                        .background(
+                            Image(book.coverImageName)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 104, height: 156)
+                                .clipped()
+                        )
+                }
+                .padding(.bottom, 20)
                 
-                Rectangle()
-                    .foregroundColor(.clear)
-                    .frame(width: 104, height: 156)
-                    .background(
-                        Image(book.coverImageName)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 104, height: 156)
-                            .clipped()
-                    )
+                Text(book.title)
+                    .font(.headline)
+                    .lineLimit(1)
+                    .foregroundColor(.black)
+                Text(book.author)
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                Text(book.details)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .lineLimit(1)
             }
-            .padding(.bottom, 20)
+            .frame(width: 161)
             
-            Text(book.title)
-                .font(.headline)
-                .lineLimit(1)
-            Text(book.author)
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-            Text(book.details)
-                .font(.caption)
-                .foregroundColor(.secondary)
-                .lineLimit(1)
         }
-        .frame(width: 161)
     }
 }
 

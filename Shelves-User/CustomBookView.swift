@@ -11,6 +11,10 @@ struct CustomBookDetailView: View {
     @Environment(\.colorScheme) var colorScheme
     @State private var randomColor: Color = Color.random()
 
+    var title: String
+    var author: String
+    var subtitle: String
+    
     var body: some View {
         ZStack {
             ScrollView {
@@ -21,7 +25,7 @@ struct CustomBookDetailView: View {
                     GeometryReader { geometry in
                         ZStack {
                             CustomHalfCircle()
-                                .fill(randomColor).opacity(0.5)
+                                .fill(.gray).opacity(0.5)
                                 .frame(height: geometry.size.width / 16)
                                 .frame(width: 280)
                                 .offset(y: geometry.size.width / 4)
@@ -41,16 +45,16 @@ struct CustomBookDetailView: View {
                     }
                     .frame(height: 200) // Adjust the height to match the image height
                     
-                    Text("Life 3.0")
+                    Text(title)
                         .font(.title)
                         .fontWeight(.bold).padding(.top)
                         .foregroundColor(customColor)
 
-                    Text("Max Tegmark")
+                    Text(author)
                         .font(.title2)
                         .foregroundColor(customColor)
 
-                    Text("Being Human in the Age of Artificial Intelligence")
+                    Text(subtitle)
                         .font(.subheadline)
                         .foregroundColor(.gray)
 
@@ -309,6 +313,6 @@ struct RatingAgeGenreView: View {
 }
 
 #Preview{
-    CustomBookDetailView()
+    CustomBookDetailView(title: "", author: "", subtitle: "")
 }
 

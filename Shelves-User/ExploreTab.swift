@@ -1,10 +1,3 @@
-//
-//  ExploreTab.swift
-//  Shelves-User
-//
-//  Created by Anay Dubey on 05/07/24.
-//
-
 import SwiftUI
 
 struct ExploreTab: View {
@@ -13,36 +6,37 @@ struct ExploreTab: View {
     
     var body: some View {
         NavigationView {
-            
-                VStack(alignment: .leading, spacing: 20) {
-                    HStack(alignment: .center, spacing: 15) {
-                        VStack(alignment: .leading, spacing: 7) {
-                            Text("Explore")
-                                .font(.largeTitle)
-                                .foregroundColor(.black)
-                                .bold()
-                            Rectangle()
-                                .foregroundColor(.clear)
-                                .frame(width: 50, height: Constants.meta)
-                                .background(Color(red: 0.32, green: 0.23, blue: 0.06))
-                                .frame(alignment: .leading)
-                        }
-                        Spacer()
-                    }.padding(.bottom,0)
-                        .padding(.top)
-                        .padding(.leading)
-                        .padding(.trailing)
-                    ScrollView {
+            VStack(alignment: .leading, spacing: 20) {
+                HStack(alignment: .center, spacing: 15) {
+                    VStack(alignment: .leading, spacing: 7) {
+                        Text("Explore")
+                            .font(.largeTitle)
+                            .foregroundColor(.black)
+                            .bold()
+                        Rectangle()
+                            .foregroundColor(.clear)
+                            .frame(width: 50, height: 5)  // Adjusted height
+                            .background(Color(red: 0.32, green: 0.23, blue: 0.06))
+                            .alignmentGuide(.leading) { _ in 0 }
+                    }
+                    Spacer()
+                }
+                .padding(.horizontal)
+                .padding(.top)
+                
+                ScrollView {
                     SearchBar()
                         .padding(.horizontal)
-                       
-                        HStack(){
-                            Text("Categories")
-                                .font(.headline)
-                                .padding(.horizontal)
-                                .padding(.top, 5)
-                            Spacer()
-                        }.padding(.top)
+                    
+                    HStack {
+                        Text("Categories")
+                            .font(.headline)
+                            .padding(.horizontal)
+                            .padding(.top, 5)
+                        Spacer()
+                    }
+                    .padding(.top)
+                    
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 15) {
                             CategoryButton(
@@ -80,7 +74,8 @@ struct ExploreTab: View {
                     }
                     
                     ForEach(viewModel.contentSections) { section in
-                        BookContentView(section: section).padding(.top)
+                        BookContentView(section: section)
+                            .padding(.top)
                     }
                     
                     Spacer()
@@ -154,42 +149,45 @@ struct BookView: View {
     var imageName: String
     
     var body: some View {
-        VStack(alignment: .leading) {
-            ZStack {
-                Image("Ellipse 2")
-                    .frame(width: 161.58664, height: 81.00001)
-                    .offset(y: 55)
+        NavigationLink(destination: CustomBookDetailView(title: title, author: author, subtitle: subtitle)) {
+            VStack(alignment: .leading) {
+                ZStack {
+                    Image("Ellipse 2")
+                        .frame(width: 161.58664, height: 81.00001)
+                        .offset(y: 55)
+                    
+                    Rectangle()
+                        .foregroundColor(.clear)
+                        .frame(width: 104, height: 156)
+                        .background(
+                            Image("bookCover")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 104, height: 156)
+                                .clipped()
+                        )
+                }
+                .padding(.bottom, 20)
                 
-                Rectangle()
-                    .foregroundColor(.clear)
-                    .frame(width: 104, height: 156)
-                    .background(
-                        Image("bookCover")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 104, height: 156)
-                            .clipped()
-                    )
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(title)
+                        .font(.headline)
+                        .lineLimit(1)
+                        .foregroundColor(.black)
+                    
+                    Text(author)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                        .lineLimit(1)
+                    
+                    Text(subtitle)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                        .lineLimit(1)
+                }
             }
-            .padding(.bottom, 20)
-            
-            VStack(alignment: .leading, spacing: 4) {
-                Text(title)
-                    .font(.headline)
-                    .lineLimit(1)
-                
-                Text(author)
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-                    .lineLimit(1)
-                
-                Text(subtitle)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                    .lineLimit(1)
-            }
+            .frame(width: 161)
         }
-        .frame(width: 161)
     }
 }
 
