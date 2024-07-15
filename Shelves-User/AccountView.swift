@@ -57,21 +57,19 @@ struct ProfileHeader: View {
     var body: some View {
         VStack {
             HStack {
-                Image(systemName: "person.crop.circle.fill")
+                Image(systemName: "person.crop.circle")
                     .resizable()
-                    .frame(width: 60, height: 60)
-                    .clipShape(Circle())
+                    .frame(width: 50, height: 50)
                 VStack(alignment: .leading) {
-                    Text("User")
-                        .font(.title2)
-                        .bold()
-                    Text("An Avid Reader")
+                    Text("Hi, User")
+                        .font(.headline)
+                    Text("Manage your account")
                         .font(.subheadline)
-                        .foregroundColor(.gray)
                 }
                 Spacer()
             }
             .padding()
+
         }
     }
 }

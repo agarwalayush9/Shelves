@@ -2,33 +2,53 @@ import SwiftUI
 
 struct EventContentView: View {
     var body: some View {
-        
-            VStack(alignment: .leading, spacing: 20) {
-                // Header
-                HStack {
-                    Image(systemName: "person.crop.circle")
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                    VStack(alignment: .leading) {
-                        Text("Hi, User")
-                            .font(.headline)
-                        Text("Find your Favourite Events")
-                            .font(.subheadline)
+        VStack(alignment: .leading, spacing: 20) {
+            // Header
+            VStack(alignment: .leading, spacing: 16){
+                HStack(alignment: .center, spacing: 15) {
+                    VStack(alignment: .leading, spacing: 7) {
+                        Text("Library Events")
+                            .font(.largeTitle)
+                            .foregroundColor(.black)
+                            .bold()
+                        Rectangle()
+                            .foregroundColor(.clear)
+                            .frame(width: 50, height: Constants.meta)
+                            .background(Color(red: 0.32, green: 0.23, blue: 0.06))
+                            .frame(alignment: .leading)
                     }
                     Spacer()
-                }
-                .padding()
-
-                // Search Bar
+                    NavigationLink(destination: ContentWiew()) {
+                        Image(systemName: "calendar.badge.clock")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(.black)
+                    }
+                }.padding(.top)
+            }.padding(.leading)
+                .padding(.trailing)
+            // Search Bar
+            ZStack{
                 HStack {
                     Image(systemName: "magnifyingglass")
-                    TextField("Search for events", text: .constant(""))
+                        .foregroundColor(.brown)
+                        .padding(.leading, 10)
+                    
+                    TextField("Search Library Events", text: .constant(""))
+                        .foregroundColor(.primary)
+                        .padding(10)
                 }
-                .padding()
-                .background(Color(.systemGray6))
+                
+                .background(Color.white)
                 .cornerRadius(10)
-                .padding(.horizontal)
-                ScrollView {
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.brown, lineWidth: 2)
+                )
+            } .padding(.trailing)
+                .padding(.leading)
+            
+            ScrollView {
                 // Your Event's Tickets
                 VStack(alignment: .leading) {
                     HStack {
@@ -38,6 +58,7 @@ struct EventContentView: View {
                         Text("See All")
                             .foregroundColor(.blue)
                     }
+                    .padding(.top)
                     .padding(.horizontal)
 
                     EventTicketView()
@@ -52,143 +73,95 @@ struct EventContentView: View {
                         Text("See All")
                             .foregroundColor(.blue)
                     }
+                    
                     .padding(.horizontal)
 
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 15) {
-                            ForEach(0..<3) { _ in
-                                EventCategoryView()
-                            }
+                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
+                        ForEach(0..<6) { _ in
+                            EventCategoryView()
                         }
-                        .padding(.horizontal)
-                    }
-                }
-
-                // Event Nearby
-                VStack(alignment: .leading) {
-                    HStack {
-                        Text("Event Nearby")
-                            .font(.headline)
-                        Spacer()
-                        Text("See All")
-                            .foregroundColor(.blue)
                     }
                     .padding(.horizontal)
-
-                    ForEach(0..<2) { _ in
-                        EventNearbyView()
-                    }
-                }
+                }.padding(.top)
             }
         }
         .background(
             LinearGradient(gradient: Gradient(colors: [Color(red: 1.0, green: 0.87, blue: 0.7), Color.white]),
                            startPoint: .top,
                            endPoint: .bottom)
-            )
-            .navigationBarHidden(true)
+        )
+        .navigationBarHidden(true)
     }
 }
 
 struct EventTicketView: View {
     var body: some View {
-        VStack {
-            HStack {
-                Image(systemName: "books.vertical.fill")
-                    .resizable()
-                    .frame(width: 50, height: 50)
-                    .cornerRadius(10)
+        ZStack {
+            VStack {
+                HStack {
+                    Image(systemName: "book.pages")
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                        .cornerRadius(10)
+                        .padding(.trailing)
+                    VStack(alignment: .leading, spacing: 5) {
+                        Text("California Art Festival 2023")
+                            .font(.headline)
+                        Text("Dana Point 29-30")
+                            .font(.subheadline)
+                    }
+                    Spacer()
+                }
+                .padding(.bottom, 4)
                 
-                VStack(alignment: .leading, spacing: 5) {
-                    Text("California Art Festival 2023")
-                        .font(.headline)
-                    Text("Dana Point 29-30")
-                        .font(.subheadline)
-                }
-                Spacer()
-            }
-            .padding(.bottom, 4)
-            
-            DottedDivider()
-                            .stroke(style: StrokeStyle(lineWidth: 1, dash: [5]))
-                            .foregroundColor(.brown)
-                            .frame(height: 1)
-                            .padding(.vertical, 4)
-            
-            HStack {
-                VStack(alignment: .leading) {
-                    Text("Time")
-                        .font(.caption)
-                    Text("10:00 PM")
-                        .font(.subheadline)
-                }
-                Spacer()
-                VStack(alignment: .leading) {
-                    Text("Location")
-                        .font(.caption)
-                    Text("California, CA")
-                        .font(.subheadline)
-                }
-                Spacer()
+                DottedDivider()
+                    .stroke(style: StrokeStyle(lineWidth: 1, dash: [5]))
+                    .foregroundColor(.brown)
+                    .frame(height: 1)
+                    .padding(.vertical, 4)
                 
-                Text("Premium ticket x1")
-                    .padding(5)
-                    .background(Color.brown)
-                    .foregroundColor(.white)
-                    .cornerRadius(15).padding(.top,10)
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("Time")
+                            .font(.caption)
+                        Text("10:00 PM")
+                            .font(.subheadline)
+                    }
+                    Spacer()
+                    VStack(alignment: .leading) {
+                        Text("Location")
+                            .font(.caption)
+                        Text("California, CA")
+                            .font(.subheadline)
+                    }
+                }
             }
+            .padding()
+            .cornerRadius(15)
+            .overlay(
+                RoundedRectangle(cornerRadius: 15)
+                    .stroke(Color.brown, lineWidth: 2)
+            )
         }
-        .padding()
-        .cornerRadius(15)
-        .padding(.horizontal)
-        .overlay(
-            RoundedRectangle(cornerRadius: 15)
-                .stroke(Color.brown, lineWidth: 2).frame(width: 380))
+        .padding(.leading)
+        .padding(.bottom)
+        .padding(.trailing)
     }
 }
 
 struct EventCategoryView: View {
     var body: some View {
         VStack {
-            Image( "authormeet")
+            Image("authormeet")
                 .resizable()
-                .frame(width: 150, height: 150).cornerRadius(8)
+                .frame(width: 150, height: 150)
+                .cornerRadius(8)
             Text("Author's Meet")
-                .font(.subheadline).bold().padding(.top,4)
+                .font(.subheadline)
+                .bold()
+                .padding(.top, 4)
         }
-//        .padding()
-//        .background(Color(.systemGray6))
         .cornerRadius(10)
-    }
-}
-
-struct EventNearbyView: View {
-    var body: some View {
-        HStack {
-            Image(systemName: "book.fill")
-                .resizable()
-                .frame(width: 50, height: 50)
-            VStack(alignment: .leading) {
-                Text("California Art Festival 2023")
-                    .font(.headline)
-                Text("Dana Point 29-30")
-                    .font(.subheadline)
-                HStack {
-                    Text("July 31, 07:30 PM")
-                    Spacer()
-                    Text("₹299")
-                        .foregroundColor(.green)
-                }
-                .font(.caption)
-            }
-            Spacer()
-        }
-        .padding()
-
-        .cornerRadius(10)
-        .padding(.horizontal).overlay(
-            RoundedRectangle(cornerRadius: 15)
-                .stroke(Color.brown, lineWidth: 2).frame(width: 380))
     }
 }
 
@@ -197,7 +170,6 @@ struct EventContentView_Previews: PreviewProvider {
         EventContentView()
     }
 }
-
 
 struct DottedDivider: Shape {
     func path(in rect: CGRect) -> Path {

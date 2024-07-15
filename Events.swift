@@ -1,9 +1,3 @@
-//
-//  Events.swift
-//  Shelves-User
-//
-//  Created by Anay Dubey on 11/07/24.
-//
 
 import SwiftUI
 
