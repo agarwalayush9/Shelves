@@ -37,7 +37,7 @@ struct HomeView: View {
                                startPoint: .top,
                                endPoint: .bottom)
                 .edgesIgnoringSafeArea(.all)
-                ScrollView {
+               
                     
                     VStack {
                         // Header
@@ -64,7 +64,7 @@ struct HomeView: View {
                         //                    }
                         //                    .frame(height: 100)
                         //                    .padding()
-                        
+                        ScrollView {
                         // Shelf of the Day Section
                         ShelfOfTheDayView()
                             .padding(.top,0)

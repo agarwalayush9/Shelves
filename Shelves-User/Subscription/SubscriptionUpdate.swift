@@ -124,9 +124,9 @@ struct UpdateSubscriptionView: View {
                     message: Text("Your subscription has been updated successfully."),
                     dismissButton: .default(Text("OK"))
                 )
+                
             }
         }
-        .navigationBarBackButtonHidden(true)
     }
 }
 

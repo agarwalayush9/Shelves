@@ -2,7 +2,7 @@ import SwiftUI
 
 struct EventContentView: View {
     var body: some View {
-        ScrollView {
+        
             VStack(alignment: .leading, spacing: 20) {
                 // Header
                 HStack {
@@ -28,7 +28,7 @@ struct EventContentView: View {
                 .background(Color(.systemGray6))
                 .cornerRadius(10)
                 .padding(.horizontal)
-
+                ScrollView {
                 // Your Event's Tickets
                 VStack(alignment: .leading) {
                     HStack {

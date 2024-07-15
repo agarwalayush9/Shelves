@@ -13,7 +13,7 @@ struct ExploreTab: View {
     
     var body: some View {
         NavigationView {
-            ScrollView {
+            
                 VStack(alignment: .leading, spacing: 20) {
                     HStack(alignment: .center, spacing: 15) {
                         VStack(alignment: .leading, spacing: 7) {
@@ -29,17 +29,20 @@ struct ExploreTab: View {
                         }
                         Spacer()
                     }.padding(.bottom,0)
-                        .padding(.top,0)
+                        .padding(.top)
                         .padding(.leading)
                         .padding(.trailing)
+                    ScrollView {
                     SearchBar()
                         .padding(.horizontal)
-                    
-                    Text("Categories")
-                        .font(.headline)
-                        .padding(.horizontal)
-                        .padding(.top, 5)
-                    
+                       
+                        HStack(){
+                            Text("Categories")
+                                .font(.headline)
+                                .padding(.horizontal)
+                                .padding(.top, 5)
+                            Spacer()
+                        }.padding(.top)
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 15) {
                             CategoryButton(
@@ -82,7 +85,7 @@ struct ExploreTab: View {
                     
                     Spacer()
                 }
-                .padding(.top, 20)
+                .padding(.top, 0)
                 .padding(.bottom, 20)
             }
             .background(

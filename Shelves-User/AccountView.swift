@@ -20,7 +20,7 @@ struct AccountView: View {
                         NavigationLink(destination: Text("Profile Details View")) {
                             AccountNavigationItem(title: "Your Profile details", icon: "person.fill")
                         }
-                        NavigationLink(destination: SubscriptionView()) {
+                        NavigationLink(destination: UpdateSubscriptionView()) {
                             AccountNavigationItem(title: "Change Plan", icon: "star.fill")
                         }
                         NavigationLink(destination: Text("Saved by You View")) {
