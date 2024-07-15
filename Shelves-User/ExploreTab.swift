@@ -80,7 +80,7 @@ struct ExploreTab: View {
                     }
                     
                     ForEach(viewModel.contentSections) { section in
-                        BookContentView(section: section)
+                        BookContentView(section: section).padding(.top)
                     }
                     
                     Spacer()
