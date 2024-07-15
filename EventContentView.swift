@@ -107,50 +107,57 @@ struct EventTicketView: View {
                 }
                 Spacer()
             }
-            .padding(.bottom, 10)
+            .padding(.bottom, 4)
             
-            Divider()
+            DottedDivider()
+                            .stroke(style: StrokeStyle(lineWidth: 1, dash: [5]))
+                            .foregroundColor(.brown)
+                            .frame(height: 1)
+                            .padding(.vertical, 4)
             
             HStack {
                 VStack(alignment: .leading) {
                     Text("Time")
                         .font(.caption)
                     Text("10:00 PM")
-                        .font(.headline)
+                        .font(.subheadline)
                 }
                 Spacer()
                 VStack(alignment: .leading) {
                     Text("Location")
                         .font(.caption)
                     Text("California, CA")
-                        .font(.headline)
+                        .font(.subheadline)
                 }
                 Spacer()
+                
                 Text("Premium ticket x1")
                     .padding(5)
                     .background(Color.brown)
                     .foregroundColor(.white)
-                    .cornerRadius(5)
+                    .cornerRadius(15).padding(.top,10)
             }
         }
         .padding()
-        .background(Color(.systemGray6))
         .cornerRadius(15)
         .padding(.horizontal)
+        .overlay(
+            RoundedRectangle(cornerRadius: 15)
+                .stroke(Color.brown, lineWidth: 2).frame(width: 380))
     }
 }
 
 struct EventCategoryView: View {
     var body: some View {
         VStack {
-            Image(systemName: "person.3.fill")
+            Image( "authormeet")
                 .resizable()
-                .frame(width: 100, height: 100)
+                .frame(width: 150, height: 150).cornerRadius(8)
             Text("Author's Meet")
-                .font(.caption)
+                .font(.subheadline).bold().padding(.top,4)
         }
-        .padding()
-        .background(Color(.systemGray6))
+//        .padding()
+//        .background(Color(.systemGray6))
         .cornerRadius(10)
     }
 }
@@ -177,9 +184,11 @@ struct EventNearbyView: View {
             Spacer()
         }
         .padding()
-        .background(Color(.systemGray6))
+
         .cornerRadius(10)
-        .padding(.horizontal)
+        .padding(.horizontal).overlay(
+            RoundedRectangle(cornerRadius: 15)
+                .stroke(Color.brown, lineWidth: 2).frame(width: 380))
     }
 }
 
@@ -190,3 +199,11 @@ struct EventContentView_Previews: PreviewProvider {
 }
 
 
+struct DottedDivider: Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        path.move(to: CGPoint(x: rect.minX, y: rect.midY))
+        path.addLine(to: CGPoint(x: rect.maxX, y: rect.midY))
+        return path
+    }
+}
