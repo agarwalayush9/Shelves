@@ -11,7 +11,7 @@ import SwiftUI
 struct SubscriptionView: View {
     @State private var selectedPlan: String = "Monthly"
     @State private var selectedTier: String? = nil
-    @State private var showCustomTabbar: Bool = false
+    @State private var showUserHomePage: Bool = false
 
     var body: some View {
         NavigationStack {
@@ -87,19 +87,10 @@ struct SubscriptionView: View {
 
                 Spacer()
 
-                Button(action: {
-                    // Handle skip action
-                }) {
-                    Text("I don't want a subscription! Skip")
-                        .foregroundColor(Color(red: 81/255, green: 58/255, blue: 16/255))
-                        .padding().multilineTextAlignment(.center)
-
-                }
-                .padding(.horizontal, 50)
-
+               
                 Button(action: {
                     // Handle continue and pay action
-                    self.showCustomTabbar = true
+                    self.showUserHomePage = true
                 }) {
                     Text("Continue & Pay")
                         .foregroundColor(.white).bold()
@@ -111,7 +102,10 @@ struct SubscriptionView: View {
                 .padding(.horizontal, 40)
                 .padding(.bottom, 20)
                 .disabled(selectedTier == nil) // Disable the button if no tier is selected
-            
+                .navigationDestination(isPresented: $showUserHomePage) {
+                    CustomTabbar()
+                        .navigationBarBackButtonHidden(true)
+                }
 
                 Text("You can cancel the subscription at any time from the app store at no additional cost and it will end at the end of the current period. By going further, you accept our terms of service, which lay down the details of your right of withdrawal.")
                     .font(.system(size: 12))
@@ -123,7 +117,7 @@ struct SubscriptionView: View {
             .background(LinearGradient(gradient: Gradient(colors: [Color(red: 1, green: 0.87, blue: 0.74), Color.white]), startPoint: .top, endPoint: .bottom))
             .edgesIgnoringSafeArea(.all)
         }
-        .navigationBarBackButtonHidden(true)
+     
     }
 }
 

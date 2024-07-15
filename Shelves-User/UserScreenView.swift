@@ -13,42 +13,11 @@ struct UserHomePage: View {
         Author(name: "Stephen Hawking", title: "Stephen Hawking", description: "From the Bing Bang to Black Holes", image: "bookCover"),
         Author(name: "Stephen Hawking", title: "Stephen Hawking", description: "From the Bing Bang to Black Holes", image: "bookCover")
     ]
-
+    
     var body: some View {
-        TabView {
-            HomeView(selectedCategory: $selectedCategory, books: books, authors: authors)
-                .tabItem {
-                    Image(systemName: "house.fill")
-                    Text("Home")
-                }
-            
-            ExploreTab()
-                .tabItem {
-                    Image(systemName: "magnifyingglass")
-                    Text("Search")
-                }
-            
-            BorrowBooks()
-                .tabItem {
-                    Image(systemName: "books.vertical.fill")
-                    Text("BookShelf")
-                }
-            Text("Events")
-                .tabItem {
-                    Image(systemName: "book.circle.fill")
-                    Text("Events")
-                }
-            
-            Text("Profile")
-                .tabItem {
-                    Image(systemName: "person.fill")
-                    Text("Profile")
-                }
-        }
-        .accentColor(Color(hex: "#513A10"))
+        HomeView(selectedCategory: $selectedCategory, books: books, authors: authors)
     }
 }
-
 struct HomeView: View {
     @Binding var selectedCategory: String
     let books: [Book]
@@ -164,7 +133,7 @@ struct OverdueBookView: View {
         }
         .padding()
         .background(Color("background"))
-        .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color(hex: "#513A10"), lineWidth: 3))
+        .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color("#513A10"), lineWidth: 3))
     }
 }
 
@@ -176,13 +145,13 @@ struct ViewMyRentalsView: View {
             }) {
                 VStack {
                     Image("bookIcon").resizable().frame(width: 50, height: 50).padding(.horizontal, 10)
-                    Text("View").font(.system(size: 13, weight: .semibold)).foregroundColor(Color(hex: "#513A10")).padding(.top, 10)
-                    Text("My Issued").font(.system(size: 13, weight: .bold)).foregroundColor(Color(hex: "#513A10"))
-                    Text("Books").font(.system(size: 13, weight: .bold)).foregroundColor(Color(hex: "#513A10"))
+                    Text("View").font(.system(size: 13, weight: .semibold)).foregroundColor(Color("#513A10")).padding(.top, 10)
+                    Text("My Issued").font(.system(size: 13, weight: .bold)).foregroundColor(Color("#513A10"))
+                    Text("Books").font(.system(size: 13, weight: .bold)).foregroundColor(Color("#513A10"))
                 }
                 .background(Color("background"))
                 .frame(width: 100, height: 140)
-                .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color(hex: "#513A10"), lineWidth: 3))
+                .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color("#513A10"), lineWidth: 3))
             }
         }
         .frame(width: 100, height: 115)
@@ -263,7 +232,7 @@ struct TopAuthorsView: View {
                     .bold()
                 Spacer()
                 Text("Show all")
-                    .foregroundColor(Color(hex: "#765511"))
+                    .foregroundColor(Color("#765511"))
                     .underline()
             }
             ScrollView(.horizontal, showsIndicators: false) {

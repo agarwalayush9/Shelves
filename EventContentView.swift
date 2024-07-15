@@ -10,7 +10,7 @@ struct EventContentView: View {
                         .resizable()
                         .frame(width: 50, height: 50)
                     VStack(alignment: .leading) {
-                        Text("Hi, Ankit Verma")
+                        Text("Hi, User")
                             .font(.headline)
                         Text("Find your Favourite Events")
                             .font(.subheadline)

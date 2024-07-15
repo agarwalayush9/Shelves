@@ -36,7 +36,7 @@ struct Shelves_UserApp: App {
     var body: some Scene {
         WindowGroup {
             if authManager.isLoggedIn {
-                UserHomePage()
+                CustomTabbar()
                     .environmentObject(authManager)
             } else {
                 ContentView()
