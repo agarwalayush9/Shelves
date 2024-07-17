@@ -19,7 +19,6 @@ struct SignupInput: View {
     @State private var showGenreSelection: Bool = false
     @State private var showAlert = false
     @State private var alertMessage = ""
-    
     @State private var firstnameError: String = ""
     @State private var lastnameError: String = ""
     @State private var emailError: String = ""

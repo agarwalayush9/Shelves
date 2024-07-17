@@ -66,9 +66,11 @@ struct UserHomePage: View {
                                             ForEach(viewModel.booksByGenre[genre] ?? []) { book in
                                                 VStack {
                                                     if let url = URL(string: book.imageName) {
-                                                        AsyncImage(url: url)
-                                                            .frame(width: 100, height: 150)
-                                                            .cornerRadius(8)
+                                                        NavigationLink(destination: CustomBookDetailView(title: book.title, author: book.author, subtitle: book.subtitle, url: book.imageName, rating: book.rating, genre: book.categories)) {
+                                                            AsyncImage(url: url)
+                                                                .frame(width: 100, height: 150)
+                                                                .cornerRadius(8)
+                                                        }
                                                     }
                                                     Text(book.title)
                                                         .font(.caption)
