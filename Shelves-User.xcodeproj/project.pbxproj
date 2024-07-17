@@ -11,6 +11,7 @@
 		441E4BDA2C365E7500FD59DD /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441E4BD92C365E7500FD59DD /* PageControl.swift */; };
 		441E4BFC2C380F8700FD59DD /* GenereSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441E4BFB2C380F8700FD59DD /* GenereSelectionView.swift */; };
 		441E4C1C2C3BA59600FD59DD /* SubscriptionPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441E4C1B2C3BA59600FD59DD /* SubscriptionPlan.swift */; };
+		447F104C2C47BBD30023A1C8 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447F104B2C47BBD30023A1C8 /* EventDetailView.swift */; };
 		44EE4A1E2C42BFFF00B322B6 /* SubscriptionUpdateDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EE4A1D2C42BFFF00B322B6 /* SubscriptionUpdateDataController.swift */; };
 		44EE4A202C42C01F00B322B6 /* SubscriptionTier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EE4A1F2C42C01F00B322B6 /* SubscriptionTier.swift */; };
 		44EE4A222C42C05B00B322B6 /* SubscriptionUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EE4A212C42C05B00B322B6 /* SubscriptionUpdate.swift */; };
@@ -63,6 +64,7 @@
 		441E4BD92C365E7500FD59DD /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
 		441E4BFB2C380F8700FD59DD /* GenereSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenereSelectionView.swift; sourceTree = "<group>"; };
 		441E4C1B2C3BA59600FD59DD /* SubscriptionPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlan.swift; sourceTree = "<group>"; };
+		447F104B2C47BBD30023A1C8 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
 		44EE4A1D2C42BFFF00B322B6 /* SubscriptionUpdateDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionUpdateDataController.swift; sourceTree = "<group>"; };
 		44EE4A1F2C42C01F00B322B6 /* SubscriptionTier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionTier.swift; sourceTree = "<group>"; };
 		44EE4A212C42C05B00B322B6 /* SubscriptionUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionUpdate.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				C41746BF2C3F9A8400D5D7D1 /* DataModel.swift */,
 				C41746C32C3FA34A00D5D7D1 /* EventRowView.swift */,
 				C41746C52C3FA42700D5D7D1 /* EventContentView.swift */,
+				447F104B2C47BBD30023A1C8 /* EventDetailView.swift */,
 				94CC11322C3FFDEA006B3988 /* Events.swift */,
 				D06370842C3C135600697510 /* DataController.swift */,
 				D063707A2C3BDE5500697510 /* GoogleService-Info.plist */,
@@ -324,6 +327,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD938B102C3566C700FFFC1E /* ContentView.swift in Sources */,
+				447F104C2C47BBD30023A1C8 /* EventDetailView.swift in Sources */,
 				FDE615102C44901700D37975 /* Tab.swift in Sources */,
 				441E4BFC2C380F8700FD59DD /* GenereSelectionView.swift in Sources */,
 				9410FDB62C40FC7A00299544 /* DetailedBookListView.swift in Sources */,
