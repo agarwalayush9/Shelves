@@ -29,7 +29,7 @@ struct SignupInput: View {
     var isFormValid: Bool {
         return !email.isEmpty && !password.isEmpty && !confirmPassword.isEmpty && password == confirmPassword &&
         password.count >= 8 &&
-        email.lowercased() == email && acceptTerms
+        acceptTerms
     }
 
     var body: some View {
@@ -214,7 +214,7 @@ struct SignupInput: View {
                             .cornerRadius(10)
                             .padding(.horizontal, 15)
                     }
-                    .disabled(!isFormValid)
+                    
                     .padding(.bottom, 60)
 
                     Text("by continuing, you agree with")
@@ -298,10 +298,36 @@ struct SignupInput: View {
                 }
             } else {
                 print("User signed up successfully")
-                showGenreSelection = true
+                
+                // Save member details to database
+                let newMember = Member(email: email,
+                                       firstName: firstname, // You can add first name if available
+                                       lastName: lastname, // You can add last name if available
+                                       phoneNumber: 0, // You can add phone number if available
+                                       subscriptionPlan: "bronze",
+                                       registeredEvents: [], genre: [])// Empty array for default events
+                   
+                
+                DataController.shared.addMember(newMember) { result in
+                    switch result {
+                    case .success:
+                        print("Member details saved to database.")
+                        UserDefaults.standard.set(true, forKey: "isLoggedIn")
+                        UserDefaults.standard.set(email, forKey: "email")
+                        showGenreSelection = true // Assuming this flag is used to proceed to genre selection
+                    case .failure(let error):
+                        print("Failed to save member details to database: \(error.localizedDescription)")
+                        DispatchQueue.main.async {
+                            showAlert = true
+                            alertMessage = "Failed to save member details to database."
+                        }
+                        // Optionally, handle retry or other UI logic here
+                    }
+                }
             }
         }
     }
+
 
     // Validation functions
     func isValidFirstName(_ name: String) -> Bool {

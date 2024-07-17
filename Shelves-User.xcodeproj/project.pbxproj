@@ -46,6 +46,9 @@
 		FDBC5EAF2C46619B004F0890 /* BookDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC5EAA2C46619B004F0890 /* BookDetails.swift */; };
 		FDBC5EB02C46619B004F0890 /* BookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC5EAB2C46619B004F0890 /* BookDetailView.swift */; };
 		FDBC5EB12C46619B004F0890 /* ContentWiew.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC5EAC2C46619B004F0890 /* ContentWiew.swift */; };
+		FDBC5EB62C4746B9004F0890 /* BookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC5EB52C4746B9004F0890 /* BookViewModel.swift */; };
+		FDBC5EB92C47492C004F0890 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = FDBC5EB82C47492C004F0890 /* URLImage */; };
+		FDBC5EBB2C47492D004F0890 /* URLImageStore in Frameworks */ = {isa = PBXBuildFile; productRef = FDBC5EBA2C47492D004F0890 /* URLImageStore */; };
 		FDE615052C431BBD00D37975 /* BorrowBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE615042C431BBD00D37975 /* BorrowBooks.swift */; };
 		FDE615072C44040E00D37975 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE615062C44040E00D37975 /* AuthManager.swift */; };
 		FDE6150E2C44901700D37975 /* CustomBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE615082C44901700D37975 /* CustomBookView.swift */; };
@@ -91,6 +94,7 @@
 		FDBC5EAA2C46619B004F0890 /* BookDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookDetails.swift; sourceTree = "<group>"; };
 		FDBC5EAB2C46619B004F0890 /* BookDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookDetailView.swift; sourceTree = "<group>"; };
 		FDBC5EAC2C46619B004F0890 /* ContentWiew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentWiew.swift; sourceTree = "<group>"; };
+		FDBC5EB52C4746B9004F0890 /* BookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookViewModel.swift; sourceTree = "<group>"; };
 		FDE615042C431BBD00D37975 /* BorrowBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowBooks.swift; sourceTree = "<group>"; };
 		FDE615062C44040E00D37975 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		FDE615082C44901700D37975 /* CustomBookView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomBookView.swift; sourceTree = "<group>"; };
@@ -105,10 +109,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDBC5EBB2C47492D004F0890 /* URLImageStore in Frameworks */,
 				C27C0EF22C3DABDE00131A5B /* GoogleSignIn in Frameworks */,
 				C26271702C3C054B009C6830 /* FirebaseAnalyticsSwift in Frameworks */,
 				D06370812C3BE00600697510 /* FirebaseDatabase in Frameworks */,
 				C27C0EF42C3DABDE00131A5B /* GoogleSignInSwift in Frameworks */,
+				FDBC5EB92C47492C004F0890 /* URLImage in Frameworks */,
 				D063707F2C3BE00600697510 /* FirebaseAuth in Frameworks */,
 				C262716E2C3C0548009C6830 /* FirebaseAnalytics in Frameworks */,
 			);
@@ -164,9 +170,9 @@
 		FD938B0C2C3566C700FFFC1E /* Shelves-User */ = {
 			isa = PBXGroup;
 			children = (
+				FDBC5EB22C473EEE004F0890 /* HomeScreen */,
 				FDBC5EAD2C46619B004F0890 /* ISBNfiles */,
 				C27C0EEF2C3DABA100131A5B /* Info.plist */,
-				C4447C722C36C7FE00E1D065 /* UserScreenView.swift */,
 				FD938B0D2C3566C700FFFC1E /* Shelves_UserApp.swift */,
 				441E4BFB2C380F8700FD59DD /* GenereSelectionView.swift */,
 				FD938B0F2C3566C700FFFC1E /* ContentView.swift */,
@@ -210,6 +216,15 @@
 			path = ISBNfiles;
 			sourceTree = "<group>";
 		};
+		FDBC5EB22C473EEE004F0890 /* HomeScreen */ = {
+			isa = PBXGroup;
+			children = (
+				C4447C722C36C7FE00E1D065 /* UserScreenView.swift */,
+				FDBC5EB52C4746B9004F0890 /* BookViewModel.swift */,
+			);
+			path = HomeScreen;
+			sourceTree = "<group>";
+		};
 		FDE6150D2C44901700D37975 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,6 +259,8 @@
 				C262716F2C3C054B009C6830 /* FirebaseAnalyticsSwift */,
 				C27C0EF12C3DABDE00131A5B /* GoogleSignIn */,
 				C27C0EF32C3DABDE00131A5B /* GoogleSignInSwift */,
+				FDBC5EB82C47492C004F0890 /* URLImage */,
+				FDBC5EBA2C47492D004F0890 /* URLImageStore */,
 			);
 			productName = "Shelves-User";
 			productReference = FD938B0A2C3566C700FFFC1E /* Shelves-User.app */;
@@ -276,6 +293,7 @@
 			packageReferences = (
 				D063707C2C3BDFB200697510 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				C27C0EF02C3DABDE00131A5B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				FDBC5EB72C47492C004F0890 /* XCRemoteSwiftPackageReference "url-image" */,
 			);
 			productRefGroup = FD938B0B2C3566C700FFFC1E /* Products */;
 			projectDirPath = "";
@@ -312,6 +330,7 @@
 				FD938B0E2C3566C700FFFC1E /* Shelves_UserApp.swift in Sources */,
 				44EE4A1E2C42BFFF00B322B6 /* SubscriptionUpdateDataController.swift in Sources */,
 				C41746C62C3FA42700D5D7D1 /* EventContentView.swift in Sources */,
+				FDBC5EB62C4746B9004F0890 /* BookViewModel.swift in Sources */,
 				44EE4A222C42C05B00B322B6 /* SubscriptionUpdate.swift in Sources */,
 				FDE615122C44901700D37975 /* TabPosition.swift in Sources */,
 				441E4BDA2C365E7500FD59DD /* PageControl.swift in Sources */,
@@ -489,7 +508,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.team1.Shelves;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.team1.Shelves-User";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -520,7 +539,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.team1.Shelves;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.team1.Shelves-User";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -568,6 +587,14 @@
 				minimumVersion = 10.28.1;
 			};
 		};
+		FDBC5EB72C47492C004F0890 /* XCRemoteSwiftPackageReference "url-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dmytro-anokhin/url-image";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -600,6 +627,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D063707C2C3BDFB200697510 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseDatabase;
+		};
+		FDBC5EB82C47492C004F0890 /* URLImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FDBC5EB72C47492C004F0890 /* XCRemoteSwiftPackageReference "url-image" */;
+			productName = URLImage;
+		};
+		FDBC5EBA2C47492D004F0890 /* URLImageStore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FDBC5EB72C47492C004F0890 /* XCRemoteSwiftPackageReference "url-image" */;
+			productName = URLImageStore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -95,7 +95,7 @@ struct SubHeaderView: View {
                             .stroke(Color(red: 0.32, green: 0.23, blue: 0.06), lineWidth: 2)
                     )
                 VStack {
-                    Text("Reading limit")
+                    Text("Borrow limit")
                         .font(.subheadline)
                     Text("4 of 5")
                         .font(.title2)
@@ -173,7 +173,7 @@ struct BookView1: View {
     let book: Book1
     
     var body: some View {
-        NavigationLink(destination: CustomBookDetailView(title: book.title, author: book.author, subtitle: book.details)){
+        NavigationLink(destination: CustomBookDetailView(title: book.title, author: book.author, subtitle: book.details, url: "")){
             VStack(alignment: .leading) {
                 ZStack {
                     Image("Ellipse 2")

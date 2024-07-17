@@ -55,4 +55,7 @@ class AuthManager: ObservableObject {
             }
         }
     }
+    func getEmail() -> String? {
+            return Auth.auth().currentUser?.email
+        }
 }

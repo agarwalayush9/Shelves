@@ -1,16 +1,20 @@
 import SwiftUI
+import FirebaseDatabaseInternal
 
 struct BookDetailView: View {
+    
     let book: Books
     @State private var quantity: Int = 1
     @Environment(\.presentationMode) var presentationMode
     let dummyImage = UIImage(named: "dummyBookImage") // Add a dummy image to your assets
     @State private var showAlert = false
     @State private var alertMessage = ""
+    @EnvironmentObject var authManager: AuthManager
     var customColor: Color {
         colorScheme == .dark ? Color(red: 230/255, green: 230/255, blue: 230/255) : Color(red: 81/255, green: 58/255, blue: 16/255)
     }
     @Environment(\.colorScheme) var colorScheme
+    @State private var bookStatus = "Borrow Now"
     @State private var randomColor: Color = Color.random()
     var body: some View {
         ZStack{
@@ -69,9 +73,9 @@ struct BookDetailView: View {
                         }
                         Spacer()
                         Button(action: {
-                            // Borrow now action
+                            requestBook()
                         }) {
-                            Text("Borrow Now")
+                            Text(bookStatus)
                                 .font(.headline)
                                 .foregroundColor(.white)
                                 .frame(maxWidth: .infinity)
@@ -91,6 +95,37 @@ struct BookDetailView: View {
                            endPoint: .bottom))
     }
   
+    func requestBook(){
+        guard let email = authManager.getEmail() else {
+             alertMessage = "SignIn to borrow"
+             showAlert = true
+             return
+         }
+
+         // Prepare the dictionary to be saved
+         let bookDetails: [String: String] = [
+            "isbn": book.bookCode,
+             "status": "Requested"
+         ]
+
+         // Replace '.' in email with ',' to create a valid Firebase key
+         let emailKey = email.replacingOccurrences(of: "@", with: "-").replacingOccurrences(of: ".", with: "-")
+
+         // Reference to the Firebase Realtime Database
+         let ref = Database.database().reference()
+
+         // Create the path issue-book/emailKey
+         ref.child("issue-book").child(emailKey).setValue(bookDetails) { (error, ref) in
+             if let error = error {
+                 print("Data could not be saved: \(error).")
+             } else {
+                 print("Data saved successfully!")
+                 alertMessage = "Ask for librarian's approval"
+                 showAlert = true
+                 bookStatus = "Requested"
+             }
+         }
+    }
 }
 
 struct BookDetailView_Previews: PreviewProvider {

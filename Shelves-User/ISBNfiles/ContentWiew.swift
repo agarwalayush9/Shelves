@@ -5,13 +5,19 @@ struct ContentWiew: View {
     @State private var bookDetails: Books?
     @State private var showAlert: Bool = false
     @State private var alertMessage: String = ""
+    @State private var showScanner: Bool = true
 
     var body: some View {
         VStack {
-            if let bookDetails = bookDetails {
+            if showScanner {
+                BarcodeScannerView(scannedCode: $scannedCode, onCodeScanned: {
+                    if let code = scannedCode {
+                        fetchBookDetails(isbn: code)
+                    }
+                })
+            } else if let bookDetails = bookDetails {
                 BookDetailView(book: bookDetails)
-            } else {
-                BarcodeScannerView(scannedCode: $scannedCode, onCodeScanned: fetchBookDetails)
+                
             }
         }
         .alert(isPresented: $showAlert) {
@@ -23,21 +29,21 @@ struct ContentWiew: View {
         }
     }
 
-    func fetchBookDetails() {
-        guard let scannedCode = scannedCode else { return }
+    func fetchBookDetails(isbn: String) {
+        guard !isbn.isEmpty else {
+            self.alertMessage = "No barcode scanned."
+            self.showAlert = true
+            return
+        }
 
-        BookAPI.fetchDetails(isbn: scannedCode) { result in
+        BookAPI.fetchDetails(isbn: isbn) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let details):
                     self.bookDetails = details
-                    self.showAlert = false // Reset showAlert if it was previously shown
+                    self.showScanner = false // Close the scanner view
                 case .failure(let error):
-                    if scannedCode.isEmpty {
-                        self.alertMessage = "No barcode scanned."
-                    } else {
-                        self.alertMessage = self.errorMessage(from: error)
-                    }
+                    self.alertMessage = self.errorMessage(from: error)
                     self.showAlert = true
                 }
             }
