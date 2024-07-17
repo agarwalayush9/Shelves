@@ -304,12 +304,11 @@ struct SignupInput: View {
                 print("User signed up successfully")
                 
                 // Save member details to database
-                let newMember = Member(email: email,
-                                       firstName: firstname,
-                                       lastName: lastname,
+                let newMember = Member(firstName: email,
+                                       lastName: firstname,
+                                       email: lastname,
                                        phoneNumber: 0,
-                                       subscriptionPlan: "bronze",
-                                       registeredEvents: [], genre: []) // Empty array for default events
+                                       subscriptionPlan: "bronze", genre: []) // Empty array for default events
                 
                 DataController.shared.addMember(newMember) { result in
                     switch result {

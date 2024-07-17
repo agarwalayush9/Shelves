@@ -58,7 +58,6 @@ struct Member {
     var email: String
     var phoneNumber: Int
     var subscriptionPlan: String?
-    var registeredEvents: [Event]?
     var genre: [Genre]?
 
     // Additional methods or properties as needed
@@ -84,11 +83,6 @@ struct Member {
         if let genre = genre {
             dictionary["genre"] = genre.map { $0.rawValue }
         }
-
-        if let registeredEvents = registeredEvents {
-            dictionary["registeredEvents"] = registeredEvents.map { $0.toDictionary() }
-        }
-
         return dictionary
     }
 }
