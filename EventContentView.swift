@@ -2,92 +2,92 @@ import SwiftUI
 
 struct EventContentView: View {
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            // Header
-            VStack(alignment: .leading, spacing: 16){
-                HStack(alignment: .center, spacing: 15) {
-                    VStack(alignment: .leading, spacing: 7) {
-                        Text("Library Events")
-                            .font(.largeTitle)
-                            .foregroundColor(.black)
-                            .bold()
-                        Rectangle()
-                            .foregroundColor(.clear)
-                            .frame(width: 50, height: Constants.meta)
-                            .background(Color(red: 0.32, green: 0.23, blue: 0.06))
-                            .frame(alignment: .leading)
-                    }
-                    Spacer()
-                    NavigationLink(destination: ContentWiew()) {
-                        Image(systemName: "calendar.badge.clock")
-                            .resizable()
-                            .frame(width: 40, height: 40)
-                            .foregroundColor(.black)
-                    }
-                }.padding(.top)
-            }.padding(.leading)
-                .padding(.trailing)
-            // Search Bar
-            ZStack{
-                HStack {
-                    Image(systemName: "magnifyingglass")
-                        .foregroundColor(.brown)
-                        .padding(.leading, 10)
-                    
-                    TextField("Search Library Events", text: .constant(""))
-                        .foregroundColor(.primary)
-                        .padding(10)
-                }
-                
-                .background(Color.white)
-                .cornerRadius(10)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.brown, lineWidth: 2)
-                )
-            } .padding(.trailing)
-                .padding(.leading)
-            
-            ScrollView {
-                // Your Event's Tickets
-                VStack(alignment: .leading) {
-                    HStack {
-                        Text("Your Event’s Tickets")
-                            .font(.headline)
-                        Spacer()
-                        Text("See All")
-                            .foregroundColor(.blue)
-                    }
-                    .padding(.top)
-                    .padding(.horizontal)
-
-                    EventTicketView()
-                }
-
-                // Event Categories
-                VStack(alignment: .leading) {
-                    HStack {
-                        Text("Event Categories")
-                            .font(.headline)
-                    }
-                    
-                    .padding(.horizontal)
-
-                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
-                        ForEach(0..<6) { _ in
-                            EventCategoryView()
+        NavigationView {
+            VStack(alignment: .leading, spacing: 20) {
+                // Header
+                VStack(alignment: .leading, spacing: 16) {
+                    HStack(alignment: .center, spacing: 15) {
+                        VStack(alignment: .leading, spacing: 7) {
+                            Text("Library Events")
+                                .font(.largeTitle)
+                                .foregroundColor(.black)
+                                .bold()
+                            Rectangle()
+                                .foregroundColor(.clear)
+                                .frame(width: 50, height: 10)
+                                .background(Color(red: 0.32, green: 0.23, blue: 0.06))
+                                .frame(alignment: .leading)
                         }
+                        Spacer()
+                        NavigationLink(destination: ContentWiew()) {
+                            Image(systemName: "calendar.badge.clock")
+                                .resizable()
+                                .frame(width: 40, height: 40)
+                                .foregroundColor(.black)
+                        }
+                    }.padding(.top)
+                }.padding(.leading)
+                    .padding(.trailing)
+                // Search Bar
+                ZStack {
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(.brown)
+                            .padding(.leading, 10)
+                        
+                        TextField("Search Library Events", text: .constant(""))
+                            .foregroundColor(.primary)
+                            .padding(10)
                     }
-                    .padding(.horizontal)
-                }.padding(.top)
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.brown, lineWidth: 2)
+                    )
+                } .padding(.trailing)
+                    .padding(.leading)
+                
+                ScrollView {
+                    // Your Event's Tickets
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Text("Your Event’s Tickets")
+                                .font(.headline)
+                            Spacer()
+                            Text("See All")
+                                .foregroundColor(.blue)
+                        }
+                        .padding(.top)
+                        .padding(.horizontal)
+                        
+                        EventTicketView()
+                    }
+                    
+                    // Event Categories
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Text("Event Categories")
+                                .font(.headline)
+                        }
+                        .padding(.horizontal)
+                        
+                        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
+                            ForEach(0..<6) { _ in
+                                EventCategoryView()
+                            }
+                        }
+                        .padding(.horizontal)
+                    }.padding(.top)
+                }
             }
+            .background(
+                LinearGradient(gradient: Gradient(colors: [Color(red: 1.0, green: 0.87, blue: 0.7), Color.white]),
+                               startPoint: .top,
+                               endPoint: .bottom)
+            )
+            .navigationBarHidden(true)
         }
-        .background(
-            LinearGradient(gradient: Gradient(colors: [Color(red: 1.0, green: 0.87, blue: 0.7), Color.white]),
-                           startPoint: .top,
-                           endPoint: .bottom)
-        )
-        .navigationBarHidden(true)
     }
 }
 
@@ -148,19 +148,25 @@ struct EventTicketView: View {
 
 struct EventCategoryView: View {
     var body: some View {
-        VStack {
-            Image("authormeet")
-                .resizable()
-                .frame(width: 150, height: 150)
-                .cornerRadius(8)
-            Text("Author's Meet")
-                .font(.subheadline)
-                .bold()
-                .padding(.top, 4)
+        NavigationLink(destination: EventDetailView(title: "", host: "", location: "")) {
+            VStack {
+                Image("authormeet")
+                    .resizable()
+                    .frame(width: 150, height: 150)
+                    .cornerRadius(8)
+                Text("Author's Meet")
+                    .font(.subheadline)
+                    .bold()
+                    .padding(.top, 4)
+                Text("Date: 01-09-24")
+                Text("100 tickets available")
+            }
+            .foregroundColor(.brown).bold()
         }
-        .cornerRadius(10)
     }
 }
+
+
 
 struct EventContentView_Previews: PreviewProvider {
     static var previews: some View {
