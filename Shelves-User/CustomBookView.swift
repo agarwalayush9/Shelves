@@ -15,6 +15,8 @@ struct CustomBookDetailView: View {
     var author: String
     var subtitle: String
     var url:String
+    var rating: Double
+    var genre: [String]
     
     var body: some View {
         ZStack {
@@ -82,7 +84,7 @@ struct CustomBookDetailView: View {
 
                    
 
-                    RatingAgeGenreView()
+                    RatingAgeGenreView(rating: rating, genre: genre)
                         .padding(.vertical, 16)
 
                     Text("What's it about?")
@@ -200,19 +202,20 @@ struct CustomHalfCircle: Shape {
 
 struct RatingAgeGenreView: View {
     @Environment(\.colorScheme) var colorScheme
-    let rating: Double = 4.8 // Example rating value, you can replace this with your actual rating
-
+   // Example rating value, you can replace this with your actual rating
+    var rating: Double
+    var genre: [String]
     var body: some View {
         VStack(spacing: 16) {
             Divider().padding(.vertical, 1)
 
             HStack(spacing: 24) {
                 VStack(spacing: 1) {
-                    Text("10K RATINGS")
-                        .multilineTextAlignment(.leading)
+                    Text("RATINGS")
+                        .multilineTextAlignment(.center)
                         .font(.caption)
                         .foregroundColor(customColor)
-                        .frame(maxWidth: .infinity, alignment: .leading) // Ensure the text spans full width
+                        .frame(maxWidth: .infinity, alignment: .center) // Ensure the text spans full width
                         .layoutPriority(1) // Give this text higher priority to prevent truncation
 
                     Text("\(rating, specifier: "%.1f")") // Display rating with one decimal place
@@ -256,12 +259,14 @@ struct RatingAgeGenreView: View {
                     Text("GENRE")
                         .font(.caption)
                         .foregroundColor(customColor)
-                    Image(systemName: "book.fill")
+                    Image(systemName: "book.circle")
                         .font(.title)
                         .foregroundColor(customColor)
-                    Text("Fictional")
+                    Text(genre[0])
                         .font(.caption)
                         .foregroundColor(customColor)
+                        .frame(alignment: .leading)
+                        .multilineTextAlignment(.leading)
                 }
                 .padding(.horizontal, 16)
                 .frame(height: 50) // Ensure the VStack height is 50 points

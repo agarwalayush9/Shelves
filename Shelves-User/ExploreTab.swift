@@ -149,7 +149,7 @@ struct BookView: View {
     var imageName: String
     
     var body: some View {
-        NavigationLink(destination: CustomBookDetailView(title: title, author: author, subtitle: subtitle, url: "")) {
+       
             VStack(alignment: .leading) {
                 ZStack {
                     Image("Ellipse 2")
@@ -189,7 +189,7 @@ struct BookView: View {
             .frame(width: 161)
         }
     }
-}
+
 
 struct ExploreTab_Previews: PreviewProvider {
     static var previews: some View {

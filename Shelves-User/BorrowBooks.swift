@@ -11,6 +11,7 @@ struct Book1: Identifiable {
     let author: String
     let details: String
     let coverImageName: String
+    
 }
 
 struct BorrowBooks: View {
@@ -173,7 +174,7 @@ struct BookView1: View {
     let book: Book1
     
     var body: some View {
-        NavigationLink(destination: CustomBookDetailView(title: book.title, author: book.author, subtitle: book.details, url: "")){
+        
             VStack(alignment: .leading) {
                 ZStack {
                     Image("Ellipse 2")
@@ -209,7 +210,7 @@ struct BookView1: View {
             
         }
     }
-}
+
 
 struct BooksGridView1: View {
     let title: String

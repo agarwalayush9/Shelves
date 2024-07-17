@@ -104,7 +104,7 @@ struct ShelfOfTheDayView: View {
                 Text("Shelf of the Day")
                     .font(.headline)
                 Spacer()
-                NavigationLink(destination: CustomBookDetailView(title: book.title, author: book.author, subtitle: book.subtitle, url: book.imageName)) {
+                NavigationLink(destination: CustomBookDetailView(title: book.title, author: book.author, subtitle: book.subtitle, url: book.imageName, rating: book.rating, genre: book.categories)) {
                     Image(systemName: "chevron.right")
                 }
                     
@@ -196,7 +196,10 @@ struct RecommendedForYouView: View {
                 imageName: book.imageName,
                 title: book.title,
                 author: book.author,
-                description: book.subtitle
+                description: book.subtitle,
+                rating: book.rating
+                , genre: book.categories
+                
             )
         }
     }
@@ -246,7 +249,9 @@ struct GenreBooksView: View {
                         imageName: book.imageName,
                         title: book.title,
                         author: book.author,
-                        description: book.subtitle
+                        description: book.subtitle,
+                        rating: book.rating,
+                        genre: book.categories
                     )
                 }
             }
@@ -267,9 +272,11 @@ struct BookCardView: View {
     let title: String
     let author: String
     let description: String
+    let rating: Double
+    let genre: [String]
     
     var body: some View {
-        NavigationLink(destination: CustomBookDetailView(title: title, author: author, subtitle: description, url: imageName)) {
+        NavigationLink(destination: CustomBookDetailView(title: title, author: author, subtitle: description, url: imageName,rating: rating, genre: genre)) {
             VStack(alignment: .leading) {
                 ZStack {
                     Image("Ellipse 2")
