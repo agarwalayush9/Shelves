@@ -1,10 +1,3 @@
-//
-//  SignupInput.swift
-//  Shelves-User
-//
-//  Created by Anay Dubey on 04/07/24.
-//
-
 import SwiftUI
 import FirebaseAuth
 
@@ -24,6 +17,11 @@ struct SignupInput: View {
     @State private var emailError: String = ""
     @State private var passwordError: String = ""
     @State private var confirmPasswordError: String = ""
+    @FocusState private var activeField: Field?
+
+    enum Field {
+        case firstname, lastname, email, password, confirmPassword
+    }
 
     var isFormValid: Bool {
         return !email.isEmpty && !password.isEmpty && !confirmPassword.isEmpty && password == confirmPassword &&
@@ -64,6 +62,7 @@ struct SignupInput: View {
                                     .foregroundColor(Color(red: 81/255, green: 58/255, blue: 16/255))
 
                                 TextField("Your First Name", text: $firstname)
+                                    .focused($activeField, equals: .firstname)
                                     .onChange(of: firstname) { newValue in
                                         firstnameError = ""
                                         if newValue.isEmpty {
@@ -93,6 +92,7 @@ struct SignupInput: View {
                                     .foregroundColor(Color(red: 81/255, green: 58/255, blue: 16/255))
 
                                 TextField("Your Last Name", text: $lastname)
+                                    .focused($activeField, equals: .lastname)
                                     .onChange(of: lastname) { newValue in
                                         lastnameError = ""
                                         if newValue.isEmpty {
@@ -122,6 +122,7 @@ struct SignupInput: View {
                             .foregroundColor(Color(red: 81/255, green: 58/255, blue: 16/255))
 
                         TextField("Enter your Email", text: $email)
+                            .focused($activeField, equals: .email)
                             .onChange(of: email) { newValue in
                                 emailError = ""
                                 if !newValue.isEmpty && !isValidEmail(newValue) {
@@ -146,6 +147,7 @@ struct SignupInput: View {
                             .foregroundColor(Color(red: 81/255, green: 58/255, blue: 16/255))
 
                         SecureField("Create your password", text: $password)
+                            .focused($activeField, equals: .password)
                             .onChange(of: password) { newValue in
                                 passwordError = ""
                                 if !newValue.isEmpty && !isValidPassword(newValue) {
@@ -161,6 +163,7 @@ struct SignupInput: View {
                             )
 
                         SecureField("Confirm your password", text: $confirmPassword)
+                            .focused($activeField, equals: .confirmPassword)
                             .padding()
                             .background(Color.white)
                             .cornerRadius(10)
@@ -192,17 +195,15 @@ struct SignupInput: View {
                             return
                         }
                         
-                         //Check if email is already in use
+                        //Check if email is already in use
                         DataController.shared.isEmailAlreadyInUse(email: email) { exists in
                             if exists {
-                                
                                 alertMessage = "Email is already in use by another user"
                                 showAlert = true
                             } else {
                                 register()
-                                
-                                
-                            }}
+                            }
+                        }
                     }) {
                         Text("Sign Up")
                             .fontWeight(.bold)
@@ -213,7 +214,6 @@ struct SignupInput: View {
                             .cornerRadius(10)
                             .padding(.horizontal, 15)
                     }
-                    
                     .padding(.bottom, 60)
 
                     Text("by continuing, you agree with")
@@ -229,21 +229,26 @@ struct SignupInput: View {
                     }
                     .padding(.bottom, 30)
                 }
-
-             
             }
-            
-//            NavigationLink(destination: GenreSelectionView(), isActive: $showGenreSelection)
-//            {
-//                EmptyView()
-//            }.navigationBarBackButtonHidden()
             .fullScreenCover(isPresented: $showGenreSelection) {
-                            GenreSelectionView()
-                        
-                        }
+                GenreSelectionView()
+            }
         }
         .alert(isPresented: $showAlert) {
             Alert(title: Text("Registration"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+        }
+        .onAppear {
+            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { data in
+                withAnimation {
+                    // Move view up when keyboard shows
+                }
+            }
+
+            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { data in
+                withAnimation {
+                    // Move view back down when keyboard hides
+                }
+            }
         }
     }
 
@@ -300,12 +305,11 @@ struct SignupInput: View {
                 
                 // Save member details to database
                 let newMember = Member(email: email,
-                                       firstName: firstname, // You can add first name if available
-                                       lastName: lastname, // You can add last name if available
-                                       phoneNumber: 0, // You can add phone number if available
+                                       firstName: firstname,
+                                       lastName: lastname,
+                                       phoneNumber: 0,
                                        subscriptionPlan: "bronze",
-                                       registeredEvents: [], genre: [])// Empty array for default events
-                   
+                                       registeredEvents: [], genre: []) // Empty array for default events
                 
                 DataController.shared.addMember(newMember) { result in
                     switch result {
@@ -313,29 +317,27 @@ struct SignupInput: View {
                         print("Member details saved to database.")
                         UserDefaults.standard.set(true, forKey: "isLoggedIn")
                         UserDefaults.standard.set(email, forKey: "email")
-                        showGenreSelection = true // Assuming this flag is used to proceed to genre selection
+                        showGenreSelection = true
                     case .failure(let error):
                         print("Failed to save member details to database: \(error.localizedDescription)")
                         DispatchQueue.main.async {
                             showAlert = true
                             alertMessage = "Failed to save member details to database."
                         }
-                        // Optionally, handle retry or other UI logic here
                     }
                 }
             }
         }
     }
 
-
     // Validation functions
     func isValidFirstName(_ name: String) -> Bool {
-        let nameRegex = "^[A-Za-z]+$"
+        let nameRegex = "^[A-Za-z\\s-]+$"
         return !name.isEmpty && NSPredicate(format: "SELF MATCHES %@", nameRegex).evaluate(with: name)
     }
 
     func isValidLastName(_ name: String) -> Bool {
-        let nameRegex = "^[A-Za-z]+$"
+        let nameRegex = "^[A-Za-z\\s-]+$"
         return !name.isEmpty && NSPredicate(format: "SELF MATCHES %@", nameRegex).evaluate(with: name)
     }
 

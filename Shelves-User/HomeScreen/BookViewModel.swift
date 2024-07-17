@@ -6,7 +6,7 @@ class BooksViewModel: ObservableObject {
     @Published var booksByGenre: [String: [GBook]] = [:]
     @Published var isLoading: Bool = false
     private var cancellables = Set<AnyCancellable>()
-    private let booksLimit = 10
+    private let booksLimit = 15
     @Published var shelfOfTheDay: GBook? = nil
 
     func fetchGenresAndBooks() {

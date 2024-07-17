@@ -22,12 +22,7 @@ struct BorrowBooks: View {
         Book1(title: "Book 4", author: "Author 4", details: "Details of Book 4", coverImageName: "bookCover")
     ]
     
-    let reservedBooks = [
-        Book1(title: "Really Good, Actually", author: "Monica Heisey", details: "A story of a woman navigating life after divorce.", coverImageName: "bookCover"),
-        Book1(title: "Book 2", author: "Author 2", details: "Details of Book 2", coverImageName: "bookCover"),
-        Book1(title: "Book 3", author: "Author 3", details: "Details of Book 3", coverImageName: "bookCover"),
-        Book1(title: "Book 4", author: "Author 4", details: "Details of Book 4", coverImageName: "bookCover")
-    ]
+  
     
     var body: some View {
         NavigationView {
@@ -42,7 +37,6 @@ struct BorrowBooks: View {
                     ScrollView(showsIndicators: false) {
                         SubHeaderView()
                         BorrowedBooksSection(books: borrowedBooks)
-                        ReservationsSection(books: reservedBooks)
                     }
                 }
                 .padding([.leading, .trailing], 16)
@@ -130,45 +124,19 @@ struct BorrowedBooksSection: View {
                         .foregroundColor(Color(red: 0.32, green: 0.23, blue: 0.06))
                 }
             }
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 16) {
+            ScrollView {
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 150), spacing: 16)], spacing: 16) {
                     ForEach(books) { book in
                         BookView1(book: book)
                     }
                 }
+                .padding()
             }
         }
         .padding(.vertical)
     }
 }
 
-struct ReservationsSection: View {
-    let books: [Book1]
-    
-    var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Text("Your Reservations")
-                    .font(.title2)
-                    .bold()
-                Spacer()
-                NavigationLink(destination: BooksGridView1(title: "Reservations", books: books)) {
-                    Text("See All")
-                        .font(Font.custom("DM Sans", size: 14).weight(.medium))
-                        .foregroundColor(Color(red: 0.32, green: 0.23, blue: 0.06))
-                }
-            }
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 16) {
-                    ForEach(books) { book in
-                        BookView1(book: book)
-                    }
-                }
-            }
-        }
-        .padding(.vertical)
-    }
-}
 
 struct BookView1: View {
     let book: Book1

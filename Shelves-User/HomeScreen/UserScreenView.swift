@@ -52,7 +52,7 @@ struct UserHomePage: View {
                                 VStack(alignment: .leading) {
                                     HStack {
                                         Text(genre)
-                                            .font(.title2)
+                                            .font(.title3)
                                             .padding(.leading)
                                         Spacer()
                                         NavigationLink(destination: GenreBooksView(genre: genre, books: viewModel.booksByGenre[genre] ?? [])) {
@@ -103,8 +103,8 @@ struct ShelfOfTheDayView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
-                Text("Shelf of the Day")
-                    .font(.headline)
+                Text("Top pick for you")
+                    .font(.title3)
                 Spacer()
                 NavigationLink(destination: CustomBookDetailView(title: book.title, author: book.author, subtitle: book.subtitle, url: book.imageName, rating: book.rating, genre: book.categories)) {
                     Image(systemName: "chevron.right")
@@ -123,42 +123,43 @@ struct ShelfOfTheDayView: View {
                         .frame(width: 280)
                         .offset(y: geometry.size.width / 4)
                         .padding(.horizontal, 35).padding(.top,20) // Adjust the offset to position the half-circle correctly
-
-                    if let url = URL(string: book.imageName) {
-                        Rectangle()
-                            .fill(Color.clear)
-                            .frame(width: geometry.size.width - 100, height: 200)
-                            .background(
-                                
-                                AsyncImage(url: url) { phase in
-                                    switch phase {
-                                    case .empty:
-                                        ProgressView()
-                                            .frame(width: 100, height: 150)
-                                            .cornerRadius(10)
-                                    case .success(let image):
-                                        image
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width: geometry.size.width - 100, height: 200)
-                                            .cornerRadius(8)
-                                    case .failure:
-                                        Image(systemName: "photo")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width: geometry.size.width - 100, height: 200)
-                                            .cornerRadius(8)
-                                    @unknown default:
-                                        Image(systemName: "photo")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width: geometry.size.width - 100, height: 200)
-                                            .cornerRadius(8)
+                    NavigationLink(destination: CustomBookDetailView(title: book.title, author: book.author, subtitle: book.subtitle, url: book.imageName, rating: book.rating, genre: book.categories)) {
+                        if let url = URL(string: book.imageName) {
+                            Rectangle()
+                                .fill(Color.clear)
+                                .frame(width: geometry.size.width - 100, height: 200)
+                                .background(
+                                    
+                                    AsyncImage(url: url) { phase in
+                                        switch phase {
+                                        case .empty:
+                                            ProgressView()
+                                                .frame(width: 100, height: 150)
+                                                .cornerRadius(10)
+                                        case .success(let image):
+                                            image
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: geometry.size.width - 100, height: 200)
+                                                .cornerRadius(8)
+                                        case .failure:
+                                            Image(systemName: "photo")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: geometry.size.width - 100, height: 200)
+                                                .cornerRadius(8)
+                                        @unknown default:
+                                            Image(systemName: "photo")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: geometry.size.width - 100, height: 200)
+                                                .cornerRadius(8)
+                                        }
                                     }
-                                }
-                                
-                                  
-                            )}
+                                    
+                                    
+                                )}
+                    }
                 }
             }
             .frame(height: 200)
