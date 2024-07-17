@@ -14,6 +14,7 @@
 		44EE4A1E2C42BFFF00B322B6 /* SubscriptionUpdateDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EE4A1D2C42BFFF00B322B6 /* SubscriptionUpdateDataController.swift */; };
 		44EE4A202C42C01F00B322B6 /* SubscriptionTier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EE4A1F2C42C01F00B322B6 /* SubscriptionTier.swift */; };
 		44EE4A222C42C05B00B322B6 /* SubscriptionUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EE4A212C42C05B00B322B6 /* SubscriptionUpdate.swift */; };
+		732DC2922C47B15200C62471 /* SearchAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732DC2912C47B15200C62471 /* SearchAsset.swift */; };
 		94045C0E2C37BFD400DB9602 /* SignupInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94045C0D2C37BFD400DB9602 /* SignupInput.swift */; };
 		94045C102C37CD6500DB9602 /* LoginInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94045C0F2C37CD6500DB9602 /* LoginInput.swift */; };
 		9410FDB62C40FC7A00299544 /* DetailedBookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9410FDB52C40FC7A00299544 /* DetailedBookListView.swift */; };
@@ -63,6 +64,7 @@
 		44EE4A1D2C42BFFF00B322B6 /* SubscriptionUpdateDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionUpdateDataController.swift; sourceTree = "<group>"; };
 		44EE4A1F2C42C01F00B322B6 /* SubscriptionTier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionTier.swift; sourceTree = "<group>"; };
 		44EE4A212C42C05B00B322B6 /* SubscriptionUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionUpdate.swift; sourceTree = "<group>"; };
+		732DC2912C47B15200C62471 /* SearchAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAsset.swift; sourceTree = "<group>"; };
 		94045C0D2C37BFD400DB9602 /* SignupInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupInput.swift; sourceTree = "<group>"; };
 		94045C0F2C37CD6500DB9602 /* LoginInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInput.swift; sourceTree = "<group>"; };
 		9410FDB52C40FC7A00299544 /* DetailedBookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedBookListView.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				D063707A2C3BDE5500697510 /* GoogleService-Info.plist */,
 				441E4BD72C365E3300FD59DD /* OnboardingView.swift */,
 				441E4BD92C365E7500FD59DD /* PageControl.swift */,
+				732DC2912C47B15200C62471 /* SearchAsset.swift */,
 				FD4A05F12C3581A000529DDA /* .gitignore */,
 				FD938B0C2C3566C700FFFC1E /* Shelves-User */,
 				FD938B0B2C3566C700FFFC1E /* Products */,
@@ -314,6 +317,7 @@
 				C41746C62C3FA42700D5D7D1 /* EventContentView.swift in Sources */,
 				44EE4A222C42C05B00B322B6 /* SubscriptionUpdate.swift in Sources */,
 				FDE615122C44901700D37975 /* TabPosition.swift in Sources */,
+				732DC2922C47B15200C62471 /* SearchAsset.swift in Sources */,
 				441E4BDA2C365E7500FD59DD /* PageControl.swift in Sources */,
 				94C9B15C2C35E0A7001784C3 /* LoginView.swift in Sources */,
 				FDE615072C44040E00D37975 /* AuthManager.swift in Sources */,
@@ -474,7 +478,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Shelves-User/Preview Content\"";
-				DEVELOPMENT_TEAM = L9X5P4T6V4;
+				DEVELOPMENT_TEAM = 458RNVZ66L;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Shelves-User/Info.plist";
@@ -489,7 +493,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.team1.Shelves;
+				PRODUCT_BUNDLE_IDENTIFIER = com.team1.Shelvess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -505,7 +509,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Shelves-User/Preview Content\"";
-				DEVELOPMENT_TEAM = L9X5P4T6V4;
+				DEVELOPMENT_TEAM = 458RNVZ66L;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Shelves-User/Info.plist";
@@ -520,7 +524,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.team1.Shelves;
+				PRODUCT_BUNDLE_IDENTIFIER = com.team1.Shelvess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

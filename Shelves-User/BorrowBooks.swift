@@ -64,6 +64,7 @@ struct HeaderView: View {
                     .frame(width: 50, height: Constants.meta)
                     .background(Color(red: 0.32, green: 0.23, blue: 0.06))
                     .frame(alignment: .leading)
+                
             }
             Spacer()
             NavigationLink(destination: ContentWiew()) {
