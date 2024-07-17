@@ -20,15 +20,20 @@ struct LibraryEvent:Identifiable {
 
 // Main Event Content View
 struct EventContentView: View {
-    let events = [
-        LibraryEvent(name: "California Art Festival 2023", host: "Art Society", date: Date(), time: Date(), address: "234, 4th Street, Noida, Xyz", duration: "2hr 30 min", description: "A premier event showcasing contemporary art.", registeredMembers: "123 members registered", tickets: 100, imageName: "authormeet", fees: 499, revenue: 0, status: "Open"),
-        LibraryEvent(name: "Music Concert", host: "Music Club", date: Date(), time: Date(), address: "123 Music Ave, Noida", duration: "3hr", description: "Join us for an unforgettable night.", registeredMembers: "123 members registered", tickets: 50, imageName: "musicconcert", fees: 399, revenue: 0, status: "Open"),
-        LibraryEvent(name: "Book Reading Event", host: "Literary Society", date: Date(), time: Date(), address: "456 Reader St, Noida", duration: "1hr", description: "An evening with local authors.", registeredMembers: "123 members registered", tickets: 75, imageName: "bookreading", fees: 200, revenue: 0, status: "Open"),
-        LibraryEvent(name: "Tech Talk", host: "Tech Innovators", date: Date(), time: Date(), address: "789 Tech Blvd, Noida", duration: "2hr", description: "Discussion on emerging technologies.", registeredMembers: "123 members registered", tickets: 30, imageName: "techtalk", fees: 350, revenue: 0, status: "Open"),
-        LibraryEvent(name: "Art Workshop", host: "Art Academy", date: Date(), time: Date(), address: "321 Art Lane, Noida", duration: "4hr", description: "Hands-on workshop for budding artists.", registeredMembers: "123 members registered", tickets: 20, imageName: "artworkshop", fees: 700, revenue: 0, status: "Open"),
-        LibraryEvent(name: "Children's Story Hour", host: "Library Staff", date: Date(), time: Date(), address: "111 Library St, Noida", duration: "1hr", description: "Stories and fun activities for kids.", registeredMembers: "123 members registered", tickets: 50, imageName: "storyhour", fees: 0, revenue: 0, status: "Open"),
-        LibraryEvent(name: "Film Screening", host: "Cinema Club", date: Date(), time: Date(), address: "222 Film Ave, Noida", duration: "2hr", description: "Screening of classic films.", registeredMembers: "123 members registered", tickets: 40, imageName: "film", fees: 300, revenue: 0, status: "Open"),
-    ]
+    
+    @State private var events: [Event] = []
+    
+    private func fetchEvents() async {
+        await DataController.shared.fetchAllEvents { result in
+            switch result {
+            case .success(let fetchedEvents):
+                self.events = fetchedEvents
+            case .failure(let error):
+                print("Failed to fetch books: \(error.localizedDescription)")
+            }
+        }
+    }
+
 
     var body: some View {
         NavigationView {
@@ -113,6 +118,13 @@ struct EventContentView: View {
                                endPoint: .bottom)
             )
             .navigationBarHidden(true)
+            .onAppear()
+            {
+                Task {
+                    await fetchEvents()
+                }
+
+            }
         }
     }
 }
@@ -164,7 +176,7 @@ struct EventTicketView: View {
 
 // Event Category View
 struct EventCategoryView: View {
-    var event: LibraryEvent
+    var event: Event
 
     var body: some View {
         NavigationLink(destination: EventDetailView(event: event)) {

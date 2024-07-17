@@ -8,26 +8,40 @@
 import Foundation
 
 struct Event: Identifiable {
-    let id = UUID()
-    let title: String
-    let date: String
-    let time: String
-    let location: String
-    let price: String
-    let imageName: String
-
+    var id: String = UUID().uuidString
+    var name: String
+    var host: String
+    var date: Date
+    var time: Date
+    var address: String
+    var duration: String
+    var description: String
+    var registeredMembers: [Member]
+    var tickets: Int
+    var imageName: String
+    var fees: Int
+    var revenue: Int
+    var status: String
+    
     func toDictionary() -> [String: Any] {
         return [
-            "id": id.uuidString,
-            "title": title,
-            "date": date,
-            "time": time,
-            "location": location,
-            "price": price,
-            "imageName": imageName
+            "name": name,
+            "host": host,
+            "date": date.timeIntervalSince1970, // Convert Date to TimeInterval
+            "time": time.timeIntervalSince1970,
+            "address": address,
+            "duration": duration,
+            "description": description,
+            "registeredMembers": registeredMembers.map { $0.toDictionary() },
+            "tickets": tickets,
+            "imageName": imageName,
+            "fees": fees,
+            "revenue": revenue,
+            "status": status
         ]
     }
 }
+
 
 
 struct Author: Identifiable {
@@ -39,34 +53,45 @@ struct Author: Identifiable {
 }
 
 struct Member {
-    var email: String
     var firstName: String
     var lastName: String
+    var email: String
     var phoneNumber: Int
-    var subscriptionPlan: String
-    var registeredEvents: [Event]
-    var genre: [Genre]
+    var subscriptionPlan: String?
+    var registeredEvents: [Event]?
+    var genre: [Genre]?
+
+    // Additional methods or properties as needed
+
+    var safeEmail: String {
+        var safeEmail = email.replacingOccurrences(of: ".", with: "-")
+        safeEmail = safeEmail.replacingOccurrences(of: "@", with: "-")
+        return safeEmail
+    }
 
     func toDictionary() -> [String: Any] {
         var dictionary: [String: Any] = [
-            "email": email,
             "firstName": firstName,
             "lastName": lastName,
-            "phoneNumber": phoneNumber,
-            "subscriptionPlan": subscriptionPlan,
-            "genre": genre.map { $0.rawValue } // Convert Genre enum to raw values (String)
+            "email": email,
+            "phoneNumber": phoneNumber
         ]
 
-        // Convert registeredEvents to an array of dictionaries
-        let eventsArray = registeredEvents.map { event -> [String: Any] in
-            return event.toDictionary()
+        if let subscriptionPlan = subscriptionPlan {
+            dictionary["subscriptionPlan"] = subscriptionPlan
         }
-        dictionary["registeredEvents"] = eventsArray
+
+        if let genre = genre {
+            dictionary["genre"] = genre.map { $0.rawValue }
+        }
+
+        if let registeredEvents = registeredEvents {
+            dictionary["registeredEvents"] = registeredEvents.map { $0.toDictionary() }
+        }
 
         return dictionary
     }
 }
-
 
 
 struct BronzeSubscription {
