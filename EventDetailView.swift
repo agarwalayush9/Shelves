@@ -3,7 +3,7 @@ import SwiftUI
 struct EventDetailView: View {
     @Environment(\.colorScheme) var colorScheme
 
-    var event: LibraryEvent
+    var event: Event
 
     var body: some View {
         ZStack {
@@ -145,7 +145,7 @@ struct EventDetailView: View {
 // Event Rating, Age, and Genre View
 struct EventRatingAgeGenreView: View {
     @Environment(\.colorScheme) var colorScheme
-    var event: LibraryEvent
+    var event: Event
 
     var body: some View {
         VStack(spacing: 10) {

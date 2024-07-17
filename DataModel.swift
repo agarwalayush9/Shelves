@@ -8,26 +8,40 @@
 import Foundation
 
 struct Event: Identifiable {
-    let id = UUID()
-    let title: String
-    let date: String
-    let time: String
-    let location: String
-    let price: String
-    let imageName: String
-
+    var id = UUID()
+    var name: String
+    var host: String
+    var date: Date
+    var time: Date
+    var address: String
+    var duration: String
+    var description: String
+    var registeredMembers: [Member]
+    var tickets: Int
+    var imageName: String
+    var fees: Int
+    var revenue: Int
+    var status: String
+    
     func toDictionary() -> [String: Any] {
         return [
-            "id": id.uuidString,
-            "title": title,
-            "date": date,
-            "time": time,
-            "location": location,
-            "price": price,
-            "imageName": imageName
+            "name": name,
+            "host": host,
+            "date": date.timeIntervalSince1970, // Convert Date to TimeInterval
+            "time": time.timeIntervalSince1970,
+            "address": address,
+            "duration": duration,
+            "description": description,
+            "registeredMembers": registeredMembers.map { $0.toDictionary() },
+            "tickets": tickets,
+            "imageName": imageName,
+            "fees": fees,
+            "revenue": revenue,
+            "status": status
         ]
     }
 }
+
 
 
 struct Author: Identifiable {
@@ -43,9 +57,9 @@ struct Member {
     var firstName: String
     var lastName: String
     var phoneNumber: Int
-    var subscriptionPlan: String
-    var registeredEvents: [Event]
-    var genre: [Genre]
+    var subscriptionPlan: String?
+    var registeredEvents: [Event]? // Optional array of Event
+    var genre: [Genre]? // Optional array of Genre
 
     func toDictionary() -> [String: Any] {
         var dictionary: [String: Any] = [
@@ -53,20 +67,25 @@ struct Member {
             "firstName": firstName,
             "lastName": lastName,
             "phoneNumber": phoneNumber,
-            "subscriptionPlan": subscriptionPlan,
-            "genre": genre.map { $0.rawValue } // Convert Genre enum to raw values (String)
+            "subscriptionPlan": subscriptionPlan ?? "", // Provide a default value if nil
         ]
 
-        // Convert registeredEvents to an array of dictionaries
-        let eventsArray = registeredEvents.map { event -> [String: Any] in
-            return event.toDictionary()
+        // Convert genre to an array of raw values (String)
+        if let genreArray = genre {
+            dictionary["genre"] = genreArray.map { $0.rawValue }
         }
-        dictionary["registeredEvents"] = eventsArray
+
+        // Convert registeredEvents to an array of dictionaries if not nil
+        if let eventsArray = registeredEvents {
+            let eventsDictionaryArray = eventsArray.map { event -> [String: Any] in
+                return event.toDictionary()
+            }
+            dictionary["registeredEvents"] = eventsDictionaryArray
+        }
 
         return dictionary
     }
 }
-
 
 
 struct BronzeSubscription {

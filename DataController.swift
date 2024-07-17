@@ -42,30 +42,29 @@ class DataController
 
     private func saveMemberToDatabase(_ member: Member, completion: @escaping (Result<Void, Error>) -> Void) {
         let safeEmail = DataController.safeEmail(email: member.email)
+        
         var memberDictionary: [String: Any] = [
             "email": member.email,
             "firstName": member.firstName,
             "lastName": member.lastName,
             "phoneNumber": member.phoneNumber,
-            "subscriptionPlan": member.subscriptionPlan,
-            "genre": member.genre.map { $0.rawValue } // Convert Genre enum to raw values (String)
+            "subscriptionPlan": member.subscriptionPlan ?? "" // Provide a default value if nil
         ]
 
-        // Convert events to a dictionary representation
-        var eventsArray: [[String: Any]] = []
-        for event in member.registeredEvents {
-            let eventDictionary: [String: Any] = [
-                "id": event.id.uuidString,
-                "title": event.title,
-                "date": event.date,
-                "time": event.time,
-                "location": event.location,
-                "price": event.price,
-                "imageName": event.imageName
-            ]
-            eventsArray.append(eventDictionary)
+        // Convert genre to an array of raw values (String)
+        if let genreArray = member.genre {
+            memberDictionary["genre"] = genreArray.map { $0.rawValue }
         }
-        memberDictionary["registeredEvents"] = eventsArray
+
+        // Convert registeredEvents to an array of dictionaries if not nil
+        if let eventsArray = member.registeredEvents {
+            var eventsDictionaryArray: [[String: Any]] = []
+            for event in eventsArray {
+                let eventDictionary = event.toDictionary()
+                eventsDictionaryArray.append(eventDictionary)
+            }
+            memberDictionary["registeredEvents"] = eventsDictionaryArray
+        }
 
         // Save member to database
         database.child("members").child(safeEmail).setValue(memberDictionary) { error, _ in
@@ -78,6 +77,109 @@ class DataController
             }
         }
     }
+
+    
+    func fetchAllEvents(completion: @escaping (Result<[Event], Error>) -> Void) {
+            database.child("events").observeSingleEvent(of: .value) { snapshot in
+                guard let eventsDict = snapshot.value as? [String: [String: Any]] else {
+                    completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No data found or failed to cast snapshot value."])))
+                    return
+                }
+
+                var events: [Event] = []
+
+                for (_, dict) in eventsDict {
+                    do {
+                        if let event = try self.parseEvent(from: dict) {
+                            events.append(event)
+                        }
+                    } catch {
+                        print("Failed to parse event data: \(error.localizedDescription)")
+                    }
+                }
+
+                print("Fetched \(events.count) events.")
+                completion(.success(events))
+            }
+        }
+    
+    
+    private func parseEvent(from dict: [String: Any]) throws -> Event? {
+        // Extract values with conditional binding
+        guard
+            let name = dict["name"] as? String,
+            let host = dict["host"] as? String,
+            let dateInterval = dict["date"] as? TimeInterval,
+            let timeInterval = dict["time"] as? TimeInterval,
+            let address = dict["address"] as? String,
+            let duration = dict["duration"] as? String,
+            let description = dict["description"] as? String,
+            let tickets = dict["tickets"] as? Int,
+            let imageName = dict["imageName"] as? String,
+            let fees = dict["fees"] as? Int,
+            let revenue = dict["revenue"] as? Int,
+            let status = dict["status"] as? String
+        else {
+            // Print missing or invalid keys
+            let keyMissing = [
+                "name": dict["name"],
+                "host": dict["host"],
+                "dateInterval": dict["dateInterval"],
+                "timeInterval": dict["timeInterval"],
+                "address": dict["address"],
+                "duration": dict["duration"],
+                "description": dict["description"],
+                "tickets": dict["tickets"],
+                "imageName": dict["imageName"],
+                "fees": dict["fees"],
+                "revenue": dict["revenue"],
+                "status": dict["status"]
+            ]
+            
+            print("Failed to parse event data. Missing or invalid key/value: \(keyMissing)")
+            return nil
+        }
+
+        // Parse date and time
+        let date = Date(timeIntervalSince1970: dateInterval)
+        let time = Date(timeIntervalSince1970: timeInterval)
+
+        // Parse registered members if available
+        var registeredMembers: [Member] = []
+        if let registeredMembersArray = dict["registeredMembers"] as? [[String: Any]] {
+            for memberDict in registeredMembersArray {
+                guard
+                    let name = memberDict["name"] as? String,
+                    let email = memberDict["email"] as? String,
+                    let lastName = memberDict["lastName"] as? String,
+                    let phoneNumber = memberDict["phoneNumber"] as? Int
+                else {
+                    print("Failed to parse registered member data.")
+                    continue
+                }
+                let user = Member(email: email, firstName: name, lastName: lastName, phoneNumber: phoneNumber)
+                registeredMembers.append(user)
+            }
+        }
+
+        // Return Event object
+        return Event(
+            name: name,
+            host: host,
+            date: date,
+            time: time,
+            address: address,
+            duration: duration,
+            description: description,
+            registeredMembers: registeredMembers,
+            tickets: tickets,
+            imageName: imageName,
+            fees: fees,
+            revenue: revenue,
+            status: status
+        )
+    }
+
 
     func updateMemberGenre(email: String, selectedGenres: [Genre], completion: @escaping (Result<Void, Error>) -> Void) {
         let safeEmail = DataController.safeEmail(email: email)
