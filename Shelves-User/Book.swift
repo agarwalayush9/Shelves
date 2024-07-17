@@ -56,22 +56,6 @@ struct Books: Identifiable, Codable, Equatable {
         return lhs.id == rhs.id
     }
 }
-enum Genre: String, Codable, CaseIterable {
-    case Horror
-    case Mystery
-    case Fiction
-    case Finance
-    case Fantasy
-    case Business
-    case Romance
-    case Psychology
-    case YoungAdult
-    case SelfHelp
-    case HistoricalFiction
-    case NonFiction
-    case ScienceFiction
-    case Literature
-}
 
 struct ContentSection: Identifiable, Decodable {
     let id: UUID

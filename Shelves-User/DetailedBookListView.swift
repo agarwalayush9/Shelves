@@ -53,8 +53,8 @@ struct DetailedBookListView_Previews: PreviewProvider {
         DetailedBookListView(
             title: "Sample Title",
             books: [
-                Book(id: UUID(), title: "Sample Book 1", author: "Author 1", subtitle: "Subtitle 1", imageName: "book1"),
-                Book(id: UUID(), title: "Sample Book 2", author: "Author 2", subtitle: "Subtitle 2", imageName: "book2")
+                Book(id: UUID(), title: "Sample Book 1", author: "Author 1", subtitle: "Subtitle 1", imageName: "bookCover"),
+                Book(id: UUID(), title: "Sample Book 2", author: "Author 2", subtitle: "Subtitle 2", imageName: "bookCover")
             ]
         )
     }

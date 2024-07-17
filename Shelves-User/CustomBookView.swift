@@ -14,6 +14,9 @@ struct CustomBookDetailView: View {
     var title: String
     var author: String
     var subtitle: String
+    var url:String
+    var rating: Double
+    var genre: [String]
     
     var body: some View {
         ZStack {
@@ -31,34 +34,57 @@ struct CustomBookDetailView: View {
                                 .offset(y: geometry.size.width / 4)
                                 .padding(.horizontal, 35).padding(.top,20) // Adjust the offset to position the half-circle correctly
 
-                            RoundedRectangle(cornerRadius: 20)
-                                .fill(Color.clear)
-                                .frame(width: geometry.size.width - 100, height: 200) // Adjust width if necessary
-                                .overlay(
-                                    Image("bookCover")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: geometry.size.width - 100, height: 200)
-                                        .cornerRadius(8)
-                                )
+                            if let url = URL(string: url) {
+                                Rectangle()
+                                    .fill(Color.clear)
+                                    .frame(width: geometry.size.width - 100, height: 200)
+                                    .background(
+                                        
+                                        AsyncImage(url: url) { phase in
+                                            switch phase {
+                                            case .empty:
+                                                ProgressView()
+                                                    .frame(width: 100, height: 150)
+                                                    .cornerRadius(10)
+                                            case .success(let image):
+                                                image
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .frame(width: geometry.size.width - 100, height: 200)
+                                                    .cornerRadius(8)
+                                            case .failure:
+                                                Image(systemName: "photo")
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .frame(width: geometry.size.width - 100, height: 200)
+                                                    .cornerRadius(8)
+                                            @unknown default:
+                                                Image(systemName: "photo")
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .frame(width: geometry.size.width - 100, height: 200)
+                                                    .cornerRadius(8)
+                                            }
+                                        }
+                                        
+                                          
+                                    )}
                         }
                     }
                     .frame(height: 200) // Adjust the height to match the image height
                     
                     Text(title)
                         .font(.title)
-                        .fontWeight(.bold).padding(.top)
+                        .fontWeight(.bold).padding(.top,0)
                         .foregroundColor(customColor)
 
                     Text(author)
                         .font(.title2)
                         .foregroundColor(customColor)
 
-                    Text(subtitle)
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
+                   
 
-                    RatingAgeGenreView()
+                    RatingAgeGenreView(rating: rating, genre: genre)
                         .padding(.vertical, 16)
 
                     Text("What's it about?")
@@ -66,73 +92,13 @@ struct CustomBookDetailView: View {
                         .font(.system(size: 24))
                         .bold()
 
-                    Text("""
-                        Life 3.0 (2017) is a tour through the current questions, ideas and research involved in the emerging field of artificial intelligence. Author Max Tegmark provides us a glimpse into the future, sketching out the possible scenarios of how AI might progress and how society could take over.
-                        """)
+                    Text(subtitle)
                         .font(.system(size: 16))
                         .foregroundColor(customColor)
 
-                    Text("Who's it for?")
-                        .foregroundColor(customColor)
-                        .font(.system(size: 24))
-                        .bold()
+                 
 
-                    Text("""
-                        • Artificial intelligence enthusiasts & physicists.
-                        • Future gazers and philosophers.
-                        • Nerds, geeks and science fiction fans.
-                        """)
-                        .font(.system(size: 16))
-                        .foregroundColor(customColor)
-
-                    Text("About the author")
-                        .foregroundColor(customColor)
-                        .font(.system(size: 24))
-                        .bold()
-
-                    Text("""
-                        Max Tegmark is a professor of physics at MIT. He is president of the Future of Life Institute and has featured in various science documentaries. Tegmark is also the author of Our Mathematical Universe.
-                        """)
-                        .font(.system(size: 16))
-                        .foregroundColor(customColor)
-                    
-                    HStack {
-                        Text("Similar on Shelves")
-                            .foregroundColor(customColor)
-                            .font(.system(size: 24))
-                            .bold()
-    
-            Spacer()
-                        Button(action: {
-                            // Action for "Show All" button
-                        }) {
-                            Text("Show All")
-                                .foregroundColor(customColor)
-                                .font(.system(size: 16))
-                        }
-                    }
-
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 16) {
-                            VStack(alignment: .leading, spacing: 10) {
-                                                   
-                
-                                                    
-                                ScrollView(.horizontal, showsIndicators: false) {
-                                    HStack(spacing: 20) {
-                                        CustomBookView(title: "The Good Guy", author: "Author Name", subtitle: "Subtitle goes here", imageName: "book1")
-                                        CustomBookView(title: "Really Good, Actually", author: "Monica Heisey", subtitle: "Subtitle goes here", imageName: "book2")
-                                        CustomBookView(title: "A Brief History of Time", author: "Stephen Hawking", subtitle: "From the Big Bang to Black Holes", imageName: "book")
-                                        CustomBookView(title: "Who We Are and How We", author: "David Reich", subtitle: "Ancient DNA and the New Science of Human", imageName: "book4")
-                                    }
-                                    .padding(.horizontal, 1)
-                                }
-
-                                                }
-                           
-                        }
-                        .padding(.bottom, 16) // Add bottom padding to the similar books section to avoid overlapping with buttons
-                    }
+                  
                 }
                 .padding(.horizontal, 16)
                 .padding(.bottom, 100) // Add padding to the bottom to avoid content being hidden behind the buttons
@@ -236,19 +202,20 @@ struct CustomHalfCircle: Shape {
 
 struct RatingAgeGenreView: View {
     @Environment(\.colorScheme) var colorScheme
-    let rating: Double = 4.8 // Example rating value, you can replace this with your actual rating
-
+   // Example rating value, you can replace this with your actual rating
+    var rating: Double
+    var genre: [String]
     var body: some View {
         VStack(spacing: 16) {
             Divider().padding(.vertical, 1)
 
             HStack(spacing: 24) {
                 VStack(spacing: 1) {
-                    Text("10K RATINGS")
-                        .multilineTextAlignment(.leading)
+                    Text("RATINGS")
+                        .multilineTextAlignment(.center)
                         .font(.caption)
                         .foregroundColor(customColor)
-                        .frame(maxWidth: .infinity, alignment: .leading) // Ensure the text spans full width
+                        .frame(maxWidth: .infinity, alignment: .center) // Ensure the text spans full width
                         .layoutPriority(1) // Give this text higher priority to prevent truncation
 
                     Text("\(rating, specifier: "%.1f")") // Display rating with one decimal place
@@ -292,12 +259,14 @@ struct RatingAgeGenreView: View {
                     Text("GENRE")
                         .font(.caption)
                         .foregroundColor(customColor)
-                    Image(systemName: "book.fill")
+                    Image(systemName: "book.circle")
                         .font(.title)
                         .foregroundColor(customColor)
-                    Text("Fictional")
+                    Text(genre[0])
                         .font(.caption)
                         .foregroundColor(customColor)
+                        .frame(alignment: .leading)
+                        .multilineTextAlignment(.leading)
                 }
                 .padding(.horizontal, 16)
                 .frame(height: 50) // Ensure the VStack height is 50 points
@@ -312,7 +281,4 @@ struct RatingAgeGenreView: View {
     }
 }
 
-#Preview{
-    CustomBookDetailView(title: "", author: "", subtitle: "")
-}
 

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AccountView: View {
+    @EnvironmentObject var authManager: AuthManager
     var body: some View {
         NavigationView {
             ScrollView {
@@ -35,9 +36,11 @@ struct AccountView: View {
                         NavigationLink(destination: Text("Contact Librarian View")) {
                             AccountNavigationItem(title: "Contact Librarian", icon: "questionmark.circle.fill")
                         }
-                        NavigationLink(destination: Text("Logout View")) {
-                            AccountNavigationItem(title: "Logout", icon: "arrow.backward.circle.fill")
+                        
+                        AccountNavigationItem(title: "Logout", icon: "arrow.backward.circle.fill").onTapGesture {
+                            authManager.signOut()
                         }
+                        
                     }
 //                    .padding(.horizontal)
                 }
