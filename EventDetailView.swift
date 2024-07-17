@@ -1,10 +1,34 @@
 import SwiftUI
 
+
+import SwiftUI
+
+class EventDetailViewModel: ObservableObject {
+    @Published var showAlert = false
+    @Published var alertMessage = ""
+
+    func registerForMember(eventId: String, newMember: Member) {
+        DataController.shared.addMemberToEvent(eventId: eventId, newMember: newMember) { result in
+            switch result {
+            case .success:
+                self.alertMessage = "Successfully registered for the event!"
+            case .failure(let error):
+                self.alertMessage = "Failed to register: \(error.localizedDescription)"
+            }
+            self.showAlert = true
+        }
+    }
+}
+
+
 struct EventDetailView: View {
     @Environment(\.colorScheme) var colorScheme
+    @State private var showAlert = false
+    @State private var alertMessage = ""
+    @StateObject private var viewModel = EventDetailViewModel()
 
     var event: Event
-
+    var newMember: Member? = nil
     var body: some View {
         ZStack {
             ScrollView {
@@ -114,8 +138,23 @@ struct EventDetailView: View {
                 Spacer()
                 HStack(spacing: 16) {
                     Button(action: {
-                        // Buy Tickets action
-                    }) {
+                        if let userEmail = UserDefaults.standard.string(forKey: "email") {
+                        DataController.shared.fetchMemberByEmail(userEmail) { result in
+                        switch result {
+                            case .success(let member):
+                            viewModel.registerForMember(eventId: event.id, newMember: member)
+                            print(event.id)
+                            case .failure(let error):
+                                self.alertMessage = "Failed to fetch member: \(error.localizedDescription)"
+                            print(alertMessage)
+                                self.showAlert = true
+                                }
+                            }
+                        } else {
+                                self.alertMessage = "User email not found."
+                                self.showAlert = true
+                                }
+                           }) {
                         Text("Register")
                             .font(.headline)
                             .foregroundColor(.white)
@@ -135,12 +174,16 @@ struct EventDetailView: View {
             LinearGradient(gradient: Gradient(colors: [Color(red: 1.0, green: 0.87, blue: 0.7), Color.white]),
                            startPoint: .top,
                            endPoint: .bottom))
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("Registration"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+        }
     }
 
     var customColor: Color {
         colorScheme == .dark ? Color(red: 230/255, green: 230/255, blue: 230/255) : Color(red: 81/255, green: 58/255, blue: 16/255)
     }
 }
+
 
 // Event Rating, Age, and Genre View
 struct EventRatingAgeGenreView: View {

@@ -77,34 +77,101 @@ class DataController
             }
         }
     }
+    
+    
+    func fetchMemberByEmail(_ email: String, completion: @escaping (Result<Member, Error>) -> Void) {
+        let safeEmail = DataController.safeEmail(email: "Mew@gmail.com")
+
+        database.child("members").child(safeEmail).observeSingleEvent(of: .value) { snapshot in
+            guard let memberDict = snapshot.value as? [String: Any] else {
+                completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Member not found."])))
+                return
+            }
+
+            do {
+                let member = try self.parseMember(from: memberDict)
+                completion(.success(member))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
+
+
+    private func parseMember(from dictionary: [String: Any]) throws -> Member {
+        guard
+            let firstName = dictionary["firstName"] as? String,
+            let lastName = dictionary["lastName"] as? String,
+            let email = dictionary["email"] as? String,
+            let phoneNumber = dictionary["phoneNumber"] as? Int
+        else {
+            throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid member data."])
+        }
+
+        let subscriptionPlan = dictionary["subscriptionPlan"] as? String
+
+        let genre: [Genre]?
+        if let genreArray = dictionary["genre"] as? [String] {
+            genre = genreArray.compactMap { Genre(rawValue: $0) }
+        } else {
+            genre = nil
+        }
+
+        let registeredEvents: [Event]?
+        if let eventsArray = dictionary["registeredEvents"] as? [[String: Any]] {
+            registeredEvents = try eventsArray.compactMap { eventDict -> Event? in
+                guard let eventId = eventDict["eventId"] as? String else {
+                    throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Missing eventId for registered event."])
+                }
+                return try parseEvent(from: eventDict, eventId: eventId)
+            }
+        } else {
+            registeredEvents = nil
+        }
+
+        return Member(
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            phoneNumber: phoneNumber,
+            subscriptionPlan: subscriptionPlan,
+            registeredEvents: registeredEvents,
+            genre: genre
+        )
+    }
 
     
     func fetchAllEvents(completion: @escaping (Result<[Event], Error>) -> Void) {
-            database.child("events").observeSingleEvent(of: .value) { snapshot in
-                guard let eventsDict = snapshot.value as? [String: [String: Any]] else {
-                    completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No data found or failed to cast snapshot value."])))
-                    return
-                }
-
-                var events: [Event] = []
-
-                for (_, dict) in eventsDict {
-                    do {
-                        if let event = try self.parseEvent(from: dict) {
-                            events.append(event)
-                        }
-                    } catch {
-                        print("Failed to parse event data: \(error.localizedDescription)")
-                    }
-                }
-
-                print("Fetched \(events.count) events.")
-                completion(.success(events))
+        database.child("events").observeSingleEvent(of: .value) { snapshot in
+            guard let eventsSnapshot = snapshot.children.allObjects as? [DataSnapshot] else {
+                completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No data found or failed to cast snapshot value."])))
+                return
             }
+            
+            var events: [Event] = []
+            
+            for eventSnapshot in eventsSnapshot {
+                guard let eventDict = eventSnapshot.value as? [String: Any] else {
+                    print("Failed to parse event data for event with ID: \(eventSnapshot.key)")
+                    continue
+                }
+                
+                do {
+                    if let event = try self.parseEvent(from: eventDict, eventId: eventSnapshot.key) {
+                        events.append(event)
+                    }
+                } catch {
+                    print("Failed to parse event data: \(error.localizedDescription)")
+                }
+            }
+            
+            print("Fetched \(events.count) events.")
+            completion(.success(events))
         }
+    }
     
     
-    private func parseEvent(from dict: [String: Any]) throws -> Event? {
+    private func parseEvent(from dict: [String: Any], eventId: String) throws -> Event? {
         // Extract values with conditional binding
         guard
             let name = dict["name"] as? String,
@@ -157,13 +224,14 @@ class DataController
                     print("Failed to parse registered member data.")
                     continue
                 }
-                let user = Member(email: email, firstName: name, lastName: lastName, phoneNumber: phoneNumber)
+                let user = Member(firstName: name, lastName: lastName, email: email, phoneNumber: phoneNumber)
                 registeredMembers.append(user)
             }
         }
 
         // Return Event object
         return Event(
+            id: eventId,
             name: name,
             host: host,
             date: date,
@@ -179,6 +247,36 @@ class DataController
             status: status
         )
     }
+
+    
+    
+    func addMemberToEvent(eventId: String, newMember: Member, completion: @escaping (Result<Void, Error>) -> Void) {
+        let eventRef = database.child("events").child(eventId).child("registeredMembers")
+
+        // Fetch the current list of registered members
+        eventRef.observeSingleEvent(of: .value) { snapshot in
+            var registeredMembers: [[String: Any]] = []
+
+            // If there are existing members, fetch them
+            if let membersArray = snapshot.value as? [[String: Any]] {
+                registeredMembers = membersArray
+            }
+
+            // Convert the new member to a dictionary and add to the list
+            let newMemberDict = newMember.toDictionary()
+            registeredMembers.append(newMemberDict)
+
+            // Update the registered members list in Firebase
+            eventRef.setValue(registeredMembers) { error, _ in
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    completion(.success(()))
+                }
+            }
+        }
+    }
+
 
 
     func updateMemberGenre(email: String, selectedGenres: [Genre], completion: @escaping (Result<Void, Error>) -> Void) {

@@ -300,9 +300,9 @@ struct SignupInput: View {
                 print("User signed up successfully")
                 
                 // Save member details to database
-                let newMember = Member(email: email,
-                                       firstName: firstname, // You can add first name if available
-                                       lastName: lastname, // You can add last name if available
+                let newMember = Member(firstName: email,
+                                       lastName: firstname, // You can add first name if available
+                                       email: lastname, // You can add last name if available
                                        phoneNumber: 0, // You can add phone number if available
                                        subscriptionPlan: "bronze",
                                        registeredEvents: [], genre: [])// Empty array for default events

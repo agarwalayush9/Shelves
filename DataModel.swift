@@ -8,7 +8,7 @@
 import Foundation
 
 struct Event: Identifiable {
-    var id = UUID()
+    var id: String = UUID().uuidString
     var name: String
     var host: String
     var date: Date
@@ -53,34 +53,40 @@ struct Author: Identifiable {
 }
 
 struct Member {
-    var email: String
     var firstName: String
     var lastName: String
+    var email: String
     var phoneNumber: Int
     var subscriptionPlan: String?
-    var registeredEvents: [Event]? // Optional array of Event
-    var genre: [Genre]? // Optional array of Genre
+    var registeredEvents: [Event]?
+    var genre: [Genre]?
+
+    // Additional methods or properties as needed
+
+    var safeEmail: String {
+        var safeEmail = email.replacingOccurrences(of: ".", with: "-")
+        safeEmail = safeEmail.replacingOccurrences(of: "@", with: "-")
+        return safeEmail
+    }
 
     func toDictionary() -> [String: Any] {
         var dictionary: [String: Any] = [
-            "email": email,
             "firstName": firstName,
             "lastName": lastName,
-            "phoneNumber": phoneNumber,
-            "subscriptionPlan": subscriptionPlan ?? "", // Provide a default value if nil
+            "email": email,
+            "phoneNumber": phoneNumber
         ]
 
-        // Convert genre to an array of raw values (String)
-        if let genreArray = genre {
-            dictionary["genre"] = genreArray.map { $0.rawValue }
+        if let subscriptionPlan = subscriptionPlan {
+            dictionary["subscriptionPlan"] = subscriptionPlan
         }
 
-        // Convert registeredEvents to an array of dictionaries if not nil
-        if let eventsArray = registeredEvents {
-            let eventsDictionaryArray = eventsArray.map { event -> [String: Any] in
-                return event.toDictionary()
-            }
-            dictionary["registeredEvents"] = eventsDictionaryArray
+        if let genre = genre {
+            dictionary["genre"] = genre.map { $0.rawValue }
+        }
+
+        if let registeredEvents = registeredEvents {
+            dictionary["registeredEvents"] = registeredEvents.map { $0.toDictionary() }
         }
 
         return dictionary
