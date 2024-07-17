@@ -17,11 +17,23 @@ struct LibraryEvent:Identifiable {
     var revenue: Int
     var status: String
 }
+struct EventTicket: Identifiable {
+    var id = UUID()
+    var imageName: String
+    var title: String
+    var subtitle: String
+    var time: String
+    var location: String
+}
 
 // Main Event Content View
 struct EventContentView: View {
     
     @State private var events: [Event] = []
+    @State private var tickets: [EventTicket] = [
+            EventTicket(imageName: "book.pages", title: "California Art Festival 2023", subtitle: "Dana Point 29-30", time: "10:00 PM", location: "California, CA"),
+            EventTicket(imageName: "book.pages", title: "New York Book Fair", subtitle: "New York 10-11", time: "11:00 AM", location: "New York, NY")
+        ]
     
     private func fetchEvents() async {
         await DataController.shared.fetchAllEvents { result in
@@ -91,10 +103,16 @@ struct EventContentView: View {
                         }
                         .padding(.top)
                         .padding(.horizontal)
-
-                        EventTicketView()
+                        
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 20) {
+                                ForEach(tickets) { ticket in
+                                    EventDetailTicketView(ticket: ticket)
+                                }
+                            }
+                            .padding(.horizontal)
+                        }
                     }
-
                     // Event Categories
                     VStack(alignment: .leading) {
                         HStack {
@@ -130,19 +148,21 @@ struct EventContentView: View {
 }
 
 // Event Ticket View
-struct EventTicketView: View {
+struct EventDetailTicketView: View {
+    var ticket: EventTicket
+    
     var body: some View {
         ZStack {
             VStack {
                 HStack {
-                    Image(systemName: "book.pages")
+                    Image(systemName: ticket.imageName)
                         .resizable()
                         .frame(width: 50, height: 50)
                         .cornerRadius(10)
                         .padding(.trailing)
                     VStack(alignment: .leading, spacing: 5) {
-                        Text("California Art Festival 2023").font(.headline)
-                        Text("Dana Point 29-30").font(.subheadline)
+                        Text(ticket.title).font(.headline)
+                        Text(ticket.subtitle).font(.subheadline)
                     }
                     Spacer()
                 }
@@ -157,12 +177,12 @@ struct EventTicketView: View {
                 HStack {
                     VStack(alignment: .leading) {
                         Text("Time").font(.caption)
-                        Text("10:00 PM").font(.subheadline)
+                        Text(ticket.time).font(.subheadline)
                     }
                     Spacer()
                     VStack(alignment: .leading) {
                         Text("Location").font(.caption)
-                        Text("California, CA").font(.subheadline)
+                        Text(ticket.location).font(.subheadline)
                     }
                 }
             }
