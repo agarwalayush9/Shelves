@@ -25,6 +25,7 @@ struct Event: Identifiable {
     
     func toDictionary() -> [String: Any] {
         return [
+            "id": id,
             "name": name,
             "host": host,
             "date": date.timeIntervalSince1970, // Convert Date to TimeInterval
@@ -32,7 +33,7 @@ struct Event: Identifiable {
             "address": address,
             "duration": duration,
             "description": description,
-            "registeredMembers": registeredMembers.map { $0.toDictionary() },
+            "registeredMembers": registeredMembers.map { $0.toDictionary() }, // Convert each member to dictionary
             "tickets": tickets,
             "imageName": imageName,
             "fees": fees,
@@ -59,8 +60,7 @@ struct Member {
     var phoneNumber: Int
     var subscriptionPlan: String?
     var genre: [Genre]?
-
-    // Additional methods or properties as needed
+    var registeredEvents: [Event]? // This should be [Event] since it's an array of events
 
     var safeEmail: String {
         var safeEmail = email.replacingOccurrences(of: ".", with: "-")
@@ -83,9 +83,15 @@ struct Member {
         if let genre = genre {
             dictionary["genre"] = genre.map { $0.rawValue }
         }
+        
+        if let registeredEvents = registeredEvents {
+            // Convert each event to dictionary
+            dictionary["registeredEvents"] = registeredEvents.map { $0.toDictionary() }
+        }
         return dictionary
     }
 }
+
 
 
 struct BronzeSubscription {

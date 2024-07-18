@@ -1,21 +1,63 @@
 import SwiftUI
 
-
-import SwiftUI
-
 class EventDetailViewModel: ObservableObject {
     @Published var showAlert = false
     @Published var alertMessage = ""
+    @Published var isRegistered = false
+
+    func checkRegistrationStatus(for eventId: String, userEmail: String) {
+        DataController.shared.fetchRegisteredEvents(for: userEmail) { result in
+            switch result {
+            case .success(let events):
+                DispatchQueue.main.async {
+                    self.isRegistered = events.contains(where: { $0.id == eventId })
+                    print("Registration status for \(eventId) and \(userEmail): \(self.isRegistered)")
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self.alertMessage = "Failed to fetch registered events: \(error.localizedDescription)"
+                    self.showAlert = true
+                }
+            }
+        }
+    }
 
     func registerForMember(eventId: String, newMember: Member) {
         DataController.shared.addMemberToEvent(eventId: eventId, newMember: newMember) { result in
             switch result {
             case .success:
-                self.alertMessage = "Successfully registered for the event!"
+                self.updateRegisteredEvents(for: newMember.email, eventId: eventId)
             case .failure(let error):
-                self.alertMessage = "Failed to register: \(error.localizedDescription)"
+                DispatchQueue.main.async {
+                    self.alertMessage = "Failed to register: \(error.localizedDescription)"
+                    self.showAlert = true
+                }
             }
-            self.showAlert = true
+        }
+    }
+
+    private func updateRegisteredEvents(for email: String, eventId: String) {
+        DataController.shared.fetchEventById(eventId) { result in
+            switch result {
+            case .success(let event):
+                DataController.shared.updateRegisteredEvents(email: email, newEvent: event) { updateResult in
+                    DispatchQueue.main.async {
+                        switch updateResult {
+                        case .success:
+                            self.alertMessage = "Successfully registered for the event!"
+                            self.isRegistered = true
+                        case .failure(let error):
+                            self.alertMessage = "Failed to update registered events: \(error.localizedDescription)"
+                        }
+                        self.showAlert = true
+                    }
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self.alertMessage = "Failed to fetch event: \(error.localizedDescription)"
+                    self.showAlert = true
+                }
+            }
         }
     }
 }
@@ -23,12 +65,10 @@ class EventDetailViewModel: ObservableObject {
 
 struct EventDetailView: View {
     @Environment(\.colorScheme) var colorScheme
-    @State private var showAlert = false
-    @State private var alertMessage = ""
     @StateObject private var viewModel = EventDetailViewModel()
 
     var event: Event
-    var newMember: Member? = nil
+
     var body: some View {
         ZStack {
             ScrollView {
@@ -137,31 +177,41 @@ struct EventDetailView: View {
             VStack {
                 Spacer()
                 HStack(spacing: 16) {
-                    Button(action: {
-                        if let userEmail = UserDefaults.standard.string(forKey: "email") {
-                        DataController.shared.fetchMemberByEmail(userEmail) { result in
-                        switch result {
-                            case .success(let member):
-                            viewModel.registerForMember(eventId: event.id, newMember: member)
-                            print(event.id)
-                            case .failure(let error):
-                                self.alertMessage = "Failed to fetch member: \(error.localizedDescription)"
-                            print(alertMessage)
-                                self.showAlert = true
-                                }
-                            }
-                        } else {
-                                self.alertMessage = "User email not found."
-                                self.showAlert = true
-                                }
-                           }) {
-                        Text("Register")
+                    if viewModel.isRegistered {
+                        Text("Registered")
                             .font(.headline)
                             .foregroundColor(.white)
                             .frame(maxWidth: 250)
                             .padding()
                             .background(customColor)
                             .cornerRadius(8)
+                    } else {
+                        Button(action: {
+                            if let userEmail = UserDefaults.standard.string(forKey: "email") {
+                                DataController.shared.fetchMemberByEmail(userEmail) { result in
+                                    switch result {
+                                    case .success(let member):
+                                        viewModel.registerForMember(eventId: event.id, newMember: member)
+                                        print(event.id)
+                                    case .failure(let error):
+                                        viewModel.alertMessage = "Failed to fetch member: \(error.localizedDescription)"
+                                        print(viewModel.alertMessage)
+                                        viewModel.showAlert = true
+                                    }
+                                }
+                            } else {
+                                viewModel.alertMessage = "User email not found."
+                                viewModel.showAlert = true
+                            }
+                        }) {
+                            Text("Register")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .frame(maxWidth: 250)
+                                .padding()
+                                .background(customColor)
+                                .cornerRadius(8)
+                        }
                     }
                 }
                 .padding()
@@ -174,8 +224,14 @@ struct EventDetailView: View {
             LinearGradient(gradient: Gradient(colors: [Color(red: 1.0, green: 0.87, blue: 0.7), Color.white]),
                            startPoint: .top,
                            endPoint: .bottom))
-        .alert(isPresented: $showAlert) {
-            Alert(title: Text("Registration"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+        .onAppear {
+            if let userEmail = UserDefaults.standard.string(forKey: "email") {
+                viewModel.checkRegistrationStatus(for: event.id, userEmail: userEmail)
+                print("Checking registration status for \(event.id) and \(userEmail)")
+            }
+        }
+        .alert(isPresented: $viewModel.showAlert) {
+            Alert(title: Text("Registration"), message: Text(viewModel.alertMessage), dismissButton: .default(Text("OK")))
         }
     }
 
