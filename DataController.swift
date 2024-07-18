@@ -14,6 +14,7 @@ class DataController
 {
     static let shared = DataController() // singleton
     let database = Database.database().reference()
+   
     
     static func safeEmail(email: String) -> String {
         var safeEmail = email.replacingOccurrences(of: ".", with: "-")
@@ -21,6 +22,29 @@ class DataController
         return safeEmail
     }
     
+    func fetchIsbnCodes(completion: @escaping (Result<[String: String], Error>) -> Void) {
+            guard let userEmail = AuthManager().getEmail() else {
+                completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "User is not logged in."])))
+                return
+            }
+            
+            let safeEmail = DataController.safeEmail(email: userEmail)
+            database.child("issue-book").child(safeEmail).observeSingleEvent(of: .value) { snapshot in
+                guard let isbnDict = snapshot.value as? [String: [String: Any]] else {
+                    completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No data found or failed to cast snapshot value for ISBN status."])))
+                    return
+                }
+                
+                var isbnStatusDict: [String: String] = [:]
+                for (isbn, statusDict) in isbnDict {
+                    if let status = statusDict["status"] as? String {
+                        isbnStatusDict[isbn] = status
+                    }
+                }
+                
+                completion(.success(isbnStatusDict))
+            }
+        }
     
     
     func addMember(_ member: Member, completion: @escaping (Result<Void, Error>) -> Void) {

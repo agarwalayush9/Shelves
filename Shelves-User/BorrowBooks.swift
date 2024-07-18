@@ -5,16 +5,8 @@ struct Constants {
     static let meta: CGFloat = 4
 }
 
-struct Book1: Identifiable {
-    let id = UUID()
-    let title: String
-    let author: String
-    let details: String
-    let coverImageName: String
-    
-}
-
 struct BorrowBooks: View {
+    @ObservedObject var viewModel = BooksViewModel()
     
     var body: some View {
         NavigationView {
@@ -28,7 +20,11 @@ struct BorrowBooks: View {
                     HeaderView()
                     ScrollView(showsIndicators: false) {
                         SubHeaderView()
-//                        BorrowedBooksSection(book: book)
+                        ForEach(viewModel.booksByISBN) { book in
+                           BooksGridView1()
+                        }.onAppear {
+                            viewModel.fetchBooksByISBN()
+                        }
                     }
                 }
                 .padding([.leading, .trailing], 16)
@@ -102,7 +98,7 @@ struct SubHeaderView: View {
 
 struct BorrowedBooksSection: View {
     let book: [GBook]
-    
+    @ObservedObject var viewModel = BooksViewModel()
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
@@ -110,7 +106,7 @@ struct BorrowedBooksSection: View {
                     .font(.title2)
                     .bold()
                 Spacer()
-                NavigationLink(destination: BooksGridView1(title: "Borrowed Books", books: book)) {
+                NavigationLink(destination: BooksGridView1(viewModel) {
                     Text("See All")
                         .font(Font.custom("DM Sans", size: 14).weight(.medium))
                         .foregroundColor(Color(red: 0.32, green: 0.23, blue: 0.06))
@@ -131,9 +127,6 @@ struct BorrowedBooksSection: View {
 
 
 struct BooksGridView1: View {
-    let title: String
-    let books: [GBook]
-    
     var body: some View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: [Color(red: 1.0, green: 0.87, blue: 0.7), Color.white]),
