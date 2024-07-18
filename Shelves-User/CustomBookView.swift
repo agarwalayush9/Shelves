@@ -10,7 +10,7 @@ import SwiftUI
 struct CustomBookDetailView: View {
     @Environment(\.colorScheme) var colorScheme
     @State private var randomColor: Color = Color.random()
-
+    
     var title: String
     var author: String
     var subtitle: String
@@ -262,7 +262,7 @@ struct RatingAgeGenreView: View {
                     Image(systemName: "book.circle")
                         .font(.title)
                         .foregroundColor(customColor)
-                    Text(genre[0])
+                    Text("genre[0]")
                         .font(.caption)
                         .foregroundColor(customColor)
                         .frame(alignment: .leading)

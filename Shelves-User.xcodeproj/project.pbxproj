@@ -194,10 +194,10 @@
 				FDE615082C44901700D37975 /* CustomBookView.swift */,
 				94CC11302C3FF317006B3988 /* ExploreTabViewModel.swift */,
 				94CC112E2C3FF2D1006B3988 /* BookContentView.swift */,
+				FDE615062C44040E00D37975 /* AuthManager.swift */,
 				FD938B112C3566C900FFFC1E /* Assets.xcassets */,
 				FDE6150D2C44901700D37975 /* TabBar */,
 				FD938B132C3566C900FFFC1E /* Preview Content */,
-				FDE615062C44040E00D37975 /* AuthManager.swift */,
 			);
 			path = "Shelves-User";
 			sourceTree = "<group>";

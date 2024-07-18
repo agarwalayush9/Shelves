@@ -4,10 +4,12 @@ import Combine
 
 class BooksViewModel: ObservableObject {
     @Published var booksByGenre: [String: [GBook]] = [:]
+    @Published var booksByISBN: [GBook] = []
     @Published var isLoading: Bool = false
     private var cancellables = Set<AnyCancellable>()
     private let booksLimit = 15
     @Published var shelfOfTheDay: GBook? = nil
+    private let dataController = DataController()
 
     func fetchGenresAndBooks() {
         guard let email = Auth.auth().currentUser?.email else {
@@ -49,6 +51,46 @@ class BooksViewModel: ObservableObject {
             .sink { [weak self] books in
                 self?.booksByGenre = Dictionary(grouping: books, by: { $0.categories.first ?? "Unknown" })
                 self?.selectShelfOfTheDay(from: books)
+                self?.isLoading = false
+            }
+            .store(in: &cancellables)
+        
+        self.isLoading = true
+    }
+    
+    func fetchBooksByISBN() {
+        dataController.fetchIsbnCodes { [weak self] result in
+            switch result {
+            case .success(let isbnStatusDict):
+                let isbnList = Array(isbnStatusDict.keys)
+                self?.fetchBooksByISBNList(isbnList)
+            case .failure(let error):
+                print("Failed to fetch ISBN codes: \(error.localizedDescription)")
+                self?.isLoading = false
+            }
+        }
+    }
+    
+    private func fetchBooksByISBNList(_ isbnList: [String]) {
+        let urlStrings = isbnList.map { isbn in
+            "https://www.googleapis.com/books/v1/volumes?q=isbn:\(isbn)"
+        }
+        
+        let publishers = urlStrings.map { urlString in
+            URLSession.shared.dataTaskPublisher(for: URL(string: urlString)!)
+                .map { $0.data }
+                .decode(type: GoogleBooksResponses.self, decoder: JSONDecoder())
+                .map { $0.items.map { GBook(from: $0) } }
+                .replaceError(with: [])
+                .eraseToAnyPublisher()
+        }
+        
+        Publishers.MergeMany(publishers)
+            .collect()
+            .map { $0.flatMap { $0 } }
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] books in
+                self?.booksByISBN = books
                 self?.isLoading = false
             }
             .store(in: &cancellables)
