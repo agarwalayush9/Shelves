@@ -308,7 +308,7 @@ struct SignupInput: View {
                                        lastName: lastname,
                                        email: email,
                                        phoneNumber: 0,
-                                       subscriptionPlan: "bronze", genre: []) // Empty array for default events
+                                       subscriptionPlan: "", genre: [], registeredEvents: []) // Empty array for default events
                 
                 DataController.shared.addMember(newMember) { result in
                     switch result {
