@@ -20,8 +20,8 @@ struct LibraryEvent:Identifiable {
 struct EventTicket: Identifiable {
     var id = UUID()
     var imageName: String
-    var title: String
-    var subtitle: String
+    var name: String
+    var host: String
     var time: String
     var location: String
 }
@@ -30,10 +30,37 @@ struct EventTicket: Identifiable {
 struct EventContentView: View {
     
     @State private var events: [Event] = []
-    @State private var tickets: [EventTicket] = [
-            EventTicket(imageName: "book.pages", title: "California Art Festival 2023", subtitle: "Dana Point 29-30", time: "10:00 PM", location: "California, CA"),
-            EventTicket(imageName: "book.pages", title: "New York Book Fair", subtitle: "New York 10-11", time: "11:00 AM", location: "New York, NY")
-        ]
+    @State private var registeredEvents: [Event] = []
+    @State private var tickets: [EventTicket] = []
+    
+    
+    
+    
+    private func fetchRegisteredEvents() {
+            if let userEmail = UserDefaults.standard.string(forKey: "email") {
+                DataController.shared.fetchRegisteredEvents(for: userEmail) { result in
+                    switch result {
+                    case .success(let fetchedEvents):
+                        DispatchQueue.main.async {
+                            self.registeredEvents = fetchedEvents
+                            self.tickets = fetchedEvents.map { event in
+                                EventTicket(
+                                    imageName: "book.pages",
+                                    name: event.name,
+                                    host: event.host,
+                                    time: DateFormatter.localizedString(from: event.time, dateStyle: .none, timeStyle: .short),
+                                    location: event.address
+                                )
+                            }
+                        }
+                    case .failure(let error):
+                        print("Failed to fetch registered events: \(error.localizedDescription)")
+                    }
+                }
+            } else {
+                print("No user email found in UserDefaults.")
+            }
+        }
     
     private func fetchEvents() async {
         await DataController.shared.fetchAllEvents { result in
@@ -138,6 +165,7 @@ struct EventContentView: View {
             .navigationBarHidden(true)
             .onAppear()
             {
+                fetchRegisteredEvents()
                 Task {
                     await fetchEvents()
                 }
@@ -161,8 +189,8 @@ struct EventDetailTicketView: View {
                         .cornerRadius(10)
                         .padding(.trailing)
                     VStack(alignment: .leading, spacing: 5) {
-                        Text(ticket.title).font(.headline)
-                        Text(ticket.subtitle).font(.subheadline)
+                        Text(ticket.name).font(.headline)
+                        Text(ticket.host).font(.subheadline)
                     }
                     Spacer()
                 }

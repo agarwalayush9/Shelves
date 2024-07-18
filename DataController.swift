@@ -249,7 +249,7 @@ class DataController
     
     func fetchRegisteredEvents(for email: String, completion: @escaping (Result<[Event], Error>) -> Void) {
         let safeEmail = DataController.safeEmail(email: email)
-        database.child("members").child(safeEmail).child("registeredEvents").observeSingleEvent(of: .value) { snapshot in
+        database.child("members").child(safeEmail).child("registeredEvents").observe(.value) { snapshot in
             guard let eventsSnapshot = snapshot.children.allObjects as? [DataSnapshot] else {
                 completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No registered events found."])))
                 return
@@ -279,6 +279,7 @@ class DataController
     }
 
 
+
     
     func fetchEventById(_ eventId: String, completion: @escaping (Result<Event, Error>) -> Void) {
            database.child("events").child(eventId).observeSingleEvent(of: .value) { snapshot in
@@ -303,7 +304,7 @@ class DataController
             let safeEmail = DataController.safeEmail(email: email)
 
             // Fetch the existing registered events
-        database.child("members").child(safeEmail).child("registeredEvents").child(newEvent.id).observeSingleEvent(of: .value) { snapshot in
+        database.child("members").child(safeEmail).child("registeredEvents").observeSingleEvent(of: .value) { snapshot in
                 var registeredEvents: [[String: Any]] = []
 
                 // Check if there are already registered events
