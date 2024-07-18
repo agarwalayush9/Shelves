@@ -56,15 +56,6 @@ class DataController
             memberDictionary["genre"] = genreArray.map { $0.rawValue }
         }
 
-        // Convert registeredEvents to an array of dictionaries if not nil
-        if let eventsArray = member.registeredEvents {
-            var eventsDictionaryArray: [[String: Any]] = []
-            for event in eventsArray {
-                let eventDictionary = event.toDictionary()
-                eventsDictionaryArray.append(eventDictionary)
-            }
-            memberDictionary["registeredEvents"] = eventsDictionaryArray
-        }
 
         // Save member to database
         database.child("members").child(safeEmail).setValue(memberDictionary) { error, _ in
@@ -80,54 +71,49 @@ class DataController
     
     
     func fetchMemberByEmail(_ email: String, completion: @escaping (Result<Member, Error>) -> Void) {
-        let safeEmail = DataController.safeEmail(email: "Mew@gmail.com")
+        let safeEmail = DataController.safeEmail(email: email)
+        let capitalizedSafeEmail = safeEmail.prefix(1).capitalized + safeEmail.dropFirst()
 
-        database.child("members").child(safeEmail).observeSingleEvent(of: .value) { snapshot in
+        print("Fetching member with email: \(email)")
+        print("Safe email generated: \(safeEmail)")
+        print("Capitalized safe email for Firebase: \(capitalizedSafeEmail)")
+
+        database.child("members").child(capitalizedSafeEmail).observeSingleEvent(of: .value) { snapshot in
+            print("Firebase query initiated.")
+
             guard let memberDict = snapshot.value as? [String: Any] else {
+                print("Snapshot value not valid or member not found.")
                 completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Member not found."])))
                 return
             }
 
             do {
                 let member = try self.parseMember(from: memberDict)
+                print("Member parsed successfully.")
                 completion(.success(member))
             } catch {
+                print("Error parsing member: \(error.localizedDescription)")
                 completion(.failure(error))
             }
         }
     }
 
 
-    private func parseMember(from dictionary: [String: Any]) throws -> Member {
+    func parseMember(from dict: [String: Any]) throws -> Member {
         guard
-            let firstName = dictionary["firstName"] as? String,
-            let lastName = dictionary["lastName"] as? String,
-            let email = dictionary["email"] as? String,
-            let phoneNumber = dictionary["phoneNumber"] as? Int
+            let firstName = dict["firstName"] as? String,
+            let lastName = dict["lastName"] as? String,
+            let email = dict["email"] as? String,
+            let phoneNumber = dict["phoneNumber"] as? Int
+            // Add more fields as necessary
         else {
             throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid member data."])
         }
 
-        let subscriptionPlan = dictionary["subscriptionPlan"] as? String
-
-        let genre: [Genre]?
-        if let genreArray = dictionary["genre"] as? [String] {
-            genre = genreArray.compactMap { Genre(rawValue: $0) }
-        } else {
-            genre = nil
-        }
-
-        let registeredEvents: [Event]?
-        if let eventsArray = dictionary["registeredEvents"] as? [[String: Any]] {
-            registeredEvents = try eventsArray.compactMap { eventDict -> Event? in
-                guard let eventId = eventDict["eventId"] as? String else {
-                    throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Missing eventId for registered event."])
-                }
-                return try parseEvent(from: eventDict, eventId: eventId)
-            }
-        } else {
-            registeredEvents = nil
-        }
+        // Optional fields
+        let subscriptionPlan = dict["subscriptionPlan"] as? String
+        let genreStrings = dict["genre"] as? [String] ?? []
+        let genres = genreStrings.compactMap { Genre(rawValue: $0) }
 
         return Member(
             firstName: firstName,
@@ -135,8 +121,8 @@ class DataController
             email: email,
             phoneNumber: phoneNumber,
             subscriptionPlan: subscriptionPlan,
-            registeredEvents: registeredEvents,
-            genre: genre
+            genre: genres
+            // Add other fields
         )
     }
 
