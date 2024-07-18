@@ -1,4 +1,5 @@
 import SwiftUI
+import FirebaseDatabaseInternal
 import FirebaseDatabase
 
 struct BookDetailView: View {

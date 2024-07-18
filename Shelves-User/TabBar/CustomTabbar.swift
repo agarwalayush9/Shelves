@@ -11,6 +11,7 @@ struct CustomTabbar: View {
     @State private var activeTab: Tab = .forYou
     @Namespace private var animation
     @State private var tabShapePosition: CGPoint = .zero
+   
     
     init() {
         UITabBar.appearance().isHidden = true

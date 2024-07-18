@@ -73,10 +73,10 @@ struct ExploreTab: View {
                         .padding(.horizontal)
                     }
                     
-                    ForEach(viewModel.contentSections) { section in
-                        BookContentView(section: section)
-                            .padding(.top)
-                    }
+//                    ForEach($viewModel.contentSections) { section in
+////                        BookContentView(section: section)
+////                            .padding(.top)
+//                    }
                     
                     Spacer()
                 }

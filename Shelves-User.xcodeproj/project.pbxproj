@@ -42,6 +42,7 @@
 		FD938B102C3566C700FFFC1E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD938B0F2C3566C700FFFC1E /* ContentView.swift */; };
 		FD938B122C3566C900FFFC1E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD938B112C3566C900FFFC1E /* Assets.xcassets */; };
 		FD938B152C3566C900FFFC1E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD938B142C3566C900FFFC1E /* Preview Assets.xcassets */; };
+		FD94929F2C48CA3000813FC6 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FD94929E2C48CA3000813FC6 /* FirebaseDatabaseSwift */; };
 		FDBC5E9B2C4491B1004F0890 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC5E9A2C4491B1004F0890 /* AccountView.swift */; };
 		FDBC5EAE2C46619B004F0890 /* BarCodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC5EA92C46619B004F0890 /* BarCodeScannerView.swift */; };
 		FDBC5EAF2C46619B004F0890 /* BookDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC5EAA2C46619B004F0890 /* BookDetails.swift */; };
@@ -114,6 +115,7 @@
 				FDBC5EBB2C47492D004F0890 /* URLImageStore in Frameworks */,
 				C27C0EF22C3DABDE00131A5B /* GoogleSignIn in Frameworks */,
 				C26271702C3C054B009C6830 /* FirebaseAnalyticsSwift in Frameworks */,
+				FD94929F2C48CA3000813FC6 /* FirebaseDatabaseSwift in Frameworks */,
 				D06370812C3BE00600697510 /* FirebaseDatabase in Frameworks */,
 				C27C0EF42C3DABDE00131A5B /* GoogleSignInSwift in Frameworks */,
 				FDBC5EB92C47492C004F0890 /* URLImage in Frameworks */,
@@ -264,6 +266,7 @@
 				C27C0EF32C3DABDE00131A5B /* GoogleSignInSwift */,
 				FDBC5EB82C47492C004F0890 /* URLImage */,
 				FDBC5EBA2C47492D004F0890 /* URLImageStore */,
+				FD94929E2C48CA3000813FC6 /* FirebaseDatabaseSwift */,
 			);
 			productName = "Shelves-User";
 			productReference = FD938B0A2C3566C700FFFC1E /* Shelves-User.app */;
@@ -631,6 +634,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D063707C2C3BDFB200697510 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseDatabase;
+		};
+		FD94929E2C48CA3000813FC6 /* FirebaseDatabaseSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D063707C2C3BDFB200697510 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabaseSwift;
 		};
 		FDBC5EB82C47492C004F0890 /* URLImage */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -15,14 +15,6 @@ struct Book1: Identifiable {
 }
 
 struct BorrowBooks: View {
-    let borrowedBooks = [
-        Book1(title: "Who We Are and How We...", author: "David Reich", details: "Ancient DNA and the New Science of the Human Past", coverImageName: "bookCover"),
-        Book1(title: "Book 2", author: "Author 2", details: "Details of Book 2", coverImageName: "bookCover"),
-        Book1(title: "Book 3", author: "Author 3", details: "Details of Book 3", coverImageName: "bookCover"),
-        Book1(title: "Book 4", author: "Author 4", details: "Details of Book 4", coverImageName: "bookCover")
-    ]
-    
-  
     
     var body: some View {
         NavigationView {
@@ -36,7 +28,7 @@ struct BorrowBooks: View {
                     HeaderView()
                     ScrollView(showsIndicators: false) {
                         SubHeaderView()
-                        BorrowedBooksSection(books: borrowedBooks)
+//                        BorrowedBooksSection(book: book)
                     }
                 }
                 .padding([.leading, .trailing], 16)
@@ -109,7 +101,7 @@ struct SubHeaderView: View {
 }
 
 struct BorrowedBooksSection: View {
-    let books: [Book1]
+    let book: [GBook]
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -118,7 +110,7 @@ struct BorrowedBooksSection: View {
                     .font(.title2)
                     .bold()
                 Spacer()
-                NavigationLink(destination: BooksGridView1(title: "Borrowed Books", books: books)) {
+                NavigationLink(destination: BooksGridView1(title: "Borrowed Books", books: book)) {
                     Text("See All")
                         .font(Font.custom("DM Sans", size: 14).weight(.medium))
                         .foregroundColor(Color(red: 0.32, green: 0.23, blue: 0.06))
@@ -126,8 +118,8 @@ struct BorrowedBooksSection: View {
             }
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 150), spacing: 16)], spacing: 16) {
-                    ForEach(books) { book in
-                        BookView1(book: book)
+                    ForEach(book) { book in
+                        CustomBookDetailView(title: book.title, author: book.author, subtitle: book.subtitle, url: book.imageName, rating: book.rating, genre: book.categories)
                     }
                 }
                 .padding()
@@ -138,51 +130,9 @@ struct BorrowedBooksSection: View {
 }
 
 
-struct BookView1: View {
-    let book: Book1
-    
-    var body: some View {
-        
-            VStack(alignment: .leading) {
-                ZStack {
-                    Image("Ellipse 2")
-                        .frame(width: 161.58664, height: 81.00001)
-                        .offset(y: 55)
-                    
-                    Rectangle()
-                        .foregroundColor(.clear)
-                        .frame(width: 104, height: 156)
-                        .background(
-                            Image(book.coverImageName)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 104, height: 156)
-                                .clipped()
-                        )
-                }
-                .padding(.bottom, 20)
-                
-                Text(book.title)
-                    .font(.headline)
-                    .lineLimit(1)
-                    .foregroundColor(.black)
-                Text(book.author)
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-                Text(book.details)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                    .lineLimit(1)
-            }
-            .frame(width: 161)
-            
-        }
-    }
-
-
 struct BooksGridView1: View {
     let title: String
-    let books: [Book1]
+    let books: [GBook]
     
     var body: some View {
         ZStack {
@@ -194,7 +144,7 @@ struct BooksGridView1: View {
                 ScrollView {
                     LazyVGrid(columns: [GridItem(.adaptive(minimum: 150), spacing: 16)], spacing: 16) {
                         ForEach(books) { book in
-                            BookView1(book: book)
+                            CustomBookDetailView(title: book.title, author: book.author, subtitle: book.subtitle, url: book.imageName, rating: book.rating, genre: book.categories)
                         }
                     }
                     .padding()
@@ -211,6 +161,4 @@ struct CContentView: View {
     }
 }
 
-#Preview {
-    BorrowBooks()
-}
+

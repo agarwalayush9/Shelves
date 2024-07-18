@@ -7,13 +7,7 @@
 
 import Foundation
 
-struct Book: Identifiable, Decodable {
-    let id: UUID
-    let title: String
-    let author: String
-    let subtitle: String
-    let imageName: String
-}
+
 struct Books: Identifiable, Codable, Equatable {
     var id = UUID()
     var bookCode: String
@@ -57,10 +51,5 @@ struct Books: Identifiable, Codable, Equatable {
     }
 }
 
-struct ContentSection: Identifiable, Decodable {
-    let id: UUID
-    let title: String
-    let subtitle: String
-    let books: [Book]
-}
+
 
