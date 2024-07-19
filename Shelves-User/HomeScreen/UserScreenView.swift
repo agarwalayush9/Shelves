@@ -1,5 +1,4 @@
 import SwiftUI
-import URLImage
 
 struct Constant {
     static let meta: CGFloat = 4

@@ -43,14 +43,13 @@
 		FD938B122C3566C900FFFC1E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD938B112C3566C900FFFC1E /* Assets.xcassets */; };
 		FD938B152C3566C900FFFC1E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD938B142C3566C900FFFC1E /* Preview Assets.xcassets */; };
 		FD94929F2C48CA3000813FC6 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FD94929E2C48CA3000813FC6 /* FirebaseDatabaseSwift */; };
+		FD9492A12C4972F300813FC6 /* BorrowBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9492A02C4972F300813FC6 /* BorrowBookView.swift */; };
 		FDBC5E9B2C4491B1004F0890 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC5E9A2C4491B1004F0890 /* AccountView.swift */; };
 		FDBC5EAE2C46619B004F0890 /* BarCodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC5EA92C46619B004F0890 /* BarCodeScannerView.swift */; };
 		FDBC5EAF2C46619B004F0890 /* BookDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC5EAA2C46619B004F0890 /* BookDetails.swift */; };
 		FDBC5EB02C46619B004F0890 /* BookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC5EAB2C46619B004F0890 /* BookDetailView.swift */; };
 		FDBC5EB12C46619B004F0890 /* ContentWiew.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC5EAC2C46619B004F0890 /* ContentWiew.swift */; };
 		FDBC5EB62C4746B9004F0890 /* BookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC5EB52C4746B9004F0890 /* BookViewModel.swift */; };
-		FDBC5EB92C47492C004F0890 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = FDBC5EB82C47492C004F0890 /* URLImage */; };
-		FDBC5EBB2C47492D004F0890 /* URLImageStore in Frameworks */ = {isa = PBXBuildFile; productRef = FDBC5EBA2C47492D004F0890 /* URLImageStore */; };
 		FDE615052C431BBD00D37975 /* BorrowBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE615042C431BBD00D37975 /* BorrowBooks.swift */; };
 		FDE615072C44040E00D37975 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE615062C44040E00D37975 /* AuthManager.swift */; };
 		FDE6150E2C44901700D37975 /* CustomBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE615082C44901700D37975 /* CustomBookView.swift */; };
@@ -92,6 +91,7 @@
 		FD938B0F2C3566C700FFFC1E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FD938B112C3566C900FFFC1E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD938B142C3566C900FFFC1E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		FD9492A02C4972F300813FC6 /* BorrowBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowBookView.swift; sourceTree = "<group>"; };
 		FDBC5E9A2C4491B1004F0890 /* AccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		FDBC5EA92C46619B004F0890 /* BarCodeScannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarCodeScannerView.swift; sourceTree = "<group>"; };
 		FDBC5EAA2C46619B004F0890 /* BookDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookDetails.swift; sourceTree = "<group>"; };
@@ -112,13 +112,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FDBC5EBB2C47492D004F0890 /* URLImageStore in Frameworks */,
 				C27C0EF22C3DABDE00131A5B /* GoogleSignIn in Frameworks */,
 				C26271702C3C054B009C6830 /* FirebaseAnalyticsSwift in Frameworks */,
 				FD94929F2C48CA3000813FC6 /* FirebaseDatabaseSwift in Frameworks */,
 				D06370812C3BE00600697510 /* FirebaseDatabase in Frameworks */,
 				C27C0EF42C3DABDE00131A5B /* GoogleSignInSwift in Frameworks */,
-				FDBC5EB92C47492C004F0890 /* URLImage in Frameworks */,
 				D063707F2C3BE00600697510 /* FirebaseAuth in Frameworks */,
 				C262716E2C3C0548009C6830 /* FirebaseAnalytics in Frameworks */,
 			);
@@ -198,6 +196,7 @@
 				FD938B112C3566C900FFFC1E /* Assets.xcassets */,
 				FDE6150D2C44901700D37975 /* TabBar */,
 				FD938B132C3566C900FFFC1E /* Preview Content */,
+				FD9492A02C4972F300813FC6 /* BorrowBookView.swift */,
 			);
 			path = "Shelves-User";
 			sourceTree = "<group>";
@@ -264,8 +263,6 @@
 				C262716F2C3C054B009C6830 /* FirebaseAnalyticsSwift */,
 				C27C0EF12C3DABDE00131A5B /* GoogleSignIn */,
 				C27C0EF32C3DABDE00131A5B /* GoogleSignInSwift */,
-				FDBC5EB82C47492C004F0890 /* URLImage */,
-				FDBC5EBA2C47492D004F0890 /* URLImageStore */,
 				FD94929E2C48CA3000813FC6 /* FirebaseDatabaseSwift */,
 			);
 			productName = "Shelves-User";
@@ -340,6 +337,7 @@
 				FDBC5EB62C4746B9004F0890 /* BookViewModel.swift in Sources */,
 				44EE4A222C42C05B00B322B6 /* SubscriptionUpdate.swift in Sources */,
 				FDE615122C44901700D37975 /* TabPosition.swift in Sources */,
+				FD9492A12C4972F300813FC6 /* BorrowBookView.swift in Sources */,
 				441E4BDA2C365E7500FD59DD /* PageControl.swift in Sources */,
 				94C9B15C2C35E0A7001784C3 /* LoginView.swift in Sources */,
 				FDE615072C44040E00D37975 /* AuthManager.swift in Sources */,
@@ -639,16 +637,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D063707C2C3BDFB200697510 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseDatabaseSwift;
-		};
-		FDBC5EB82C47492C004F0890 /* URLImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FDBC5EB72C47492C004F0890 /* XCRemoteSwiftPackageReference "url-image" */;
-			productName = URLImage;
-		};
-		FDBC5EBA2C47492D004F0890 /* URLImageStore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FDBC5EB72C47492C004F0890 /* XCRemoteSwiftPackageReference "url-image" */;
-			productName = URLImageStore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

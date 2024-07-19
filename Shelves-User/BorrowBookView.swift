@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct CustomBookDetailView: View {
+struct BorrowBookView: View {
     @Environment(\.colorScheme) var colorScheme
-    @State private var randomColor: Color = Color.random()
+    @State private var randomColor: Color = Color.random1()
     
     var title: String
     var author: String
@@ -17,6 +17,7 @@ struct CustomBookDetailView: View {
     var url:String
     var rating: Double
     var genre: [String]
+    var status: String
     
     var body: some View {
         ZStack {
@@ -75,53 +76,107 @@ struct CustomBookDetailView: View {
                     
                     Text(title)
                         .font(.title)
-                        .fontWeight(.bold).padding(.top,0)
+                        .fontWeight(.bold).padding(.top)
                         .foregroundColor(customColor)
-
+                        .lineLimit(1)
                     Text(author)
                         .font(.title2)
                         .foregroundColor(customColor)
-
-                   
-
-                    RatingAgeGenreView(rating: rating, genre: genre)
-                        .padding(.vertical, 16)
-
-                    Text("What's it about?")
-                        .foregroundColor(customColor)
-                        .font(.system(size: 24))
-                        .bold()
-
+                        .lineLimit(1)
                     Text(subtitle)
                         .font(.system(size: 16))
                         .foregroundColor(customColor)
-
+                        .lineLimit(2)
                  
 
                   
                 }
                 .padding(.horizontal, 16)
-                .padding(.bottom, 100) // Add padding to the bottom to avoid content being hidden behind the buttons
+                .padding(.bottom,21) // Add padding to the bottom to avoid content being hidden behind the buttons
+                HStack(alignment: .center, spacing: 42) {
+                    HStack {
+                        VStack {
+                            Text("Borrowed On")
+                              .font(
+                                Font.custom("DM Sans", size: 12)
+                                  .weight(.semibold)
+                              )
+                              .multilineTextAlignment(.center)
+                              .foregroundColor(Color(red: 0.32, green: 0.23, blue: 0.06))
+                            Text("July 21, 2023")
+                              .font(
+                                Font.custom("DM Sans", size: 20)
+                                  .weight(.bold)
+                              )
+                              .padding(.top,5)
+                              .multilineTextAlignment(.center)
+                              .foregroundColor(Color(red: 0.32, green: 0.23, blue: 0.06))
+                        }
+                        Image("Line 35")
+                            .frame(width: 32, height: 0)
+                            .overlay(
+                                Rectangle()
+                                    .stroke(Color(red: 0.32, green: 0.23, blue: 0.06), lineWidth: 2)
+                            )
+                        VStack {
+                            Text("To Return On")
+                              .font(
+                                Font.custom("DM Sans", size: 12)
+                                  .weight(.semibold)
+                              )
+                              .multilineTextAlignment(.center)
+                              .foregroundColor(Color(red: 0.32, green: 0.23, blue: 0.06))
+                            Text("July 28, 2023")
+                              .font(
+                                Font.custom("DM Sans", size: 20)
+                                  .weight(.bold)
+                              )
+                              .padding(.top,5)
+                              .multilineTextAlignment(.center)
+                              .foregroundColor(Color(red: 0.32, green: 0.23, blue: 0.06))
+                        }
+                    }
+                    .padding([.top, .bottom], 18)
+                    .padding([.leading, .trailing], 36)
+                    .cornerRadius(Constants.sm)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: Constants.sm)
+                            .inset(by: 1)
+                            .stroke(Color(red: 0.32, green: 0.23, blue: 0.06), lineWidth: 2)
+                    )
+                }.padding(.bottom,25)
+                
+                HStack(alignment: .center, spacing: -4) {
+                    Text("Any Charges/Overdues to be Paid")
+                      .font(
+                        Font.custom("DM Sans", size: 20)
+                          .weight(.semibold)
+                      )
+                      .foregroundColor(Color(red: 0.32, green: 0.23, blue: 0.06))
+                      .frame(width: 192, alignment: .topLeading)
+                    Text("Rs. 0")
+                      .font(
+                        Font.custom("DM Sans", size: 32)
+                          .weight(.semibold)
+                      )
+                      .multilineTextAlignment(.trailing)
+                      .foregroundColor(Color(red: 0.32, green: 0.23, blue: 0.06))
+                      .frame(width: 147, alignment: .topTrailing)
+                }
+                .padding(0)
+                .frame(width: 334, alignment: .trailing)
             }
+            
 
             VStack {
                 Spacer()
                 HStack(spacing: 16) {
-                    Button(action: {
-                        // Save action
-                    }) {
-                        Image(systemName: "bookmark.fill")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .frame(width: 55, height: 55)
-                            .background(customColor)
-                            .cornerRadius(8)
-                    }
+                    
 
                     Button(action: {
                         // Borrow now action
                     }) {
-                        Text("Borrow Now")
+                        Text(status)
                             .font(.headline)
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
@@ -147,49 +202,17 @@ struct CustomBookDetailView: View {
 }
 
 extension Color {
-    static func random() -> Color {
+    static func random1() -> Color {
         let red = Double.random(in: 0...1)
         let green = Double.random(in: 0...1)
         let blue = Double.random(in: 0...1)
         return Color(red: red, green: green, blue: blue)
     }
 }
-struct CustomBookView: View {
-    var title: String
-    var author: String
-    var subtitle: String
-    var imageName: String // Add imageName parameter
-
-    var body: some View {
-        VStack(alignment: .leading) {
-            Image(imageName) // Use imageName parameter here
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 120, height: 180)
-                .cornerRadius(8)
-            
-            VStack(alignment: .leading, spacing: 4) {
-                Text(title)
-                    .font(.headline)
-                    .lineLimit(2)
-                
-                Text(author)
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-                    .lineLimit(1)
-                
-                Text(subtitle)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                    .lineLimit(2)
-            }
-        }
-        .frame(width: 140)
-    }
-}
 
 
-struct CustomHalfCircle: Shape {
+
+struct CustomHalfCircle1: Shape {
     func path(in rect: CGRect) -> Path {
         var path = Path()
         let radius = rect.width / 2
@@ -200,85 +223,8 @@ struct CustomHalfCircle: Shape {
     }
 }
 
-struct RatingAgeGenreView: View {
-    @Environment(\.colorScheme) var colorScheme
-   // Example rating value, you can replace this with your actual rating
-    var rating: Double
-    var genre: [String]
-    var body: some View {
-        VStack(spacing: 16) {
-            Divider().padding(.vertical, 1)
 
-            HStack(spacing: 24) {
-                VStack(spacing: 1) {
-                    Text("RATINGS")
-                        .multilineTextAlignment(.center)
-                        .font(.caption)
-                        .foregroundColor(customColor)
-                        .frame(maxWidth: .infinity, alignment: .center) // Ensure the text spans full width
-                        .layoutPriority(1) // Give this text higher priority to prevent truncation
 
-                    Text("\(rating, specifier: "%.1f")") // Display rating with one decimal place
-                        .font(.title)
-                        .foregroundColor(customColor)
-
-                    HStack(spacing: 1) {
-                        ForEach(0..<5) { index in // Change to 5 stars
-                            Image(systemName: index < Int(rating) ? "star.fill" : "star")
-                                .foregroundColor(customColor)
-                                .font(.caption)
-                        }
-                    }
-                }
-                .padding(.horizontal, 2)
-                .frame(height: 50) // Ensure the VStack height is 50 points
-
-                Divider()
-                    .frame(width: 1, height: 50)
-                    .background(Color.gray)
-
-                VStack(spacing: 1) {
-                    Text("AGE")
-                        .font(.caption)
-                        .foregroundColor(customColor)
-                    Text("12+")
-                        .font(.title)
-                        .foregroundColor(customColor)
-                    Text("Years Old")
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                }
-                .padding(.horizontal, 16)
-                .frame(height: 50) // Ensure the VStack height is 50 points
-
-                Divider()
-                    .frame(width: 1, height: 50)
-                    .background(Color.gray)
-
-                VStack(spacing: 1) {
-                    Text("GENRE")
-                        .font(.caption)
-                        .foregroundColor(customColor)
-                    Image(systemName: "book.circle")
-                        .font(.title)
-                        .foregroundColor(customColor)
-                    Text(genre[0])
-                        .font(.caption)
-                        .foregroundColor(customColor)
-                        .frame(alignment: .leading)
-                        .multilineTextAlignment(.leading)
-                }
-                .padding(.horizontal, 16)
-                .frame(height: 50) // Ensure the VStack height is 50 points
-            }
-
-            Divider().padding(.vertical, 1)
-        }
-    }
-
-    var customColor: Color {
-        colorScheme == .dark ? Color(red: 230/255, green: 230/255, blue: 230/255) : Color(red: 81/255, green: 58/255, blue: 16/255)
-    }
+#Preview{
+    BorrowBookView(title: "Life 3.0", author: "Max Tegmark", subtitle: "Being Human in the Age of Artifical Intelligence", url: "bookCover", rating: 0.0, genre: ["nothing"], status: "Registered")
 }
-
-
